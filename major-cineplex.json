@@ -1,0 +1,3122 @@
+[
+  {
+    "name": "hor-taew-tak-10",
+    "name_en": "Hor Taew Tak Hake Lee Hoo",
+    "name_th": "หอแต๋วแตก แหกหลีหู",
+    "display": "Hor Taew Tak Hake Lee Hoo",
+    "release": "2025-12-24T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "100",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4554/thumb_4554.jpg?20260204164728",
+        "url": "https://www.majorcineplex.com/movie/hor-taew-tak-10"
+      }
+    }
+  },
+  {
+    "name": "avatar-fire-and-ash",
+    "name_en": "Avatar Fire and Ash",
+    "name_th": "อวตาร อัคนีและธุลีดิน",
+    "display": "Avatar Fire and Ash",
+    "release": "2025-12-16T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "195",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/3698/thumb_3698.jpg?20260218141509",
+        "url": "https://www.majorcineplex.com/movie/avatar-fire-and-ash"
+      }
+    }
+  },
+  {
+    "name": "phop-dib-dib",
+    "name_en": "Pop Dip Dip",
+    "name_th": "ปอบดิ๊บดิบ",
+    "display": "Pop Dip Dip",
+    "release": "2025-12-30T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "105",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4821/thumb_4821.jpg?20260205150502",
+        "url": "https://www.majorcineplex.com/movie/phop-dib-dib"
+      }
+    }
+  },
+  {
+    "name": "diva-la-vie",
+    "name_en": "Diva La Vie",
+    "name_th": "ดีว่า..ราวี",
+    "display": "Diva La Vie",
+    "release": "2025-12-09T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "125",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4564/thumb_4564.jpg?20260205130501",
+        "url": "https://www.majorcineplex.com/movie/diva-la-vie"
+      }
+    }
+  },
+  {
+    "name": "zootopia-2",
+    "name_en": "Zootopia 2",
+    "name_th": "นครสัตว์มหาสนุก 2",
+    "display": "Zootopia 2",
+    "release": "2025-11-26T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "107",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4184/thumb_4184.jpg?20260218141712",
+        "url": "https://www.majorcineplex.com/movie/zootopia-2"
+      }
+    }
+  },
+  {
+    "name": "doraemon-the-movie-nobitas-art-world-tales",
+    "name_en": "Doraemon the Movie Nobitas Art World",
+    "name_th": "โดราเอมอน เดอะมูฟวี่ ตอน เรื่องราวในโลกภาพวาดของโนบิตะ",
+    "display": "Doraemon the Movie Nobitas Art World",
+    "release": "2025-10-08T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "105",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4633/thumb_4633.jpg?20260218141821",
+        "url": "https://www.majorcineplex.com/movie/doraemon-the-movie-nobitas-art-world-tales"
+      }
+    }
+  },
+  {
+    "name": "mercy",
+    "name_en": "Mercy",
+    "name_th": "90 นาทีสั่งตาย",
+    "display": "Mercy",
+    "release": "2026-01-21T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "100",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4679/thumb_4679.jpg?20260219010903",
+        "url": "https://www.majorcineplex.com/movie/mercy"
+      }
+    }
+  },
+  {
+    "name": "dream-animals-the-movie",
+    "name_en": "Dream Animals The Movie",
+    "name_th": "ดรีม แอนิมอล เดอะ มูฟวี่",
+    "display": "Dream Animals The Movie",
+    "release": "2025-12-24T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "90",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4725/thumb_4725.jpg?20260206103541",
+        "url": "https://www.majorcineplex.com/movie/dream-animals-the-movie"
+      }
+    }
+  },
+  {
+    "name": "ejen-ali-the-movie-2",
+    "name_en": "Agent Ali2 The Movie",
+    "name_th": "เอเจ้นต์ อาลี สายลับพิทักษ์โลก",
+    "display": "Agent Ali2 The Movie",
+    "release": "2025-09-17T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "97",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4763/thumb_4763.jpg?20260211130501",
+        "url": "https://www.majorcineplex.com/movie/ejen-ali-the-movie-2"
+      }
+    }
+  },
+  {
+    "name": "utano-princesama-all-star-stage-happy-celebration",
+    "name_en": "Utano Princesama ALL STAR STAGE Happy Celebration",
+    "name_th": "อุทา โนะ ปรินท์ ซามะ ออล สตาร์ สเตจ แฮปปี้ เซเลเบรชั่น",
+    "display": "Utano Princesama ALL STAR STAGE Happy Celebration",
+    "release": "2026-03-21T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "228",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5087/thumb_5087.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/utano-princesama-all-star-stage-happy-celebration"
+      }
+    }
+  },
+  {
+    "name": "enhypen-walk-the-line-summer-edition-in-cinemas",
+    "name_en": "ENHYPEN WALK THE LINE SUMMER EDITION IN CINEMAS",
+    "name_th": "ENHYPEN WALK THE LINE SUMMER EDITION IN CINEMAS",
+    "display": "ENHYPEN WALK THE LINE SUMMER EDITION IN CINEMAS",
+    "release": "2026-03-04T17:00:00.000Z",
+    "genre": "Documentary",
+    "timeMin": "123",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5075/thumb_5075.jpg?20260212155621",
+        "url": "https://www.majorcineplex.com/movie/enhypen-walk-the-line-summer-edition-in-cinemas"
+      }
+    }
+  },
+  {
+    "name": "bang-dream-it-s-mygo-part-2-the-melody-within",
+    "name_en": "BanG Dream It s MyGO Part 2 The Melody Within",
+    "name_th": "BanG Dream It s MyGO Part 2 The Melody Within",
+    "display": "BanG Dream It s MyGO Part 2 The Melody Within",
+    "release": "2026-03-03T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "120",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5086/thumb_5086.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/bang-dream-it-s-mygo-part-2-the-melody-within"
+      }
+    }
+  },
+  {
+    "name": "scream-7",
+    "name_en": "Scream 7",
+    "name_th": "หวีดสุดขีด 7",
+    "display": "Scream 7",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "114",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4756/thumb_4756.jpg?20260218130904",
+        "url": "https://www.majorcineplex.com/movie/scream-7"
+      }
+    }
+  },
+  {
+    "name": "gezhi-town",
+    "name_en": "Gezhi Town",
+    "name_th": "เมืองนักสู้",
+    "display": "Gezhi Town",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "121",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5023/thumb_5023.jpg?20260219010903",
+        "url": "https://www.majorcineplex.com/movie/gezhi-town"
+      }
+    }
+  },
+  {
+    "name": "twenty-one-pilots-more-than-we-ever-imagined",
+    "name_en": "Twenty One Pilots More Than We Ever Imagined",
+    "name_th": "Twenty One Pilots More Than We Ever Imagined",
+    "display": "Twenty One Pilots More Than We Ever Imagined",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Documentary",
+    "timeMin": "119",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5048/thumb_5048.jpg?20260219010902",
+        "url": "https://www.majorcineplex.com/movie/twenty-one-pilots-more-than-we-ever-imagined"
+      }
+    }
+  },
+  {
+    "name": "rakee",
+    "name_en": "The Stain",
+    "name_th": "ราคี",
+    "display": "The Stain",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Romance",
+    "timeMin": "105",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5066/thumb_5066.jpg?20260218163710",
+        "url": "https://www.majorcineplex.com/movie/rakee"
+      }
+    }
+  },
+  {
+    "name": "gundam-hathaway-the-sorcery-of-nymph-circe-jam2026",
+    "name_en": "GUNDAM HATHAWAY The Sorcery of Nymph Circe",
+    "name_th": "GUNDAM HATHAWAY The Sorcery of Nymph Circe",
+    "display": "GUNDAM HATHAWAY The Sorcery of Nymph Circe",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "95",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5068/thumb_5068.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/gundam-hathaway-the-sorcery-of-nymph-circe-jam2026"
+      }
+    }
+  },
+  {
+    "name": "bang-dream-it-s-mygo-spring-sunshine-lost-cat",
+    "name_en": "BanG Dream It s MyGO Spring Sunshine Lost Cat",
+    "name_th": "BanG Dream It s MyGO Spring Sunshine Lost Cat",
+    "display": "BanG Dream It s MyGO Spring Sunshine Lost Cat",
+    "release": "2026-02-24T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "118",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5085/thumb_5085.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/bang-dream-it-s-mygo-spring-sunshine-lost-cat"
+      }
+    }
+  },
+  {
+    "name": "crime-101",
+    "name_en": "Crime 101",
+    "name_th": "เส้นทางปล้นโคตรระห่ำ",
+    "display": "Crime 101",
+    "release": "2026-02-18T17:00:00.000Z",
+    "genre": "Crime",
+    "timeMin": "140",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4942/thumb_4942.jpg?20260218170504",
+        "url": "https://www.majorcineplex.com/movie/crime-101"
+      }
+    }
+  },
+  {
+    "name": "sup-pa-rer-2",
+    "name_en": "Sup Pa Ror 2",
+    "name_th": "สัปเหร่อ 2",
+    "display": "Sup Pa Ror 2",
+    "release": "2026-02-11T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "127",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4670/thumb_4670.jpg?20260218140624",
+        "url": "https://www.majorcineplex.com/movie/sup-pa-rer-2"
+      }
+    }
+  },
+  {
+    "name": "the-strangers-chapter-3",
+    "name_en": "The Strangers Chapter 3",
+    "name_th": "เดอะ สเตรนเจอร์ส กระชากหน้าอำมหิต",
+    "display": "The Strangers Chapter 3",
+    "release": "2026-02-18T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "91",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4998/thumb_4998.jpg?20260218170504",
+        "url": "https://www.majorcineplex.com/movie/the-strangers-chapter-3"
+      }
+    }
+  },
+  {
+    "name": "hamnet",
+    "name_en": "Hamnet",
+    "name_th": "แฮมเน็ต",
+    "display": "Hamnet",
+    "release": "2026-02-18T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "126",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4851/thumb_4851.jpg?20260218170504",
+        "url": "https://www.majorcineplex.com/movie/hamnet"
+      }
+    }
+  },
+  {
+    "name": "detective-conan-episode-zero-jamnime-2026",
+    "name_en": "Detective Conan Episode Zero",
+    "name_th": "ยอดนักสืบจิ๋ว โคนัน คดีพิพิธภัณฑ์สัตว์น้ำของคุโด้ ชินอิจิ",
+    "display": "Detective Conan Episode Zero",
+    "release": "2026-02-18T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "60",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5074/thumb_5074.jpg?20260218170504",
+        "url": "https://www.majorcineplex.com/movie/detective-conan-episode-zero-jamnime-2026"
+      }
+    }
+  },
+  {
+    "name": "back-to-the-past",
+    "name_en": "Back to the Past",
+    "name_th": "เจาะเวลาหาจิ๋นซี เดอะมูฟวี่",
+    "display": "Back to the Past",
+    "release": "2026-02-18T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "105",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5030/thumb_5030.jpg?20260218170504",
+        "url": "https://www.majorcineplex.com/movie/back-to-the-past"
+      }
+    }
+  },
+  {
+    "name": "kanwila",
+    "name_en": "Devil Black Cat",
+    "name_th": "กาฬวิฬาร์ อาถรรพ์ ปีศาจ แมวดำ",
+    "display": "Devil Black Cat",
+    "release": "2026-02-04T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "82",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4620/thumb_4620.jpg?20260217170503",
+        "url": "https://www.majorcineplex.com/movie/kanwila"
+      }
+    }
+  },
+  {
+    "name": "whistle",
+    "name_en": "Whistle",
+    "name_th": "หวีดเรียกผี",
+    "display": "Whistle",
+    "release": "2026-02-18T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "97",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4059/thumb_4059.jpg?20260218170504",
+        "url": "https://www.majorcineplex.com/movie/whistle"
+      }
+    }
+  },
+  {
+    "name": "five-centimeters-per-second-anime",
+    "name_en": "5 Centimeters Per Second Animation",
+    "name_th": "ยามซากุระร่วงโรย ฉบับแอนิเมชั่น",
+    "display": "5 Centimeters Per Second Animation",
+    "release": "2026-02-11T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "73",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4752/thumb_4752.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/five-centimeters-per-second-anime"
+      }
+    }
+  },
+  {
+    "name": "greenland-migration",
+    "name_en": "Greenland 2 Migration",
+    "name_th": "ฝ่าชะตา โลกาวินาศ",
+    "display": "Greenland 2 Migration",
+    "release": "2026-01-14T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "98",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5006/thumb_5006.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/greenland-migration"
+      }
+    }
+  },
+  {
+    "name": "survive-or-die",
+    "name_en": "Survive or Die",
+    "name_th": "รอด/ตาย",
+    "display": "Survive or Die",
+    "release": "2026-02-18T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "90",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4493/thumb_4493.jpg?20260218170504",
+        "url": "https://www.majorcineplex.com/movie/survive-or-die"
+      }
+    }
+  },
+  {
+    "name": "shelter",
+    "name_en": "Shelter",
+    "name_th": "คลั่งนรก หลบตาย",
+    "display": "Shelter",
+    "release": "2026-02-04T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "107",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4947/thumb_4947.jpg?20260218190503",
+        "url": "https://www.majorcineplex.com/movie/shelter"
+      }
+    }
+  },
+  {
+    "name": "wuthering-heights",
+    "name_en": "Wuthering Heights",
+    "name_th": "วัทเตอริ่ง ไฮต์ส",
+    "display": "Wuthering Heights",
+    "release": "2026-02-11T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "136",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4806/thumb_4806.jpg?20260218141307",
+        "url": "https://www.majorcineplex.com/movie/wuthering-heights"
+      }
+    }
+  },
+  {
+    "name": "28-years-later-the-bone-temple",
+    "name_en": "28 Years Later The Bone Temple",
+    "name_th": "28 ปีให้หลัง เชื้อเขมือบคน วิหารซากกะโหลก",
+    "display": "28 Years Later The Bone Temple",
+    "release": "2026-02-04T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "109",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4500/thumb_4500.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/28-years-later-the-bone-temple"
+      }
+    }
+  },
+  {
+    "name": "pillion",
+    "name_en": "Pillion",
+    "name_th": "คนข้างหลัง",
+    "display": "Pillion",
+    "release": "2026-02-11T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "107",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5036/thumb_5036.jpg?20260218141348",
+        "url": "https://www.majorcineplex.com/movie/pillion"
+      }
+    }
+  },
+  {
+    "name": "sappaleehuan",
+    "name_en": "Sap Pa Lee Huan",
+    "name_th": "สรรพลี้หวน",
+    "display": "Sap Pa Lee Huan",
+    "release": "2026-02-04T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "118",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4715/thumb_4715.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/sappaleehuan"
+      }
+    }
+  },
+  {
+    "name": "umamusume-pretty-derby",
+    "name_en": "Uma Musume Pretty Derby the Beginning of the New",
+    "name_th": "Uma Musume Pretty Derby the Beginning of the New",
+    "display": "Uma Musume Pretty Derby the Beginning of the New",
+    "release": "2026-02-11T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "108",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5078/thumb_5078.jpg?20260218141431",
+        "url": "https://www.majorcineplex.com/movie/umamusume-pretty-derby"
+      }
+    }
+  },
+  {
+    "name": "mudborn",
+    "name_en": "Mudborn",
+    "name_th": "หุ่นดินผี",
+    "display": "Mudborn",
+    "release": "2026-02-04T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "111",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5054/thumb_5054.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/mudborn"
+      }
+    }
+  },
+  {
+    "name": "senpai-is-an-otokonoko-clear-after-the-rain",
+    "name_en": "Senpai is an Otokonoko Clear After the Rain",
+    "name_th": "รุ่นพี่สุดสวยคนนี้เป็นผู้ชาย เดอะ มูฟวี่ ในวันฟ้าใส หลังหัวใจเปียกฝน",
+    "display": "Senpai is an Otokonoko Clear After the Rain",
+    "release": "2026-02-04T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "82",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4728/thumb_4728.jpg?20260217170503",
+        "url": "https://www.majorcineplex.com/movie/senpai-is-an-otokonoko-clear-after-the-rain"
+      }
+    }
+  },
+  {
+    "name": "the-secret-agent",
+    "name_en": "The Secret Agent",
+    "name_th": "ประเทศนี้ อยู่เฉย ๆ ก็ผิดได้",
+    "display": "The Secret Agent",
+    "release": "2026-02-04T17:00:00.000Z",
+    "genre": "Crime",
+    "timeMin": "158",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4655/thumb_4655.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/the-secret-agent"
+      }
+    }
+  },
+  {
+    "name": "under-current",
+    "name_en": "Under Current",
+    "name_th": "ใต้เงามรณะ",
+    "display": "Under Current",
+    "release": "2026-01-21T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "115",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5022/thumb_5022.jpg?20260218141557",
+        "url": "https://www.majorcineplex.com/movie/under-current"
+      }
+    }
+  },
+  {
+    "name": "king-keaw",
+    "name_en": "King Keaw",
+    "name_th": "กิ่งแก้ว",
+    "display": "King Keaw",
+    "release": "2026-01-28T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "100",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4556/thumb_4556.jpg?20260218170902",
+        "url": "https://www.majorcineplex.com/movie/king-keaw"
+      }
+    }
+  },
+  {
+    "name": "panor-2",
+    "name_en": "Panor 2",
+    "name_th": "พนอ 2",
+    "display": "Panor 2",
+    "release": "2026-01-14T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "125",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4819/thumb_4819.jpg?20260218170502",
+        "url": "https://www.majorcineplex.com/movie/panor-2"
+      }
+    }
+  },
+  {
+    "name": "kang-baan",
+    "name_en": "Our House",
+    "name_th": "ข้างบ้าน",
+    "display": "Our House",
+    "release": "2025-12-03T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "120",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4571/thumb_4571.jpg?20260204164819",
+        "url": "https://www.majorcineplex.com/movie/kang-baan"
+      }
+    }
+  },
+  {
+    "name": "send-help",
+    "name_en": "Send Help",
+    "name_th": "โปรดส่งใครมาช่วยฉันที",
+    "display": "Send Help",
+    "release": "2026-01-28T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "113",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4546/thumb_4546.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/send-help"
+      }
+    }
+  },
+  {
+    "name": "kokuho",
+    "name_en": "Kokuho",
+    "name_th": "สมบัติชาติ",
+    "display": "Kokuho",
+    "release": "2026-01-14T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "175",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5001/thumb_5001.jpg?20260218170502",
+        "url": "https://www.majorcineplex.com/movie/kokuho"
+      }
+    }
+  },
+  {
+    "name": "ateez-vr-concert-light-the-way",
+    "name_en": "ATEEZ VR CONCERT LIGHT THE WAY",
+    "name_th": "ATEEZ VR CONCERT LIGHT THE WAY",
+    "display": "ATEEZ VR CONCERT LIGHT THE WAY",
+    "release": "2026-02-17T17:00:00.000Z",
+    "genre": "Musical",
+    "timeMin": "63",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5064/thumb_5064.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/ateez-vr-concert-light-the-way"
+      }
+    }
+  },
+  {
+    "name": "stray-kids-the-dominate-experience",
+    "name_en": "Stray Kids The dominATE Experience",
+    "name_th": "Stray Kids The dominATE Experience",
+    "display": "Stray Kids The dominATE Experience",
+    "release": "2026-02-06T17:00:00.000Z",
+    "genre": "Documentary",
+    "timeMin": "146",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5058/thumb_5058.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/stray-kids-the-dominate-experience"
+      }
+    }
+  },
+  {
+    "name": "gundam-wing-endless-waltz-jamnime-2026",
+    "name_en": "Gundam Wing  Endless Waltz",
+    "name_th": "บันทึกการยุทธ์บทใหม่ กันดั้มวิง - เอนด์เลส วอลซ์",
+    "display": "Gundam Wing  Endless Waltz",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "90",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5041/thumb_5041.jpg?20260212095620",
+        "url": "https://www.majorcineplex.com/movie/gundam-wing-endless-waltz-jamnime-2026"
+      }
+    }
+  },
+  {
+    "name": "sentimental-value",
+    "name_en": "Sentimental Value",
+    "name_th": "ถ้าตอนนั้น ยังมีเรา",
+    "display": "Sentimental Value",
+    "release": "2026-02-18T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "132",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4654/thumb_4654.jpg?20260218170504",
+        "url": "https://www.majorcineplex.com/movie/sentimental-value"
+      }
+    }
+  },
+  {
+    "name": "five-centimeters-per-second",
+    "name_en": "5 Centimeters Per Second Live Action",
+    "name_th": "ยามซากุระร่วงโรย",
+    "display": "5 Centimeters Per Second Live Action",
+    "release": "2026-02-18T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "121",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5007/thumb_5007.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/five-centimeters-per-second"
+      }
+    }
+  },
+  {
+    "name": "the-rose-come-back-to-me",
+    "name_en": "The Rose Come Back to Me",
+    "name_th": "The Rose Come Back to Me",
+    "display": "The Rose Come Back to Me",
+    "release": "2026-02-13T17:00:00.000Z",
+    "genre": "Musical",
+    "timeMin": "97",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5046/thumb_5046.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/the-rose-come-back-to-me"
+      }
+    }
+  },
+  {
+    "name": "o-romeo",
+    "name_en": "O Romeo",
+    "name_th": "O Romeo",
+    "display": "O Romeo",
+    "release": "2026-02-12T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "150",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5083/thumb_5083.jpg?20260218170504",
+        "url": "https://www.majorcineplex.com/movie/o-romeo"
+      }
+    }
+  },
+  {
+    "name": "live-battle-of-tokyo-utsukushiki-uso-jam26",
+    "name_en": "LIVE BATTLE OF TOKYO Utsukushiki Uso JAM26",
+    "name_th": "LIVE BATTLE OF TOKYO Utsukushiki Uso JAM26",
+    "display": "LIVE BATTLE OF TOKYO Utsukushiki Uso JAM26",
+    "release": "2026-02-06T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "103",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5073/thumb_5073.jpg?20260218170503",
+        "url": "https://www.majorcineplex.com/movie/live-battle-of-tokyo-utsukushiki-uso-jam26"
+      }
+    }
+  },
+  {
+    "name": "born-to-be-wild-imaxdigital3d-",
+    "name_en": "Born to Be Wild 3D",
+    "name_th": "บอร์น ทู บี วายด์ 3 มิติ",
+    "display": "Born to Be Wild 3D",
+    "release": "2026-02-20T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "40",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/2893/thumb_2893.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/born-to-be-wild-imaxdigital3d-"
+      }
+    }
+  },
+  {
+    "name": "do-deewane-seher-mein",
+    "name_en": "Do Deewane Seher Mein",
+    "name_th": "Do Deewane Seher Mein",
+    "display": "Do Deewane Seher Mein",
+    "release": "2026-02-19T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "138",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5084/thumb_5084.jpg?20260218142017",
+        "url": "https://www.majorcineplex.com/movie/do-deewane-seher-mein"
+      }
+    }
+  },
+  {
+    "name": "assi",
+    "name_en": "Assi",
+    "name_th": "Assi",
+    "display": "Assi",
+    "release": "2026-02-19T17:00:00.000Z",
+    "genre": "Crime",
+    "timeMin": "134",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5092/thumb_5092.jpg?20260218142052",
+        "url": "https://www.majorcineplex.com/movie/assi"
+      }
+    }
+  },
+  {
+    "name": "born-to-be-wild-imaxdigital3d-",
+    "name_en": "Born to Be Wild 3D",
+    "name_th": "บอร์น ทู บี วายด์ 3 มิติ",
+    "display": "Born to Be Wild 3D",
+    "release": "2026-02-20T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "40",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/2893/thumb_2893.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/born-to-be-wild-imaxdigital3d-"
+      }
+    }
+  },
+  {
+    "name": "bang-dream-it-s-mygo-spring-sunshine-lost-cat",
+    "name_en": "BanG Dream It s MyGO Spring Sunshine Lost Cat",
+    "name_th": "BanG Dream It s MyGO Spring Sunshine Lost Cat",
+    "display": "BanG Dream It s MyGO Spring Sunshine Lost Cat",
+    "release": "2026-02-24T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "118",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5085/thumb_5085.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/bang-dream-it-s-mygo-spring-sunshine-lost-cat"
+      }
+    }
+  },
+  {
+    "name": "f1",
+    "name_en": "F1 The Movie RE",
+    "name_th": "F1 เดอะ มูฟวี่",
+    "display": "F1 The Movie RE",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "150",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4235/thumb_4235.jpg?20260218110903",
+        "url": "https://www.majorcineplex.com/movie/f1"
+      }
+    }
+  },
+  {
+    "name": "sinners",
+    "name_en": "Sinners RE",
+    "name_th": "ซินเนอร์ส",
+    "display": "Sinners RE",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "138",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4337/thumb_4337.jpg?20260218110904",
+        "url": "https://www.majorcineplex.com/movie/sinners"
+      }
+    }
+  },
+  {
+    "name": "scream-7",
+    "name_en": "Scream 7",
+    "name_th": "หวีดสุดขีด 7",
+    "display": "Scream 7",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "114",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4756/thumb_4756.jpg?20260218130904",
+        "url": "https://www.majorcineplex.com/movie/scream-7"
+      }
+    }
+  },
+  {
+    "name": "gezhi-town",
+    "name_en": "Gezhi Town",
+    "name_th": "เมืองนักสู้",
+    "display": "Gezhi Town",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "121",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5023/thumb_5023.jpg?20260219010903",
+        "url": "https://www.majorcineplex.com/movie/gezhi-town"
+      }
+    }
+  },
+  {
+    "name": "ghost-in-the-shell-1995-jamnime-2026",
+    "name_en": "Ghost in the Shell 1995",
+    "name_th": "โกสต์ อิน เดอะ เชลล์",
+    "display": "Ghost in the Shell 1995",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "83\n                                                mins",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5043/thumb_5043.jpg?20260218090504",
+        "url": "https://www.majorcineplex.com/movie/ghost-in-the-shell-1995-jamnime-2026"
+      }
+    }
+  },
+  {
+    "name": "twenty-one-pilots-more-than-we-ever-imagined",
+    "name_en": "Twenty One Pilots More Than We Ever Imagined",
+    "name_th": "Twenty One Pilots More Than We Ever Imagined",
+    "display": "Twenty One Pilots More Than We Ever Imagined",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Documentary",
+    "timeMin": "119",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5048/thumb_5048.jpg?20260219010902",
+        "url": "https://www.majorcineplex.com/movie/twenty-one-pilots-more-than-we-ever-imagined"
+      }
+    }
+  },
+  {
+    "name": "one-battle-after-another-new",
+    "name_en": "One Battle After Another RE",
+    "name_th": "หนึ่งศึกครั้งแล้วครั้งเล่า",
+    "display": "One Battle After Another RE",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "170",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5056/thumb_5056.jpg?20260218110903",
+        "url": "https://www.majorcineplex.com/movie/one-battle-after-another-new"
+      }
+    }
+  },
+  {
+    "name": "rakee",
+    "name_en": "The Stain",
+    "name_th": "ราคี",
+    "display": "The Stain",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Romance",
+    "timeMin": "105",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5066/thumb_5066.jpg?20260218163710",
+        "url": "https://www.majorcineplex.com/movie/rakee"
+      }
+    }
+  },
+  {
+    "name": "gundam-hathaway-the-sorcery-of-nymph-circe-jam2026",
+    "name_en": "GUNDAM HATHAWAY The Sorcery of Nymph Circe",
+    "name_th": "GUNDAM HATHAWAY The Sorcery of Nymph Circe",
+    "display": "GUNDAM HATHAWAY The Sorcery of Nymph Circe",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "95",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5068/thumb_5068.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/gundam-hathaway-the-sorcery-of-nymph-circe-jam2026"
+      }
+    }
+  },
+  {
+    "name": "kinki",
+    "name_en": "Kinki",
+    "name_th": "อาถรรพ์คิงคิ",
+    "display": "Kinki",
+    "release": "2026-02-25T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "103",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5069/thumb_5069.jpg?20260218090904",
+        "url": "https://www.majorcineplex.com/movie/kinki"
+      }
+    }
+  },
+  {
+    "name": "pee-nak-5",
+    "name_en": "Pee Nak 5",
+    "name_th": "พี่นาค 5",
+    "display": "Pee Nak 5",
+    "release": "2026-03-02T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4711/thumb_4711.jpg?20260216114956",
+        "url": "https://www.majorcineplex.com/movie/pee-nak-5"
+      }
+    }
+  },
+  {
+    "name": "bang-dream-it-s-mygo-part-2-the-melody-within",
+    "name_en": "BanG Dream It s MyGO Part 2 The Melody Within",
+    "name_th": "BanG Dream It s MyGO Part 2 The Melody Within",
+    "display": "BanG Dream It s MyGO Part 2 The Melody Within",
+    "release": "2026-03-03T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "120",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5086/thumb_5086.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/bang-dream-it-s-mygo-part-2-the-melody-within"
+      }
+    }
+  },
+  {
+    "name": "tws-vr-concert-rush-road",
+    "name_en": "TWS VR CONCERT RUSH ROAD",
+    "name_th": "TWS VR CONCERT RUSH ROAD",
+    "display": "TWS VR CONCERT RUSH ROAD",
+    "release": "2026-03-03T17:00:00.000Z",
+    "genre": "Musical",
+    "timeMin": "55",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5093/thumb_5093.jpg?20260219094034",
+        "url": "https://www.majorcineplex.com/movie/tws-vr-concert-rush-road"
+      }
+    }
+  },
+  {
+    "name": "the-voice-of-hind-rajab",
+    "name_en": "The Voice of Hind Rajab",
+    "name_th": "ฮินด์ ราจาบ เสียงร่ำไห้จากกาซา",
+    "display": "The Voice of Hind Rajab",
+    "release": "2026-03-04T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "89",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4933/thumb_4933.jpg?20260211092449",
+        "url": "https://www.majorcineplex.com/movie/the-voice-of-hind-rajab"
+      }
+    }
+  },
+  {
+    "name": "hoppers",
+    "name_en": "Hoppers",
+    "name_th": "เด้งโดด เปลี่ยนโหมดเป็นบีเวอร์",
+    "display": "Hoppers",
+    "release": "2026-03-04T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "105",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4501/thumb_4501.jpg?20260209150903",
+        "url": "https://www.majorcineplex.com/movie/hoppers"
+      }
+    }
+  },
+  {
+    "name": "enhypen-walk-the-line-summer-edition-in-cinemas",
+    "name_en": "ENHYPEN WALK THE LINE SUMMER EDITION IN CINEMAS",
+    "name_th": "ENHYPEN WALK THE LINE SUMMER EDITION IN CINEMAS",
+    "display": "ENHYPEN WALK THE LINE SUMMER EDITION IN CINEMAS",
+    "release": "2026-03-04T17:00:00.000Z",
+    "genre": "Documentary",
+    "timeMin": "123",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5075/thumb_5075.jpg?20260212155621",
+        "url": "https://www.majorcineplex.com/movie/enhypen-walk-the-line-summer-edition-in-cinemas"
+      }
+    }
+  },
+  {
+    "name": "the-bride",
+    "name_en": "The Bride",
+    "name_th": "เจ้าสาว!",
+    "display": "The Bride",
+    "release": "2026-03-04T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4344/thumb_4344.jpg?20260218162154",
+        "url": "https://www.majorcineplex.com/movie/the-bride"
+      }
+    }
+  },
+  {
+    "name": "ghost-board",
+    "name_en": "Ghost Board",
+    "name_th": "กล่องผีสุ่มวิญญาณ",
+    "display": "Ghost Board",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4102/thumb_4102.jpg?20260217174304",
+        "url": "https://www.majorcineplex.com/movie/ghost-board"
+      }
+    }
+  },
+  {
+    "name": "singh-nuea-suer-tai",
+    "name_en": "Thai Fighters",
+    "name_th": "สิงห์เหนือ เสือใต้",
+    "display": "Thai Fighters",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4642/thumb_4642.jpg?20260217092544",
+        "url": "https://www.majorcineplex.com/movie/singh-nuea-suer-tai"
+      }
+    }
+  },
+  {
+    "name": "labyrinth",
+    "name_en": "Labyrinth",
+    "name_th": "มหัศจรรย์ วันติดจอ",
+    "display": "Labyrinth",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "115",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4960/thumb_4960.jpg?20260206091151",
+        "url": "https://www.majorcineplex.com/movie/labyrinth"
+      }
+    }
+  },
+  {
+    "name": "reminders-of-him",
+    "name_en": "Reminders of Him",
+    "name_th": "ร่องรอยรัก",
+    "display": "Reminders of Him",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5000/thumb_5000.jpg?20260204091954",
+        "url": "https://www.majorcineplex.com/movie/reminders-of-him"
+      }
+    }
+  },
+  {
+    "name": "number-one",
+    "name_en": "Number One",
+    "name_th": "นับหนึ่งถึงมื้อแม่",
+    "display": "Number One",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "105",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5002/thumb_5002.jpg?20260203093132",
+        "url": "https://www.majorcineplex.com/movie/number-one"
+      }
+    }
+  },
+  {
+    "name": "gundam-wing-endless-waltz-jamnime-2026",
+    "name_en": "Gundam Wing  Endless Waltz",
+    "name_th": "บันทึกการยุทธ์บทใหม่ กันดั้มวิง - เอนด์เลส วอลซ์",
+    "display": "Gundam Wing  Endless Waltz",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "90",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5041/thumb_5041.jpg?20260212095620",
+        "url": "https://www.majorcineplex.com/movie/gundam-wing-endless-waltz-jamnime-2026"
+      }
+    }
+  },
+  {
+    "name": "ghost-in-the-shell-2-innocence-2004-jamnime-2026",
+    "name_en": "Ghost in the Shell 2 Innocence 2004",
+    "name_th": "โกสต์ อิน เดอะ เชลล์ 2 อินโนเซนส์",
+    "display": "Ghost in the Shell 2 Innocence 2004",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "100",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5044/thumb_5044.jpg?20260212095001",
+        "url": "https://www.majorcineplex.com/movie/ghost-in-the-shell-2-innocence-2004-jamnime-2026"
+      }
+    }
+  },
+  {
+    "name": "masked-rider-gavv-guilty-parfait",
+    "name_en": "Masked Rider Gavv Guilty Parfait",
+    "name_th": "มาสค์ไรเดอร์ กาบุ Guilty Parfait",
+    "display": "Masked Rider Gavv Guilty Parfait",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "60",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5070/thumb_5070.jpg?20260212095832",
+        "url": "https://www.majorcineplex.com/movie/masked-rider-gavv-guilty-parfait"
+      }
+    }
+  },
+  {
+    "name": "the-mortuary-assistant",
+    "name_en": "The Mortuary Assistant",
+    "name_th": "คืนสยองห้องดับจิต",
+    "display": "The Mortuary Assistant",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "91",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5076/thumb_5076.jpg?20260217141700",
+        "url": "https://www.majorcineplex.com/movie/the-mortuary-assistant"
+      }
+    }
+  },
+  {
+    "name": "marty-supreme",
+    "name_en": "Marty Supreme",
+    "name_th": "มาร์ตี้ สุพรีม",
+    "display": "Marty Supreme",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "149",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5077/thumb_5077.jpg?20260209140746",
+        "url": "https://www.majorcineplex.com/movie/marty-supreme"
+      }
+    }
+  },
+  {
+    "name": "iron-lung",
+    "name_en": "Iron Lung",
+    "name_th": "Iron Lung",
+    "display": "Iron Lung",
+    "release": "2026-03-11T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "125",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5090/thumb_5090.jpg?20260216095357",
+        "url": "https://www.majorcineplex.com/movie/iron-lung"
+      }
+    }
+  },
+  {
+    "name": "project-hail-mary",
+    "name_en": "Project Hail Mary",
+    "name_th": "ภารกิจกู้สุริยะ",
+    "display": "Project Hail Mary",
+    "release": "2026-03-18T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4678/thumb_4678.jpg?20260209023929",
+        "url": "https://www.majorcineplex.com/movie/project-hail-mary"
+      }
+    }
+  },
+  {
+    "name": "phra-mai",
+    "name_en": "Wooden Buddha",
+    "name_th": "พระไม้",
+    "display": "Wooden Buddha",
+    "release": "2026-03-18T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4432/thumb_4432.jpg?20260219093259",
+        "url": "https://www.majorcineplex.com/movie/phra-mai"
+      }
+    }
+  },
+  {
+    "name": "nang-fa-kha-dance",
+    "name_en": "Mor Lam Rhythm",
+    "name_th": "อ้ายต้าวว เอวหวาน",
+    "display": "Mor Lam Rhythm",
+    "release": "2026-03-18T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4716/thumb_4716.jpg?20260205131839",
+        "url": "https://www.majorcineplex.com/movie/nang-fa-kha-dance"
+      }
+    }
+  },
+  {
+    "name": "billie-eilish-hit-me-hard-and-soft-the-tour-live-in-3d",
+    "name_en": "Billie Eilish Hit Me Hard and Soft The Tour Live in 3D",
+    "name_th": "Billie Eilish Hit Me Hard and Soft The Tour Live in 3D",
+    "display": "Billie Eilish Hit Me Hard and Soft The Tour Live in 3D",
+    "release": "2026-03-18T17:00:00.000Z",
+    "genre": "Documentary",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5010/thumb_5010.jpg?20260211134628",
+        "url": "https://www.majorcineplex.com/movie/billie-eilish-hit-me-hard-and-soft-the-tour-live-in-3d"
+      }
+    }
+  },
+  {
+    "name": "the-garden-of-sinners-jamnime-2026",
+    "name_en": "The Garden of Sinners",
+    "name_th": "The Garden of Sinners",
+    "display": "The Garden of Sinners",
+    "release": "2026-03-18T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "104",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5039/thumb_5039.jpg?20260212095932",
+        "url": "https://www.majorcineplex.com/movie/the-garden-of-sinners-jamnime-2026"
+      }
+    }
+  },
+  {
+    "name": "linda-linda-linda-jamnime-2026",
+    "name_en": "Linda Linda Linda",
+    "name_th": "Linda Linda Linda",
+    "display": "Linda Linda Linda",
+    "release": "2026-03-18T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "114",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5040/thumb_5040.jpg?20260212095708",
+        "url": "https://www.majorcineplex.com/movie/linda-linda-linda-jamnime-2026"
+      }
+    }
+  },
+  {
+    "name": "girls-band-cry-the-movie-part-2",
+    "name_en": "Girls Band Cry The Movie Part 2 Naa Mirai",
+    "name_th": "เกิลส์แบนด์คราย กู่ร้องถึงอนาคต",
+    "display": "Girls Band Cry The Movie Part 2 Naa Mirai",
+    "release": "2026-03-18T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "111",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5052/thumb_5052.jpg?20260203143614",
+        "url": "https://www.majorcineplex.com/movie/girls-band-cry-the-movie-part-2"
+      }
+    }
+  },
+  {
+    "name": "dusun-mayit",
+    "name_en": "Dusun Mayit",
+    "name_th": "ผีบังตาย",
+    "display": "Dusun Mayit",
+    "release": "2026-03-18T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "95",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5067/thumb_5067.jpg?20260209171339",
+        "url": "https://www.majorcineplex.com/movie/dusun-mayit"
+      }
+    }
+  },
+  {
+    "name": "blades-of-the-guardians",
+    "name_en": "Blades of the Guardians",
+    "name_th": "ยอดยุทธดาบไร้พ่าย",
+    "display": "Blades of the Guardians",
+    "release": "2026-03-18T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "125",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5080/thumb_5080.jpg?20260206101650",
+        "url": "https://www.majorcineplex.com/movie/blades-of-the-guardians"
+      }
+    }
+  },
+  {
+    "name": "utano-princesama-all-star-stage-happy-celebration",
+    "name_en": "Utano Princesama ALL STAR STAGE Happy Celebration",
+    "name_th": "อุทา โนะ ปรินท์ ซามะ ออล สตาร์ สเตจ แฮปปี้ เซเลเบรชั่น",
+    "display": "Utano Princesama ALL STAR STAGE Happy Celebration",
+    "release": "2026-03-21T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "228",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5087/thumb_5087.jpg?20260219010904",
+        "url": "https://www.majorcineplex.com/movie/utano-princesama-all-star-stage-happy-celebration"
+      }
+    }
+  },
+  {
+    "name": "doraemon-nobita-and-the-galaxy-super-express",
+    "name_en": "Doraemon  Nobita and the Galaxy Super express 1996",
+    "name_th": "โดราเอมอน เดอะมูฟวี่ รถด่วนกาแลคซีของโนบิตะ",
+    "display": "Doraemon  Nobita and the Galaxy Super express 1996",
+    "release": "2026-03-25T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "97",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5060/thumb_5060.jpg?20260212100043",
+        "url": "https://www.majorcineplex.com/movie/doraemon-nobita-and-the-galaxy-super-express"
+      }
+    }
+  },
+  {
+    "name": "ready-or-not-here-i-come",
+    "name_en": "Ready or Not Here I Come",
+    "name_th": "เกมพร้อมตาย 2",
+    "display": "Ready or Not Here I Come",
+    "release": "2026-03-25T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "104",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4662/thumb_4662.jpg?20260210164346",
+        "url": "https://www.majorcineplex.com/movie/ready-or-not-here-i-come"
+      }
+    }
+  },
+  {
+    "name": "scarlet",
+    "name_en": "Scarlet",
+    "name_th": "สการ์เล็ต",
+    "display": "Scarlet",
+    "release": "2026-03-25T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "111",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4683/thumb_4683.jpg?20260209024029",
+        "url": "https://www.majorcineplex.com/movie/scarlet"
+      }
+    }
+  },
+  {
+    "name": "the-de4d-echoes",
+    "name_en": "The De4d Echoes",
+    "name_th": "กัม มะ เว คะ",
+    "display": "The De4d Echoes",
+    "release": "2026-03-25T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4750/thumb_4750.jpg?20260205055945",
+        "url": "https://www.majorcineplex.com/movie/the-de4d-echoes"
+      }
+    }
+  },
+  {
+    "name": "elae-airy-kaolee-oppa",
+    "name_en": "Airy in Busan",
+    "name_th": "อีแหล่ แอรี่ เกาหลี โอปป้า",
+    "display": "Airy in Busan",
+    "release": "2026-03-25T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "100",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5049/thumb_5049.jpg?20260119125645",
+        "url": "https://www.majorcineplex.com/movie/elae-airy-kaolee-oppa"
+      }
+    }
+  },
+  {
+    "name": "idolish7-first-beat-part-2",
+    "name_en": "IDOLiSH7 First BEAT Part 2",
+    "name_th": "ไอดอลลิชเซเว่น เฟิร์ส บีท! พาร์ท 2",
+    "display": "IDOLiSH7 First BEAT Part 2",
+    "release": "2026-03-25T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "109",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5051/thumb_5051.jpg?20260129103742",
+        "url": "https://www.majorcineplex.com/movie/idolish7-first-beat-part-2"
+      }
+    }
+  },
+  {
+    "name": "this-is-not-a-test",
+    "name_en": "This Is Not a Test",
+    "name_th": "ขังนรกมัธยมซอมบี้",
+    "display": "This Is Not a Test",
+    "release": "2026-03-25T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "102",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5081/thumb_5081.jpg?20260209172829",
+        "url": "https://www.majorcineplex.com/movie/this-is-not-a-test"
+      }
+    }
+  },
+  {
+    "name": "the-super-mario-galaxy-movie",
+    "name_en": "The Super Mario Galaxy Movie",
+    "name_th": "เดอะ ซูเปอร์ มาริโอ กาแล็คซี่ มูฟวี่",
+    "display": "The Super Mario Galaxy Movie",
+    "release": "2026-03-31T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4849/thumb_4849.jpg?20260129122711",
+        "url": "https://www.majorcineplex.com/movie/the-super-mario-galaxy-movie"
+      }
+    }
+  },
+  {
+    "name": "song-thum-sip-ha",
+    "name_en": "Grandma Speed 2.15",
+    "name_th": "ยายสปีด 2.15",
+    "display": "Grandma Speed 2.15",
+    "release": "2026-04-01T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4714/thumb_4714.jpg?20260202151546",
+        "url": "https://www.majorcineplex.com/movie/song-thum-sip-ha"
+      }
+    }
+  },
+  {
+    "name": "they-will-kill-you",
+    "name_en": "They Will Kill You",
+    "name_th": "พวกมันจะฆ่าแก",
+    "display": "They Will Kill You",
+    "release": "2026-04-01T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "94",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5027/thumb_5027.jpg?20260216090836",
+        "url": "https://www.majorcineplex.com/movie/they-will-kill-you"
+      }
+    }
+  },
+  {
+    "name": "aikatsu-x-pripara-the-movie-deai-no-kiseki-jam2026",
+    "name_en": "Aikatsu x PriPara the Movie Deai no Kiseki",
+    "name_th": "Aikatsu x PriPara the Movie Deai no Kiseki",
+    "display": "Aikatsu x PriPara the Movie Deai no Kiseki",
+    "release": "2026-04-01T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "75",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5062/thumb_5062.jpg?20260212100012",
+        "url": "https://www.majorcineplex.com/movie/aikatsu-x-pripara-the-movie-deai-no-kiseki-jam2026"
+      }
+    }
+  },
+  {
+    "name": "the-convenience-store",
+    "name_en": "The Convenience Store",
+    "name_th": "The Convenience Store",
+    "display": "The Convenience Store",
+    "release": "2026-04-08T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "83",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5063/thumb_5063.jpg?20260116064048",
+        "url": "https://www.majorcineplex.com/movie/the-convenience-store"
+      }
+    }
+  },
+  {
+    "name": "goat",
+    "name_en": "GOAT",
+    "name_th": "คุณแพะหัวใจไม่ยอมแพ้",
+    "display": "GOAT",
+    "release": "2026-04-08T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "100",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4586/thumb_4586.jpg?20260216092047",
+        "url": "https://www.majorcineplex.com/movie/goat"
+      }
+    }
+  },
+  {
+    "name": "mummy",
+    "name_en": "Lee Cronin’s The Mummy",
+    "name_th": "ลี โครนิน เดอะ มัมมี่",
+    "display": "Lee Cronin’s The Mummy",
+    "release": "2026-04-15T17:00:00.000Z",
+    "genre": "Fantasy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4807/thumb_4807.jpg?20260219093809",
+        "url": "https://www.majorcineplex.com/movie/mummy"
+      }
+    }
+  },
+  {
+    "name": "brand-new-landscape",
+    "name_en": "Brand New Landscape",
+    "name_th": "Brand New Landscape",
+    "display": "Brand New Landscape",
+    "release": "2026-04-15T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "115",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5071/thumb_5071.jpg?20260128120619",
+        "url": "https://www.majorcineplex.com/movie/brand-new-landscape"
+      }
+    }
+  },
+  {
+    "name": "normal",
+    "name_en": "Normal",
+    "name_th": "Normal",
+    "display": "Normal",
+    "release": "2026-04-22T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "90",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5065/thumb_5065.jpg?20260205114443",
+        "url": "https://www.majorcineplex.com/movie/normal"
+      }
+    }
+  },
+  {
+    "name": "michael",
+    "name_en": "Michael",
+    "name_th": "ไมเคิล",
+    "display": "Michael",
+    "release": "2026-04-22T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4302/thumb_4302.jpg?20260203093412",
+        "url": "https://www.majorcineplex.com/movie/michael"
+      }
+    }
+  },
+  {
+    "name": "the-devil-wears-prada-2",
+    "name_en": "The Devil Wears Prada 2",
+    "name_th": "นางมารสวมปราด้า 2",
+    "display": "The Devil Wears Prada 2",
+    "release": "2026-04-29T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4636/thumb_4636.jpg?20260202145135",
+        "url": "https://www.majorcineplex.com/movie/the-devil-wears-prada-2"
+      }
+    }
+  },
+  {
+    "name": "monkey",
+    "name_en": "Wukong Jazz",
+    "name_th": "เห้งเจียแจ๊ส",
+    "display": "Wukong Jazz",
+    "release": "2026-04-29T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4738/thumb_4738.jpg?20260216133645",
+        "url": "https://www.majorcineplex.com/movie/monkey"
+      }
+    }
+  },
+  {
+    "name": "the-cursed-2",
+    "name_en": "The Cursed 2",
+    "name_th": "เหมรฺย 2",
+    "display": "The Cursed 2",
+    "release": "2026-04-29T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4817/thumb_4817.jpg?20260202152627",
+        "url": "https://www.majorcineplex.com/movie/the-cursed-2"
+      }
+    }
+  },
+  {
+    "name": "mortal-kombat-2",
+    "name_en": "Mortal Kombat 2",
+    "name_th": "มอร์ทัล คอมแบท 2",
+    "display": "Mortal Kombat 2",
+    "release": "2026-05-06T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4250/thumb_4250.jpg?20251230141040",
+        "url": "https://www.majorcineplex.com/movie/mortal-kombat-2"
+      }
+    }
+  },
+  {
+    "name": "mother-mary",
+    "name_en": "Mother Mary",
+    "name_th": "มาเธอร์ แมรี่",
+    "display": "Mother Mary",
+    "release": "2026-05-06T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "110",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5037/thumb_5037.jpg?20260202092626",
+        "url": "https://www.majorcineplex.com/movie/mother-mary"
+      }
+    }
+  },
+  {
+    "name": "the-sheep-detectives",
+    "name_en": "The Sheep Detectives",
+    "name_th": "แก๊งแกะรอย ยอดนักสืบ",
+    "display": "The Sheep Detectives",
+    "release": "2026-05-13T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4961/thumb_4961.jpg?20251222104151",
+        "url": "https://www.majorcineplex.com/movie/the-sheep-detectives"
+      }
+    }
+  },
+  {
+    "name": "sarb-mueng",
+    "name_en": "Sarb Mueng",
+    "name_th": "สาปเมือง",
+    "display": "Sarb Mueng",
+    "release": "2026-05-13T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4710/thumb_4710.jpg?20260113110026",
+        "url": "https://www.majorcineplex.com/movie/sarb-mueng"
+      }
+    }
+  },
+  {
+    "name": "phee-kao",
+    "name_en": "Phee Kao",
+    "name_th": "ผีเข้า",
+    "display": "Phee Kao",
+    "release": "2026-05-20T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4688/thumb_4688.jpg?20260121123644",
+        "url": "https://www.majorcineplex.com/movie/phee-kao"
+      }
+    }
+  },
+  {
+    "name": "the-mandalorian-grogu",
+    "name_en": "The Mandalorian and Grogu",
+    "name_th": "แมนดาลอเรี่ยนและโกรกู",
+    "display": "The Mandalorian and Grogu",
+    "release": "2026-05-20T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4503/thumb_4503.jpg?20260218104356",
+        "url": "https://www.majorcineplex.com/movie/the-mandalorian-grogu"
+      }
+    }
+  },
+  {
+    "name": "hokum",
+    "name_en": "Hokum",
+    "name_th": "Hokum",
+    "display": "Hokum",
+    "release": "2026-05-27T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5038/thumb_5038.jpg?20260108165155",
+        "url": "https://www.majorcineplex.com/movie/hokum"
+      }
+    }
+  },
+  {
+    "name": "passenger",
+    "name_en": "Passenger",
+    "name_th": "Passenger",
+    "display": "Passenger",
+    "release": "2026-05-27T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5072/thumb_5072.jpg?20260128131344",
+        "url": "https://www.majorcineplex.com/movie/passenger"
+      }
+    }
+  },
+  {
+    "name": "haunted-universities-4",
+    "name_en": "Haunted Universities 4",
+    "name_th": "เทอม 4",
+    "display": "Haunted Universities 4",
+    "release": "2026-05-27T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4818/thumb_4818.jpg?20260204122924",
+        "url": "https://www.majorcineplex.com/movie/haunted-universities-4"
+      }
+    }
+  },
+  {
+    "name": "masters-of-the-universe",
+    "name_en": "Masters of the Universe",
+    "name_th": "นักรบเจ้าจักรวาล",
+    "display": "Masters of the Universe",
+    "release": "2026-06-02T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/2608/thumb_2608.jpg?20260123095542",
+        "url": "https://www.majorcineplex.com/movie/masters-of-the-universe"
+      }
+    }
+  },
+  {
+    "name": "onethong",
+    "name_en": "Onethong",
+    "name_th": "อัศจรรย์วันทอง",
+    "display": "Onethong",
+    "release": "2026-06-02T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4713/thumb_4713.jpg?20260106102004",
+        "url": "https://www.majorcineplex.com/movie/onethong"
+      }
+    }
+  },
+  {
+    "name": "krissada-paradise",
+    "name_en": "Krissada Paradise",
+    "name_th": "กฤษฎา พาราไดซ์",
+    "display": "Krissada Paradise",
+    "release": "2026-06-10T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4217/thumb_4217.jpg?20260217024352",
+        "url": "https://www.majorcineplex.com/movie/krissada-paradise"
+      }
+    }
+  },
+  {
+    "name": "disclosure-day",
+    "name_en": "Disclosure Day",
+    "name_th": "วันเปิดโปง ไขปริศนาลวงโลก",
+    "display": "Disclosure Day",
+    "release": "2026-06-10T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5020/thumb_5020.jpg?20260114000251",
+        "url": "https://www.majorcineplex.com/movie/disclosure-day"
+      }
+    }
+  },
+  {
+    "name": "power-ballad",
+    "name_en": "Power Ballad",
+    "name_th": "Power Ballad",
+    "display": "Power Ballad",
+    "release": "2026-06-17T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4625/thumb_4625.jpg?20260116132727",
+        "url": "https://www.majorcineplex.com/movie/power-ballad"
+      }
+    }
+  },
+  {
+    "name": "obsession",
+    "name_en": "Obsession",
+    "name_th": "Obsession",
+    "display": "Obsession",
+    "release": "2026-06-17T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "108",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4474/thumb_4474.jpg?20260217032456",
+        "url": "https://www.majorcineplex.com/movie/obsession"
+      }
+    }
+  },
+  {
+    "name": "khong-khaek-2",
+    "name_en": "Khong Khaek 2",
+    "name_th": "ของแขก 2",
+    "display": "Khong Khaek 2",
+    "release": "2026-06-17T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4496/thumb_4496.jpg?20260202152815",
+        "url": "https://www.majorcineplex.com/movie/khong-khaek-2"
+      }
+    }
+  },
+  {
+    "name": "scary-movie",
+    "name_en": "Scary Movie",
+    "name_th": "Scary Movie",
+    "display": "Scary Movie",
+    "release": "2026-06-17T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4757/thumb_4757.jpg?20260217092122",
+        "url": "https://www.majorcineplex.com/movie/scary-movie"
+      }
+    }
+  },
+  {
+    "name": "toy-story-5",
+    "name_en": "Toy Story 5",
+    "name_th": "ทอย สตอรี่ 5",
+    "display": "Toy Story 5",
+    "release": "2026-06-17T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4504/thumb_4504.jpg?20251230141513",
+        "url": "https://www.majorcineplex.com/movie/toy-story-5"
+      }
+    }
+  },
+  {
+    "name": "bua",
+    "name_en": "The Lotus",
+    "name_th": "บัว",
+    "display": "The Lotus",
+    "release": "2026-06-24T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4372/thumb_4372.jpg?20260121123344",
+        "url": "https://www.majorcineplex.com/movie/bua"
+      }
+    }
+  },
+  {
+    "name": "suk-sud-thay",
+    "name_en": "The Last Bliss",
+    "name_th": "สุขสุดท้าย",
+    "display": "The Last Bliss",
+    "release": "2026-06-24T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4966/thumb_4966.jpg?20260202153056",
+        "url": "https://www.majorcineplex.com/movie/suk-sud-thay"
+      }
+    }
+  },
+  {
+    "name": "supergirl",
+    "name_en": "Supergirl",
+    "name_th": "ซูเปอร์เกิร์ล",
+    "display": "Supergirl",
+    "release": "2026-06-24T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4808/thumb_4808.jpg?20251212125805",
+        "url": "https://www.majorcineplex.com/movie/supergirl"
+      }
+    }
+  },
+  {
+    "name": "minions-3",
+    "name_en": "Minions and Monsters",
+    "name_th": "มินเนี่ยน & มอนสเตอร์",
+    "display": "Minions and Monsters",
+    "release": "2026-06-30T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4758/thumb_4758.jpg?20260210165414",
+        "url": "https://www.majorcineplex.com/movie/minions-3"
+      }
+    }
+  },
+  {
+    "name": "moana-live-action",
+    "name_en": "Moana",
+    "name_th": "โมอาน่า",
+    "display": "Moana",
+    "release": "2026-07-08T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4505/thumb_4505.jpg?20251230140930",
+        "url": "https://www.majorcineplex.com/movie/moana-live-action"
+      }
+    }
+  },
+  {
+    "name": "the-odyssey",
+    "name_en": "The Odyssey",
+    "name_th": "มหากาพย์โอดิสซี",
+    "display": "The Odyssey",
+    "release": "2026-07-15T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4680/thumb_4680.jpg?20260128163206",
+        "url": "https://www.majorcineplex.com/movie/the-odyssey"
+      }
+    }
+  },
+  {
+    "name": "televil",
+    "name_en": "TELEVIL",
+    "name_th": "มันแอบอยู่ในจอ",
+    "display": "TELEVIL",
+    "release": "2026-07-15T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4749/thumb_4749.jpg?20260210091801",
+        "url": "https://www.majorcineplex.com/movie/televil"
+      }
+    }
+  },
+  {
+    "name": "cut-off",
+    "name_en": "Cut Off",
+    "name_th": "Cut Off",
+    "display": "Cut Off",
+    "release": "2026-07-15T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5028/thumb_5028.jpg?20251222103149",
+        "url": "https://www.majorcineplex.com/movie/cut-off"
+      }
+    }
+  },
+  {
+    "name": "spider-man-brand-new-day",
+    "name_en": "Spider-Man Brand New Day",
+    "name_th": "สไปเดอร์-แมน แบรนด์ นิว เดย์",
+    "display": "Spider-Man Brand New Day",
+    "release": "2026-07-28T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4557/thumb_4557.jpg?20251209151809",
+        "url": "https://www.majorcineplex.com/movie/spider-man-brand-new-day"
+      }
+    }
+  },
+  {
+    "name": "first-camping",
+    "name_en": "First Camping",
+    "name_th": "First Camping",
+    "display": "First Camping",
+    "release": "2026-08-05T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4497/thumb_4497.jpg?20251112155322",
+        "url": "https://www.majorcineplex.com/movie/first-camping"
+      }
+    }
+  },
+  {
+    "name": "one-night-only",
+    "name_en": "One Night Only",
+    "name_th": "One Night Only",
+    "display": "One Night Only",
+    "release": "2026-08-05T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4759/thumb_4759.jpg?20250818183639",
+        "url": "https://www.majorcineplex.com/movie/one-night-only"
+      }
+    }
+  },
+  {
+    "name": "kum-sarapap-khong-mor-phee",
+    "name_en": "The Confession of Shaman",
+    "name_th": "คำสารภาพของหมอผี",
+    "display": "The Confession of Shaman",
+    "release": "2026-08-11T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4719/thumb_4719.jpg?20260215145702",
+        "url": "https://www.majorcineplex.com/movie/kum-sarapap-khong-mor-phee"
+      }
+    }
+  },
+  {
+    "name": "flowervale-street",
+    "name_en": "Flowervale Street",
+    "name_th": "Flowervale Street",
+    "display": "Flowervale Street",
+    "release": "2026-08-11T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4346/thumb_4346.jpg?20251222102251",
+        "url": "https://www.majorcineplex.com/movie/flowervale-street"
+      }
+    }
+  },
+  {
+    "name": "paw-patrol-the-dino-movie",
+    "name_en": "PAW Patrol The Dino Movie",
+    "name_th": "PAW Patrol The Dino Movie",
+    "display": "PAW Patrol The Dino Movie",
+    "release": "2026-08-12T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4760/thumb_4760.jpg?20250818184947",
+        "url": "https://www.majorcineplex.com/movie/paw-patrol-the-dino-movie"
+      }
+    }
+  },
+  {
+    "name": "call-me",
+    "name_en": "Call Me",
+    "name_th": "Call Me",
+    "display": "Call Me",
+    "release": "2026-08-12T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4814/thumb_4814.jpg?20250930155600",
+        "url": "https://www.majorcineplex.com/movie/call-me"
+      }
+    }
+  },
+  {
+    "name": "rinrada",
+    "name_en": "The Influencer",
+    "name_th": "รินรดา",
+    "display": "The Influencer",
+    "release": "2026-08-19T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4193/thumb_4193.jpg?20260121124332",
+        "url": "https://www.majorcineplex.com/movie/rinrada"
+      }
+    }
+  },
+  {
+    "name": "shiver",
+    "name_en": "Shiver",
+    "name_th": "คมเขี้ยวทะเลคลั่ง",
+    "display": "Shiver",
+    "release": "2026-08-19T17:00:00.000Z",
+    "genre": "Thriller",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4350/thumb_4350.jpg?20260205115646",
+        "url": "https://www.majorcineplex.com/movie/shiver"
+      }
+    }
+  },
+  {
+    "name": "harry-potter-and-the-sorcerer-s-stone",
+    "name_en": "Harry Potter and the Sorcerers Stone",
+    "name_th": "แฮร์รี่ พอตเตอร์กับศิลาอาถรรพ์",
+    "display": "Harry Potter and the Sorcerers Stone",
+    "release": "2026-08-26T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "152",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/3320/thumb_3320.jpg?20260216043801",
+        "url": "https://www.majorcineplex.com/movie/harry-potter-and-the-sorcerer-s-stone"
+      }
+    }
+  },
+  {
+    "name": "the-dog-stars",
+    "name_en": "The Dog Stars",
+    "name_th": "The Dog Stars",
+    "display": "The Dog Stars",
+    "release": "2026-08-26T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4635/thumb_4635.jpg?20260108100002",
+        "url": "https://www.majorcineplex.com/movie/the-dog-stars"
+      }
+    }
+  },
+  {
+    "name": "god-skin",
+    "name_en": "God Skin",
+    "name_th": "ยันต์เทวา ท้าเดิมพัน",
+    "display": "God Skin",
+    "release": "2026-08-26T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4646/thumb_4646.jpg?20260202152752",
+        "url": "https://www.majorcineplex.com/movie/god-skin"
+      }
+    }
+  },
+  {
+    "name": "cliffhanger",
+    "name_en": "Cliffhanger",
+    "name_th": "Cliffhanger",
+    "display": "Cliffhanger",
+    "release": "2026-09-02T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4934/thumb_4934.jpg?20260106035815",
+        "url": "https://www.majorcineplex.com/movie/cliffhanger"
+      }
+    }
+  },
+  {
+    "name": "insidious-6",
+    "name_en": "Insidious The Bleeding World",
+    "name_th": "Insidious The Bleeding World",
+    "display": "Insidious The Bleeding World",
+    "release": "2026-09-02T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4525/thumb_4525.jpg?20260106142238",
+        "url": "https://www.majorcineplex.com/movie/insidious-6"
+      }
+    }
+  },
+  {
+    "name": "wang-yai",
+    "name_en": "Wang Yai",
+    "name_th": "วังใหญ่",
+    "display": "Wang Yai",
+    "release": "2026-09-02T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5089/thumb_5089.jpg?20260211135542",
+        "url": "https://www.majorcineplex.com/movie/wang-yai"
+      }
+    }
+  },
+  {
+    "name": "practical-magic-2",
+    "name_en": "Practical Magic 2",
+    "name_th": "Practical Magic 2",
+    "display": "Practical Magic 2",
+    "release": "2026-09-09T17:00:00.000Z",
+    "genre": "Fantasy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4812/thumb_4812.jpg?20260216110516",
+        "url": "https://www.majorcineplex.com/movie/practical-magic-2"
+      }
+    }
+  },
+  {
+    "name": "50-first-dates",
+    "name_en": "50 First Dates",
+    "name_th": "50 First Dates",
+    "display": "50 First Dates",
+    "release": "2026-09-16T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5055/thumb_5055.jpg?20260113101544",
+        "url": "https://www.majorcineplex.com/movie/50-first-dates"
+      }
+    }
+  },
+  {
+    "name": "avengers-4",
+    "name_en": "Avengers Endgame",
+    "name_th": "อเวนเจอร์ส เผด็จศึก",
+    "display": "Avengers Endgame",
+    "release": "2026-09-23T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "182",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/2584/thumb_2584.jpg?20260109174925",
+        "url": "https://www.majorcineplex.com/movie/avengers-4"
+      }
+    }
+  },
+  {
+    "name": "someone-special-",
+    "name_en": "Someone Special",
+    "name_th": "Someone Special",
+    "display": "Someone Special",
+    "release": "2026-09-23T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4936/thumb_4936.jpg?20260216141035",
+        "url": "https://www.majorcineplex.com/movie/someone-special-"
+      }
+    }
+  },
+  {
+    "name": "saming-kao-kwang",
+    "name_en": "Saming Khao Kwang",
+    "name_th": "สมิงเขาขวาง",
+    "display": "Saming Khao Kwang",
+    "release": "2026-09-29T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4718/thumb_4718.jpg?20251031092522",
+        "url": "https://www.majorcineplex.com/movie/saming-kao-kwang"
+      }
+    }
+  },
+  {
+    "name": "forgotten-island",
+    "name_en": "Forgotten Island",
+    "name_th": "เกาะมหัศจรรย์กับความทรงจำที่ลบลืม",
+    "display": "Forgotten Island",
+    "release": "2026-09-30T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5012/thumb_5012.jpg?20260121094925",
+        "url": "https://www.majorcineplex.com/movie/forgotten-island"
+      }
+    }
+  },
+  {
+    "name": "digger",
+    "name_en": "Digger",
+    "name_th": "Digger",
+    "display": "Digger",
+    "release": "2026-09-30T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5024/thumb_5024.jpg?20251219153425",
+        "url": "https://www.majorcineplex.com/movie/digger"
+      }
+    }
+  },
+  {
+    "name": "resident-evil",
+    "name_en": "Resident Evil",
+    "name_th": "Resident Evil",
+    "display": "Resident Evil",
+    "release": "2026-10-07T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4578/thumb_4578.jpg?20251219121007",
+        "url": "https://www.majorcineplex.com/movie/resident-evil"
+      }
+    }
+  },
+  {
+    "name": "wife-out",
+    "name_en": "Wife Out",
+    "name_th": "Wife Out",
+    "display": "Wife Out",
+    "release": "2026-10-14T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4939/thumb_4939.jpg?20250930160103",
+        "url": "https://www.majorcineplex.com/movie/wife-out"
+      }
+    }
+  },
+  {
+    "name": "street-fighter",
+    "name_en": "Street Fighter",
+    "name_th": "Street Fighter",
+    "display": "Street Fighter",
+    "release": "2026-10-14T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5014/thumb_5014.jpg?20251216110142",
+        "url": "https://www.majorcineplex.com/movie/street-fighter"
+      }
+    }
+  },
+  {
+    "name": "verity",
+    "name_en": "Verity",
+    "name_th": "Verity",
+    "display": "Verity",
+    "release": "2026-10-14T17:00:00.000Z",
+    "genre": "Crime",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5025/thumb_5025.jpg?20251219123135",
+        "url": "https://www.majorcineplex.com/movie/verity"
+      }
+    }
+  },
+  {
+    "name": "whalefall",
+    "name_en": "Whalefall",
+    "name_th": "Whalefall",
+    "display": "Whalefall",
+    "release": "2026-10-14T17:00:00.000Z",
+    "genre": "Thriller",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5035/thumb_5035.jpg?20260108114110",
+        "url": "https://www.majorcineplex.com/movie/whalefall"
+      }
+    }
+  },
+  {
+    "name": "krutha-nakee",
+    "name_en": "Krutha Nakee",
+    "name_th": "ครุฑา นาคี",
+    "display": "Krutha Nakee",
+    "release": "2026-10-21T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4712/thumb_4712.jpg?20260112172745",
+        "url": "https://www.majorcineplex.com/movie/krutha-nakee"
+      }
+    }
+  },
+  {
+    "name": "clayface",
+    "name_en": "Clayface",
+    "name_th": "Clayface",
+    "display": "Clayface",
+    "release": "2026-10-21T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4809/thumb_4809.jpg?20260216110555",
+        "url": "https://www.majorcineplex.com/movie/clayface"
+      }
+    }
+  },
+  {
+    "name": "the-social-reckoning",
+    "name_en": "The Social Reckoning",
+    "name_th": "The Social Reckoning",
+    "display": "The Social Reckoning",
+    "release": "2026-10-28T17:00:00.000Z",
+    "genre": "Drama",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4946/thumb_4946.jpg?20251219121023",
+        "url": "https://www.majorcineplex.com/movie/the-social-reckoning"
+      }
+    }
+  },
+  {
+    "name": "the-cat-in-the-hat",
+    "name_en": "The Cat In The Hat",
+    "name_th": "เหมียวแคทใส่หมวกโก้",
+    "display": "The Cat In The Hat",
+    "release": "2026-11-04T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4676/thumb_4676.jpg?20250829111913",
+        "url": "https://www.majorcineplex.com/movie/the-cat-in-the-hat"
+      }
+    }
+  },
+  {
+    "name": "rean-lag-phee",
+    "name_en": "Exchange",
+    "name_th": "เรียน แลก ผี",
+    "display": "Exchange",
+    "release": "2026-11-04T17:00:00.000Z",
+    "genre": "Horror",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4717/thumb_4717.jpg?20260202153302",
+        "url": "https://www.majorcineplex.com/movie/rean-lag-phee"
+      }
+    }
+  },
+  {
+    "name": "archangel",
+    "name_en": "Archangel",
+    "name_th": "Archangel",
+    "display": "Archangel",
+    "release": "2026-11-11T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4962/thumb_4962.jpg?20251028121153",
+        "url": "https://www.majorcineplex.com/movie/archangel"
+      }
+    }
+  },
+  {
+    "name": "ebenezer-a-christmas-carol",
+    "name_en": "Ebenezer A Christmas Carol",
+    "name_th": "Ebenezer A Christmas Carol",
+    "display": "Ebenezer A Christmas Carol",
+    "release": "2026-11-11T17:00:00.000Z",
+    "genre": "Fantasy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5015/thumb_5015.jpg?20251218154705",
+        "url": "https://www.majorcineplex.com/movie/ebenezer-a-christmas-carol"
+      }
+    }
+  },
+  {
+    "name": "the-great-beyond",
+    "name_en": "The Great Beyond",
+    "name_th": "The Great Beyond",
+    "display": "The Great Beyond",
+    "release": "2026-11-11T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5091/thumb_5091.jpg?20260216112501",
+        "url": "https://www.majorcineplex.com/movie/the-great-beyond"
+      }
+    }
+  },
+  {
+    "name": "focker-in-law",
+    "name_en": "Focker In Law",
+    "name_th": "Focker In Law",
+    "display": "Focker In Law",
+    "release": "2026-11-25T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5016/thumb_5016.jpg?20260121124027",
+        "url": "https://www.majorcineplex.com/movie/focker-in-law"
+      }
+    }
+  },
+  {
+    "name": "the-killers",
+    "name_en": "The Killers",
+    "name_th": "The Killers",
+    "display": "The Killers",
+    "release": "2026-11-25T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4815/thumb_4815.jpg?20250903101502",
+        "url": "https://www.majorcineplex.com/movie/the-killers"
+      }
+    }
+  },
+  {
+    "name": "hexed",
+    "name_en": "Hexed",
+    "name_th": "Hexed",
+    "display": "Hexed",
+    "release": "2026-11-25T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4830/thumb_4830.jpg?20250910102413",
+        "url": "https://www.majorcineplex.com/movie/hexed"
+      }
+    }
+  },
+  {
+    "name": "saeng",
+    "name_en": "Saeng",
+    "name_th": "แสง",
+    "display": "Saeng",
+    "release": "2026-12-02T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4970/thumb_4970.jpg?20251204161308",
+        "url": "https://www.majorcineplex.com/movie/saeng"
+      }
+    }
+  },
+  {
+    "name": "bit-by-bit",
+    "name_en": "Bit by Bit",
+    "name_th": "Bit by Bit",
+    "display": "Bit by Bit",
+    "release": "2026-12-02T17:00:00.000Z",
+    "genre": "Thai",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4975/thumb_4975.jpg?20260128113107",
+        "url": "https://www.majorcineplex.com/movie/bit-by-bit"
+      }
+    }
+  },
+  {
+    "name": "violent-night-2",
+    "name_en": "Violent Night 2",
+    "name_th": "คืนเดือด 2",
+    "display": "Violent Night 2",
+    "release": "2026-12-02T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5018/thumb_5018.jpg?20251216120514",
+        "url": "https://www.majorcineplex.com/movie/violent-night-2"
+      }
+    }
+  },
+  {
+    "name": "jumanji-3",
+    "name_en": "Jumanji 3",
+    "name_th": "Jumanji 3",
+    "display": "Jumanji 3",
+    "release": "2026-12-09T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4587/thumb_4587.jpg?20251117110724",
+        "url": "https://www.majorcineplex.com/movie/jumanji-3"
+      }
+    }
+  },
+  {
+    "name": "avengers-doomsday",
+    "name_en": "Avengers Doomsday",
+    "name_th": "อเวนเจอร์ส ดูมส์เดย์",
+    "display": "Avengers Doomsday",
+    "release": "2026-12-16T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4502/thumb_4502.jpg?20260105092215",
+        "url": "https://www.majorcineplex.com/movie/avengers-doomsday"
+      }
+    }
+  },
+  {
+    "name": "dune-part-3",
+    "name_en": "Dune Part 3",
+    "name_th": "ดูน ภาคสาม",
+    "display": "Dune Part 3",
+    "release": "2026-12-16T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4811/thumb_4811.jpg?20251009100045",
+        "url": "https://www.majorcineplex.com/movie/dune-part-3"
+      }
+    }
+  },
+  {
+    "name": "the-angry-birds-movie-3",
+    "name_en": "The Angry Birds Movie 3",
+    "name_th": "แอ็งกรี เบิร์ดส เดอะ มูวี่ 3",
+    "display": "The Angry Birds Movie 3",
+    "release": "2026-12-23T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/5019/thumb_5019.jpg?20251216122632",
+        "url": "https://www.majorcineplex.com/movie/the-angry-birds-movie-3"
+      }
+    }
+  },
+  {
+    "name": "e-riam-sing-2",
+    "name_en": "E Riam Sing 2",
+    "name_th": "อีเรียมซิ่ง 2",
+    "display": "E Riam Sing 2",
+    "release": "2026-12-23T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4508/thumb_4508.jpg?20251120150603",
+        "url": "https://www.majorcineplex.com/movie/e-riam-sing-2"
+      }
+    }
+  },
+  {
+    "name": "high-season",
+    "name_en": "High Season",
+    "name_th": "High Season",
+    "display": "High Season",
+    "release": "2026-12-30T17:00:00.000Z",
+    "genre": "Comedy",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4940/thumb_4940.jpg?20260106110017",
+        "url": "https://www.majorcineplex.com/movie/high-season"
+      }
+    }
+  },
+  {
+    "name": "ice-age-6",
+    "name_en": "Ice Age Boiling Point",
+    "name_th": "Ice Age Boiling Point",
+    "display": "Ice Age Boiling Point",
+    "release": "2027-02-03T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4509/thumb_4509.jpg?20250909175952",
+        "url": "https://www.majorcineplex.com/movie/ice-age-6"
+      }
+    }
+  },
+  {
+    "name": "remain",
+    "name_en": "Remain",
+    "name_th": "Remain",
+    "display": "Remain",
+    "release": "2027-02-03T17:00:00.000Z",
+    "genre": "Romance",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4810/thumb_4810.jpg?20260216110624",
+        "url": "https://www.majorcineplex.com/movie/remain"
+      }
+    }
+  },
+  {
+    "name": "gatto",
+    "name_en": "Gatto",
+    "name_th": "Gatto",
+    "display": "Gatto",
+    "release": "2027-03-03T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4829/thumb_4829.jpg?20260121124121",
+        "url": "https://www.majorcineplex.com/movie/gatto"
+      }
+    }
+  },
+  {
+    "name": "star-wars-starfighter",
+    "name_en": "Star Wars Starfighter",
+    "name_th": "Star Wars Starfighter",
+    "display": "Star Wars Starfighter",
+    "release": "2027-05-26T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4828/thumb_4828.jpg?20251222152700",
+        "url": "https://www.majorcineplex.com/movie/star-wars-starfighter"
+      }
+    }
+  },
+  {
+    "name": "the-simpsons-movie-2",
+    "name_en": "The Simpsons Movie 2",
+    "name_th": "The Simpsons Movie 2",
+    "display": "The Simpsons Movie 2",
+    "release": "2027-07-21T17:00:00.000Z",
+    "genre": "Animation",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4957/thumb_4957.jpg?20251022170115",
+        "url": "https://www.majorcineplex.com/movie/the-simpsons-movie-2"
+      }
+    }
+  },
+  {
+    "name": "frozen-3",
+    "name_en": "Frozen 3",
+    "name_th": "โฟรเซ่น 3",
+    "display": "Frozen 3",
+    "release": "2027-11-24T17:00:00.000Z",
+    "genre": "Adventure",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4721/thumb_4721.jpg?20250729164750",
+        "url": "https://www.majorcineplex.com/movie/frozen-3"
+      }
+    }
+  },
+  {
+    "name": "avengers-secret-wars",
+    "name_en": "Avengers Secret Wars",
+    "name_th": "Avengers Secret Wars",
+    "display": "Avengers Secret Wars",
+    "release": "2027-12-15T17:00:00.000Z",
+    "genre": "Action",
+    "timeMin": "0",
+    "time": 0,
+    "theater": {
+      "major": {
+        "cover": "https://cdn.majorcineplex.com/uploads/movie/4722/thumb_4722.jpg?20250729165817",
+        "url": "https://www.majorcineplex.com/movie/avengers-secret-wars"
+      }
+    }
+  }
+]

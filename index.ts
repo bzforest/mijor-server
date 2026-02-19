@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { connectionPool } from './utils/db';
 
 dotenv.config();
 
@@ -15,6 +16,23 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running! 🚀");
 });
+
+app.get("/testdb", async (req, res) => {
+    try {
+      const results = await connectionPool.query('SELECT * FROM movies');
+      
+      return res.status(200).json({
+        data: results.rows
+      });
+    } catch (error: any) {
+      console.log("❌ DB Error: ", error); // 👈 ปริ้น Error จริงๆ ออก Terminal
+      
+      return res.status(500).json({
+        message: "ดึงข้อมูลไม่สำเร็จ",
+        error: error.message // 👈 ส่ง Error กลับไปโชว์ใน Postman ด้วย
+      });
+    }
+  });
 
 // Start Server (เฉพาะตอนรันในเครื่อง Local, บน Vercel มันจะจัดการเอง)
 if (process.env.NODE_ENV !== "production") {
