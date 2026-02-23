@@ -34,6 +34,37 @@ app.get("/testdb", async (req, res) => {
     }
   });
 
+app.get("/testcinemas", async (req, res) => {
+    try {
+      const results = await connectionPool.query('SELECT * FROM cinemas');
+      
+      return res.status(200).json({
+        data: results.rows
+      });
+    } catch (error: any) {
+      console.log("❌ DB Error: ", error); // 👈 ปริ้น Error จริงๆ ออก Terminal
+      
+      return res.status(500).json({
+        message: "ดึงข้อมูลไม่สำเร็จ",
+        error: error.message // 👈 ส่ง Error กลับไปโชว์ใน Postman ด้วย
+      });
+    }
+  });
+
+app.get("/testshowtime" , async (req,res) => {
+    try {
+        const results = await connectionPool.query (`SELECT * FROM showtimes`);
+        return res.status(200).json ({
+            data: results.rows
+        })
+
+    }catch (error) {
+        return res.status(500).json ({
+            message: "โหลดไม่ได้โว้ยยย"
+        })
+    }
+})
+
 // Start Server (เฉพาะตอนรันในเครื่อง Local, บน Vercel มันจะจัดการเอง)
 if (process.env.NODE_ENV !== "production") {
     app.listen(port, () => {
