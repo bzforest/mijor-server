@@ -78,7 +78,7 @@ app.post("/api/auth/register", async (req: Request, res: Response): Promise<any>
       email: email,
       password: password,
       options: {
-        data: { name: name }, // 👈 จุดที่ 1: แก้เป็น name ให้ตรงกัน (ใช้แบบย่อว่า { name } ก็ได้)
+        data: { name: name },
       },
     });
 
@@ -94,16 +94,31 @@ app.post("/api/auth/register", async (req: Request, res: Response): Promise<any>
           {
             id: data.user.id, 
             email: email,
-            name: name, // 👈 จุดที่ 2: สำคัญสุด! ต้องแก้ตรงนี้ให้ตรงกับชื่อคอลัมน์ในฐานข้อมูล
+            name: name,
           }
         ]);
 
       if (profileError) {
         console.error("❌ บันทึก Profile ไม่สำเร็จ:", profileError);
       }
-    }
 
-    // 3. ถ้าผ่านฉลุย ส่งแจ้งเตือนกลับไปหาหน้าเว็บ
+      const { data: couponData } = await supabase
+        .from("coupons")
+        .select("id")
+        .eq("code", "NEWUSER100")
+        .single();
+
+      // 2. ถ้าเจอคูปอง ก็จับยัดใส่กระเป๋า (profile_coupons) ให้ User คนนี้เลย
+      if (couponData) {
+        await supabase.from("profile_coupons").insert([{
+          profile_id: data.user.id,
+          coupon_id: couponData.id,
+          is_used: false
+        }]);
+        console.log("🎁 แจกคูปองต้อนรับสำเร็จ!");
+      }
+    }
+    
     return res.status(200).json({
       success: true,
       message: "Registration successful",
