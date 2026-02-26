@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectionPool } from './utils/db';
 import { supabase } from './utils/supabase';
+import routerApiAuth from "./routes/auth.routes";
 
 dotenv.config();
 
@@ -12,6 +13,8 @@ const port = process.env.PORT || 4000;
 // Middleware
 app.use(cors()); // อนุญาตทุกโดเมนไปก่อน (เดี๋ยวค่อยมาแก้ตอนเชื่อมกับ Frontend จริงจัง)
 app.use(express.json());
+
+app.use("/api/auth", routerApiAuth);
 
 // Test Route
 app.get("/", (req: Request, res: Response) => {
@@ -65,103 +68,6 @@ app.get("/testshowtime" , async (req,res) => {
         })
     }
 })
-
-// ==========================================
-// เส้น API สำหรับ Register
-// ==========================================
-app.post("/api/auth/register", async (req: Request, res: Response): Promise<any> => {
-  try {
-    const { email, password, name } = req.body;
-
-    // 1. สั่งให้ Supabase จัดการสมัครสมาชิกในระบบ Auth
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      options: {
-        data: { name: name },
-      },
-    });
-
-    if (error) {
-      return res.status(400).json({ success: false, message: error.message });
-    }
-
-    // 2. นำข้อมูลไปบันทึกลงตาราง public.profiles
-    if (data.user) {
-      const { error: profileError } = await supabase
-        .from("profiles")
-        .insert([
-          {
-            id: data.user.id, 
-            email: email,
-            name: name,
-          }
-        ]);
-
-      if (profileError) {
-        console.error("❌ บันทึก Profile ไม่สำเร็จ:", profileError);
-      }
-
-      const { data: couponData } = await supabase
-        .from("coupons")
-        .select("id")
-        .eq("code", "NEWUSER100")
-        .single();
-
-      // 2. ถ้าเจอคูปอง ก็จับยัดใส่กระเป๋า (profile_coupons) ให้ User คนนี้เลย
-      if (couponData) {
-        await supabase.from("profile_coupons").insert([{
-          profile_id: data.user.id,
-          coupon_id: couponData.id,
-          is_used: false
-        }]);
-        console.log("🎁 แจกคูปองต้อนรับสำเร็จ!");
-      }
-    }
-    
-    return res.status(200).json({
-      success: true,
-      message: "Registration successful",
-      user: data.user
-    });
-
-  } catch (err: any) {
-    console.error("Register Error:", err);
-    return res.status(500).json({ success: false, message: "Internal server error" });
-  }
-});
-
-// ==========================================
-// เส้น API สำหรับ Login
-// ==========================================
-app.post("/api/auth/login", async (req: Request, res: Response): Promise<any> => {
-  try {
-    const { email, password } = req.body;
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) {
-      const message = error.message === "Invalid login credentials" 
-        ? "อีเมลหรือรหัสผ่านไม่ถูกต้อง" 
-        : error.message;
-      return res.status(401).json({ success: false, message: message });
-    }
-
-    return res.status(200).json({
-      success: true,
-      message: "Login successful",
-      session: data.session,
-      user: data.user
-    });
-
-  } catch (err: any) {
-    console.error("Login Error:", err);
-    return res.status(500).json({ success: false, message: "Internal server error" });
-  }
-});
 
 // Start Server (เฉพาะตอนรันในเครื่อง Local, บน Vercel มันจะจัดการเอง)
 if (process.env.NODE_ENV !== "production") {
