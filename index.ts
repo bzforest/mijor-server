@@ -2,10 +2,9 @@ import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectionPool } from './utils/db';
-import { supabase } from './utils/supabase';
 import routerApiAuth from "./routes/auth.routes";
 import couponsRoutes from './routes/coupons';
-
+import userCouponsRoutes from './routes/userCoupons';
 dotenv.config();
 
 const app: Express = express();
@@ -18,6 +17,7 @@ app.use(express.json());
 app.use("/api/auth", routerApiAuth);
 
 app.use('/coupons', couponsRoutes);
+app.use('/api/user/coupons', userCouponsRoutes);
 // Test Route
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running! 🚀");
