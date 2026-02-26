@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectionPool } from './utils/db';
 import { supabase } from './utils/supabase';
 import routerApiAuth from "./routes/auth.routes";
+import couponsRoutes from './routes/coupons';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/auth", routerApiAuth);
 
+app.use('/coupons', couponsRoutes);
 // Test Route
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running! 🚀");
