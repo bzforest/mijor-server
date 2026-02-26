@@ -100,7 +100,7 @@ app.get("/api/cinemas/:id/showtimes", async (req: Request, res: Response): Promi
     // 0. Fetch Cinema Details
     const { data: cinemaData, error: cinemaError } = await supabase
       .from('cinemas')
-      .select('id, name, hearing_assistance, wheelchair_access')
+      .select('id, name, hearing_assistance, wheelchair_access, image_url, description')
       .eq('id', cinemaId)
       .single();
 
