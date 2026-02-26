@@ -1,6 +1,8 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { connectionPool } from "./utils/db";
+import searchRouter from "./routes/search";
 import movie from "./routes/movies";
 import cities from "./routes/cities";
 import showtimes from "./routes/Showtimes";
@@ -26,8 +28,8 @@ app.use('/movies', movie);
 app.use('/showtimes', showtimes)
 app.use('/cities', cities);
 app.use('/movieGenres', movieGenres);
+app.use("/search", searchRouter);
 app.use("/api/auth", routerApiAuth);
-
 app.use('/coupons', couponsRoutes);
 app.use('/api/user/coupons', userCouponsRoutes);
 // Test Route
@@ -52,4 +54,4 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-export default app;
+export default app; // สำคัญมาก! ต้อง export เพื่อให้ Vercel เอาไปใช้ต่อได้
