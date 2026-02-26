@@ -19,12 +19,13 @@ interface MovieRow {
   rating: string;
   status: string;
   hall_name?: string;
-  start_time?: Date;
+  time_start?: Date;
   end_time?: Date;
   cinema_name?: string;
   location?: string;
   hearing_assistance?: boolean;
   wheelchair_access?: boolean;
+  cinema_id?: number; // Added to match the SQL SELECT output
   city?: string;
 }
 
@@ -53,7 +54,7 @@ interface AggregatedMovie {
   title: string;
   synopsis: string;
   posterUrl: string;
-  releaseDate: Date;
+  showtimeStartTime: Date;
   language: string[];
   rating: string;
   status: string;
@@ -83,7 +84,6 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
       language,
       genre,
       city,
-      releaseDate,
       page,
       hearingAssistance,
       wheelchairAccess,
@@ -114,9 +114,24 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
       paramIndex++;
     }
 
-    if (releaseDate) {
-      conditions.push(`movies.release_date = $${paramIndex}`);
-      values.push(releaseDate);
+    // --- Filter: Showtime Start Time ---
+    // Rule: Supports both exact datetime match and date-only match (YYYY-MM-DD)
+    const showtimeStartTimeQuery = req.query["showtime.start_time"];
+    const showtimeStartTime = Array.isArray(showtimeStartTimeQuery)
+      ? showtimeStartTimeQuery[0]
+      : showtimeStartTimeQuery;
+
+    if (typeof showtimeStartTime === "string" && showtimeStartTime.trim() !== "") {
+      const trimmedShowtimeStartTime = showtimeStartTime.trim();
+      const isDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(trimmedShowtimeStartTime);
+
+      if (isDateOnly) {
+        conditions.push(`showtimes.start_time::date = $${paramIndex}`);
+      } else {
+        conditions.push(`showtimes.start_time = $${paramIndex}`);
+      }
+
+      values.push(trimmedShowtimeStartTime);
       paramIndex++;
     }
 
@@ -145,6 +160,11 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
       conditions.push(`cinemas.wheelchair_access = TRUE`);
     }
 
+    // --- Filter: Status ---
+    conditions.push(
+      `movies.status IN ('Now Showing', 'Coming Soon', 'Out of Theater')`
+    );
+
     // --- Query Assembly ---
     const whereClause = conditions.length > 0 ? ` WHERE ${conditions.join(" AND ")}` : "";
 
@@ -156,7 +176,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
     `;
 
     if (joinCities) {
-      fromClause += `LEFT JOIN cities ON cities.id = cinemas.city_id\n    `;
+      fromClause += `      LEFT JOIN cities ON cities.id = cinemas.city_id\n`;
     }
 
     if (joinGenres) {
@@ -188,7 +208,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
       SELECT
         movies.title,
         COALESCE(cinemas.name, '') AS cinema_name,
-        MAX(movies.release_date) AS latest_release,
+        MIN(showtimes.start_time) AS first_showtime,
         MAX(movies.status) AS status
       ${fromClause}
       ${whereClause}
@@ -200,7 +220,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
           WHEN 'Out of Theater' THEN 3
           ELSE 4
         END ASC,
-        MAX(movies.release_date) DESC,
+        MIN(showtimes.start_time) ASC,
         COALESCE(cinemas.name, '') ASC
       LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
     `;
@@ -208,10 +228,12 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
     const pairsValues = [...values, LIMIT, offset];
     const pairsResult = await connectionPool.query(pairsQuery, pairsValues);
 
-    const identifiers: MovieCinemaPair[] = pairsResult.rows.map((row: MovieCinemaPair) => ({
-      title: row.title,
-      cinema_name: row.cinema_name,
-    }));
+    const identifiers: MovieCinemaPair[] = pairsResult.rows.map(
+      (row: MovieCinemaPair) => ({
+        title: row.title,
+        cinema_name: row.cinema_name,
+      })
+    );
 
     if (identifiers.length === 0) {
       return res.status(200).json({
@@ -239,7 +261,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
         movies.rating,
         movies.status,
         halls.name AS hall_name,
-        showtimes.start_time,
+        showtimes.start_time AS time_start,
         showtimes.end_time,
         cinemas.name AS cinema_name,
         cinemas.location,
@@ -253,7 +275,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
       LEFT JOIN cinemas ON cinemas.id = halls.cinema_id
       LEFT JOIN cities ON cities.id = cinemas.city_id
       WHERE (movies.title, COALESCE(cinemas.name, '')) IN (${pairPlaceholders}) 
-      ORDER BY movies.release_date DESC, showtimes.start_time ASC
+      ORDER BY showtimes.start_time ASC
     `;
 
     const moviesResult = await connectionPool.query(dataQuery, pairValues);
@@ -298,7 +320,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
           title: row.title,
           synopsis: row.synopsis,
           posterUrl: row.poster_url,
-          releaseDate: row.release_date,
+          showtimeStartTime: row.time_start ? new Date(row.time_start) : row.release_date,
           language: row.language ? [row.language] : [],
           rating: row.rating,
           status: row.status,
@@ -318,14 +340,16 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
       }
 
       // --- 5.3 Process Schedules ---
-      if (row.start_time) {
-        const dateObj = new Date(row.start_time);
+      if (row.time_start) {
+        const dateObj = new Date(row.time_start);
         const hours = String(dateObj.getUTCHours()).padStart(2, "0");
         const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
         const timeStr = `${hours}:${minutes}`;
 
         const currentHallSchedules = moviesMap[compositeKey].hallsMap[hallName];
-        const isDuplicate = currentHallSchedules.some((s: Schedule) => s.time === timeStr);
+        const isDuplicate = currentHallSchedules.some(
+          (s: Schedule) => s.time === timeStr
+        );
 
         if (!isDuplicate) {
           currentHallSchedules.push({
@@ -375,7 +399,6 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
         limit: LIMIT,
       },
     });
-
   } catch (error: any) {
     console.error("[SearchRouter] Fetch movies failed:", error);
     return res.status(500).json({
@@ -409,7 +432,7 @@ searchRouter.get("/suggest", async (req: Request, res: Response) => {
     console.error("[SearchRouter] Fetch suggestions failed:", error);
     return res.status(500).json({
       message: "ดึง suggestion ไม่สำเร็จ",
-      error: error.message
+      error: error.message,
     });
   }
 });
