@@ -2,3 +2,5 @@ node_modules
 dist
 .env
 .DS_Store
+build_output.txt
+dev_output.txt
