@@ -245,12 +245,16 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
     /* ================= 4. Detail Enrichment ================= */
 
     // --- Step 4.1: Fetch Full Data for Specific Pairs ---
+    // Calculate offset so placeholders ($N) start after the existing `values` array length
+    const offsetIndex = values.length;
+
+    // Generate pair placeholders like ($3, $4), ($5, $6) etc. instead of ($1, $2)
     const pairPlaceholders = identifiers
-      .map((_, i) => `($${i * 2 + 1}, $${i * 2 + 2})`)
+      .map((_, i) => `($${offsetIndex + (i * 2) + 1}, $${offsetIndex + (i * 2) + 2})`)
       .join(", ");
     const pairValues = identifiers.flatMap((p) => [p.title, p.cinema_name]);
 
-    const dataQuery = `
+    let dataQuery = `
       SELECT
         movies.id,
         movies.title,
@@ -274,11 +278,23 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
       LEFT JOIN halls ON halls.id = showtimes.hall_id
       LEFT JOIN cinemas ON cinemas.id = halls.cinema_id
       LEFT JOIN cities ON cities.id = cinemas.city_id
-      WHERE (movies.title, COALESCE(cinemas.name, '')) IN (${pairPlaceholders}) 
+    `;
+
+    if (joinGenres) {
+      dataQuery += `
+      JOIN movie_genres ON movie_genres.movie_id = movies.id
+      JOIN genres ON genres.id = movie_genres.genre_id
+    `;
+    }
+
+    const wherePrefix = whereClause.length > 0 ? whereClause + ' AND' : 'WHERE';
+    dataQuery += `
+      ${wherePrefix} (movies.title, COALESCE(cinemas.name, '')) IN (${pairPlaceholders}) 
       ORDER BY showtimes.start_time ASC
     `;
 
-    const moviesResult = await connectionPool.query(dataQuery, pairValues);
+    const dataQueryValues = [...values, ...pairValues];
+    const moviesResult = await connectionPool.query(dataQuery, dataQueryValues);
 
     // --- Step 4.2: Map Genres to Movies ---
     const movieIds = [...new Set(moviesResult.rows.map((m: MovieRow) => m.id))];
