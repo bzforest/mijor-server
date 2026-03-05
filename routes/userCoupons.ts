@@ -7,6 +7,7 @@ const userCouponsRoutes = express.Router();
 userCouponsRoutes.use(requireAuth);
 
 /* ================= POST /api/user/coupons ================= */
+// Responsibility: Allow a user to save/collect a specific coupon to their profile
 
 userCouponsRoutes.post("/", async (req: Request, res: Response) => {
   try {
@@ -45,8 +46,8 @@ userCouponsRoutes.post("/", async (req: Request, res: Response) => {
 });
 
 /* ================= GET /api/user/coupons ================= */
-// Responsibility: Retrieve all coupons collected by the user
-// Returns: Coupon details with relationship data
+// Responsibility: Retrieve all active, unused coupons collected by the user
+// Returns: Coupon details with relationship data from the coupons table
 
 userCouponsRoutes.get("/", async (req: Request, res: Response) => {
   try {
@@ -64,10 +65,15 @@ userCouponsRoutes.get("/", async (req: Request, res: Response) => {
           brand,
           image_url,
           valid_until,
-          description
+          description,
+          discount_type,
+          discount_value,
+          min_purchase,
+          is_active
         )
       `)
-      .eq('profile_id', user.id);
+      .eq('profile_id', user.id)
+      .eq('is_used', false);
 
     if (fetchError) {
       return res.status(500).json({ message: "Failed to fetch coupons" });
