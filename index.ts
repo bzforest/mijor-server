@@ -13,12 +13,25 @@ import userCouponsRoutes from './routes/userCoupons';
 import cinemaRoutes from "./routes/cinemaRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
 
-
+// Booking Routes and socket.io
+import bookingRouter from "./routes/booking";
+import { startExpireSeatJob } from "./jobs/expireSeats";
+import { Server } from "socket.io";
+import http from "http";
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 4000;
+
+const server = http.createServer(app);
+
+// Socket.io
+export const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
 // Middleware
 app.use(cors()); // อนุญาตทุกโดเมนไปก่อน
@@ -40,6 +53,21 @@ app.get("/", (req: Request, res: Response) => {
 // API Routes
 app.use("/api/cinemas", cinemaRoutes);
 
+// Booking Routes
+app.use("/booking", bookingRouter);
+
+io.on("connection", (socket) => {
+  socket.on("joinShowtime", (showtimeId: string) => {
+    socket.join(`showtime:${showtimeId}`);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("❌ User disconnected:", socket.id);
+  });
+});
+
+startExpireSeatJob();
+
 // Global Error Handler
 app.use(errorHandler);
 
@@ -49,7 +77,7 @@ app.get("/ex", (req: Request, res: Response) => {
 
 
 if (process.env.NODE_ENV !== "production") {
-  app.listen(port, () => {
+  server.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
   });
 }
