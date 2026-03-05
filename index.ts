@@ -12,6 +12,7 @@ import couponsRoutes from './routes/coupons';
 import userCouponsRoutes from './routes/userCoupons';
 import cinemaRoutes from "./routes/cinemaRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
+import chatbotRouter from "./routes/chatbot";
 
 // Booking Routes and socket.io
 import bookingRouter from "./routes/booking";
@@ -45,6 +46,7 @@ app.use("/search", searchRouter);
 app.use("/api/auth", routerApiAuth);
 app.use('/coupons', couponsRoutes);
 app.use('/api/user/coupons', userCouponsRoutes);
+app.use('/chatbot', chatbotRouter)
 // Test Route
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running on Clean Architecture! 🚀");
