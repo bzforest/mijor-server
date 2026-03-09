@@ -70,9 +70,9 @@ routerApiAuth.post("/register", validateRegisterInput , async (req: Request, res
     }
   });
   
-  // ==========================================
-  // เส้น API สำหรับ Login
-  // ==========================================
+// ==========================================
+// เส้น API สำหรับ Login
+// ==========================================
 routerApiAuth.post("/login", validateLoginInput , async (req: Request, res: Response): Promise<any> => {
     try {
       const { email, password } = req.body;
@@ -177,5 +177,38 @@ routerApiAuth.post("/login", validateLoginInput , async (req: Request, res: Resp
     }
   
   });
+
+// ==========================================
+// เส้น API สำหรับ Forgot Password (ส่งลิงก์รีเซ็ต)
+// ==========================================
+routerApiAuth.post("/forgot-password" , async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: "กรุณาระบุอีเมล" });
+    }
+
+    // ส่งให้ supabase ส่งอีเมล reset password
+    const { data , error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password`,
+    });
+
+    if (error) {
+      console.error("Supabase Reset Password Error:", error);
+      return res.status(400).json({ success: false, message: "ไม่สามารถส่งอีเมลได้ โปรดตรวจสอบว่าอีเมลนี้มีในระบบ"});
+    }
+
+    return res.status(200).json ({
+      success: true,
+      message: "ส่งลิงก์สำหรับตั้งรหัสผ่านใหม่ไปยังอีเมลของคุณแล้ว",
+      data: data
+    });
+
+  } catch (err: any) {
+    console.error("Forgot Password Error:", err);
+    return res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
 
 export default routerApiAuth
