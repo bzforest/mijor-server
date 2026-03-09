@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { connectionPool } from "../utils/db";
 import { io } from "../index";
 import { requireAuth } from "../middlewares/auth.middleware";
+import { getCouponFromDB } from "../utils/booking";
 
 const bookingRouter = Router();
 
@@ -190,7 +191,7 @@ bookingRouter.get("/showtimeSeat/:showtimeId/my-seats", requireAuth, async (req:
 })
 
 bookingRouter.post(
-  "/showtimeSeat/select", 
+  "/showtimeSeat/select",
   requireAuth,
   async (req: Request, res: Response) => {
     const client = await connectionPool.connect();
@@ -217,7 +218,7 @@ bookingRouter.post(
         UPDATE showtime_seats
         SET status = 'selected',
             selected_by = $1,
-            expires_at = now() + interval '5 minutes'
+            expires_at = now() + interval '2 minute'
         WHERE id = ANY($2)
         AND status = 'available'
         AND showtime_id = $3
@@ -259,7 +260,7 @@ bookingRouter.post(
     const client = await connectionPool.connect();
 
     try {
-      const { showtimeId, seatIds } = req.body;
+      const { showtimeId, seatIds, selectedCouponId } = req.body;
 
       const userId = (req as any).user.id;
 
@@ -275,6 +276,13 @@ bookingRouter.post(
 
       await client.query("BEGIN");
 
+      console.log('🔍 [Booking Confirm] Seat validation:', {
+        seatIds,
+        userId,
+        showtimeId,
+        checking: 'selected_by field'
+      });
+
       const updateSeat = await client.query(
         `
         UPDATE showtime_seats
@@ -289,6 +297,12 @@ bookingRouter.post(
       `,
         [seatIds, userId, showtimeId],
       );
+
+      console.log('🔍 [Booking Confirm] Seat update result:', {
+        expectedCount: seatIds.length,
+        actualCount: updateSeat.rowCount,
+        updatedIds: updateSeat.rows.map(r => r.id)
+      });
 
       if (updateSeat.rowCount !== seatIds.length) {
         throw new Error("One or more seats are invalid or expired");
@@ -310,20 +324,52 @@ bookingRouter.post(
       const basePrice = Number(showtimeResult.rows[0].base_price);
 
       const subtotal = basePrice * seatIds.length;
-      const discount = 0;
+      let discount = 0;
+
+      console.log('🧮 [Booking Confirm] Coupon calculation:', {
+        showtimeId,
+        seatIds,
+        selectedCouponId,
+        subtotal,
+        basePrice
+      });
+
+      let couponIdToInsert = selectedCouponId;
+
+      if (selectedCouponId && selectedCouponId.trim() !== '') {
+        const coupon = await getCouponFromDB(selectedCouponId);
+        if (coupon && coupon.is_active) {
+          discount = coupon.discount_type === 'percentage'
+            ? (subtotal * coupon.discount_value) / 100
+            : coupon.discount_value;
+        } else {
+          // ถ้าไม่พบ coupon ให้ไม่ใช้คูปองและไม่ส่ง coupon_id ไป
+          console.log('⚠️ [Booking Confirm] Coupon not found, proceeding without discount');
+          couponIdToInsert = ''; // Reset เพื่อไม่ส่ง coupon_id ที่ไม่มีอยู่
+        }
+      }
+
       const total = subtotal - discount;
 
       const bookingResult = await client.query(
         `
           INSERT INTO bookings 
-          (profile_id, showtime_id, subtotal, discount_amount, total_price, status)
-          VALUES ($1, $2, $3, $4, $5, 'confirmed')
+          (profile_id, showtime_id, subtotal, discount_amount, total_price, coupon_id, status)
+          VALUES ($1, $2, $3, $4, $5, $6, 'confirmed')
           RETURNING *;
         `,
-        [userId, showtimeId, subtotal, discount, total],
+        [userId, showtimeId, subtotal, discount, total, couponIdToInsert || null],
       );
 
       const booking = bookingResult.rows[0];
+
+      // อัปเดตสถานะคูปองว่าถูกใช้แล้ว
+      if (couponIdToInsert && couponIdToInsert.trim() !== '') {
+        await client.query(
+          "UPDATE user_coupons SET is_used = true, used_at = now() WHERE coupon_id = $1 AND profile_id = $2",
+          [couponIdToInsert, userId]
+        );
+      }
 
       for (const seatId of seatIds) {
         await client.query(
@@ -344,9 +390,19 @@ bookingRouter.post(
       return res.status(200).json({
         message: "Booking confirmed successfully",
         bookingId: booking.id,
+        couponId: booking.coupon_id,
+        discountAmount: discount,
+        finalPrice: total,
       });
     } catch (error: any) {
       await client.query("ROLLBACK");
+
+      console.error('❌ [Booking Confirm] Error:', {
+        error: error.message,
+        stack: error.stack,
+        body: req.body,
+        userId: (req as any).user.id
+      });
 
       return res.status(400).json({
         message: error.message,

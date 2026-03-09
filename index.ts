@@ -12,12 +12,14 @@ import couponsRoutes from './routes/coupons';
 import userCouponsRoutes from './routes/userCoupons';
 import cinemaRoutes from "./routes/cinemaRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
-
-// Booking Routes and socket.io
 import bookingRouter from "./routes/booking";
 import { startExpireSeatJob } from "./jobs/expireSeats";
 import { Server } from "socket.io";
 import http from "http";
+
+// Webhook Routes
+import webhookRouter from "./routes/webhook";
+import paymentRouter from "./routes/payment";
 
 dotenv.config();
 
@@ -33,6 +35,9 @@ export const io = new Server(server, {
   },
 });
 
+// Webhook Routes
+app.use("/webhook", webhookRouter);
+
 // Middleware
 app.use(cors()); // อนุญาตทุกโดเมนไปก่อน
 app.use(express.json());
@@ -45,6 +50,10 @@ app.use("/search", searchRouter);
 app.use("/api/auth", routerApiAuth);
 app.use('/coupons', couponsRoutes);
 app.use('/api/user/coupons', userCouponsRoutes);
+
+// Payment Routes
+app.use('/api/payments', paymentRouter);
+
 // Test Route
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running on Clean Architecture! 🚀");
