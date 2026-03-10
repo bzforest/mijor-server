@@ -1,5 +1,6 @@
 import { Request, Response , Router} from "express";
 import { supabase } from '../utils/supabase';
+import { supabaseAdmin } from "../utils/supabaseAdmin";
 import { validateRegisterInput , validateLoginInput } from "../middlewares/auth.middleware";
 
 const routerApiAuth = Router();
@@ -99,6 +100,82 @@ routerApiAuth.post("/login", validateLoginInput , async (req: Request, res: Resp
       console.error("Login Error:", err);
       return res.status(500).json({ success: false, message: "Internal server error" });
     }
+  });
+
+  // ==========================================
+  // Reset Password
+  // ==========================================
+  routerApiAuth.post("/reset-password", async (req: Request, res: Response): Promise<any> => {
+
+    try {
+  
+      const { email, currentPassword, newPassword } = req.body;
+  
+      if (!email || !currentPassword || !newPassword) {
+        return res.status(400).json({
+          success: false,
+          message: "Missing required fields"
+        });
+      }
+  
+      // 1. ตรวจสอบ password เดิมก่อน
+      const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+        email,
+        password: currentPassword
+      });
+  
+      if (loginError || !loginData?.user) {
+        return res.status(200).json({
+          success: false,
+          message: "Current password is incorrect"
+        });
+      }
+  
+      // 2. สั่งเปลี่ยน password (ทางฝั่ง Admin)
+      const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(
+        loginData.user.id,
+        { password: newPassword }
+      );
+  
+      if (updateError) {
+        return res.status(400).json({
+          success: false,
+          message: updateError.message
+        });
+      }
+
+      // 3. หลังจากเปลี่ยนรหัสผ่านแล้ว ให้สั่ง Login ใหม่ด้วยรหัสผ่านใหม่ทันที
+      // เพื่อรับ Session/Token ชุดใหม่ที่ถูกต้องกลับไปให้ Client
+      const { data: newSessionData, error: newSessionError } = await supabase.auth.signInWithPassword({
+        email,
+        password: newPassword
+      });
+
+      if (newSessionError) {
+        return res.status(500).json({
+          success: false,
+          message: "Password updated, but failed to refresh session. Please login again."
+        });
+      }
+  
+      return res.status(200).json({
+        success: true,
+        message: "Password updated",
+        session: newSessionData.session,
+        user: newSessionData.user
+      });
+  
+    } catch (err: any) {
+  
+      console.error("Reset Password Error:", err);
+  
+      return res.status(500).json({
+        success: false,
+        message: err.message
+      });
+  
+    }
+  
   });
 
 export default routerApiAuth
