@@ -53,6 +53,7 @@ export const validateLoginInput = (req: Request, res: Response, next: NextFuncti
 
 // (Protected Routes)
 export const requireAuth = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  console.log(`[AUTH DEBUG] ${req.method} ${req.originalUrl}`);
   // ===== Token Extraction =====
   // Extract Bearer token from Authorization header
   const token = req.headers.authorization?.replace('Bearer ', '');

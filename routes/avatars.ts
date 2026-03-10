@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import multer from "multer";
 import { supabase } from "../utils/supabase";
+import { supabaseAdmin } from "../utils/supabaseAdmin";
 import { requireAuth } from "../middlewares/auth.middleware";
 
 const avatarsRoutes = express.Router();
@@ -40,6 +41,7 @@ avatarsRoutes.post(
   "/",
   upload.single("avatar"),
   async (req: Request, res: Response) => {
+    console.log("POST /api/avatars HIT");
 
     try {
 
@@ -56,9 +58,9 @@ avatarsRoutes.post(
 
       const filePath = `${user.id}/avatar.${fileExt}`;
 
-      /* upload */
+      /* upload (ใช้ supabaseAdmin เพื่อ bypass RLS สำหรับการอัปโหลดไฟล์) */
 
-      const { error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabaseAdmin.storage
         .from("avatars")
         .upload(filePath, file.buffer, {
           contentType: file.mimetype,
@@ -82,9 +84,9 @@ avatarsRoutes.post(
 
       const avatarUrl = `${data.publicUrl}?t=${Date.now()}`;
 
-      /* update profile */
+      /* update profile (ใช้ supabaseAdmin เพื่อ bypass RLS เนื่องจากผ่าน Auth มาแล้ว) */
 
-      const { error: updateError } = await supabase
+      const { error: updateError } = await supabaseAdmin
         .from("profiles")
         .update({
           avatar_url: avatarUrl,
@@ -115,30 +117,36 @@ avatarsRoutes.post(
   }
 );
 
-/* ================= GET avatar ================= */
+/* ================= GET profile + avatar ================= */
 
 avatarsRoutes.get("/", async (req: Request, res: Response) => {
+  console.log("GET /api/avatars HIT");
 
   try {
 
-    const user = (req as any).user;
+    const userAuth = (req as any).user;
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("profiles")
-      .select("avatar_url")
-      .eq("id", user.id)
+      .select("name, email, avatar_url")
+      .eq("id", userAuth.id)
       .single();
 
+    // หากไม่พบข้อมูล หรือมี error (เช่น ยังไม่มี row ใน profiles)
     if (error) {
-
-      return res.status(500).json({
-        message: "Failed to fetch avatar",
+      // คืนค่าพื้นฐานจาก Auth user แทนการ error เพื่อกัน 404/500
+      return res.status(200).json({
+        success: true,
+        name: userAuth.user_metadata?.name || "",
+        email: userAuth.email || "",
+        avatar_url: null,
       });
-
     }
 
     res.status(200).json({
       success: true,
+      name: data.name,
+      email: data.email,
       avatar_url: data.avatar_url,
     });
 
@@ -150,6 +158,34 @@ avatarsRoutes.get("/", async (req: Request, res: Response) => {
 
   }
 
+});
+
+/* ================= PUT update name ================= */
+
+avatarsRoutes.put("/", async (req: Request, res: Response) => {
+  console.log("PUT /api/avatars HIT", req.body);
+  try {
+    const userAuth = (req as any).user;
+    const { name } = req.body;
+
+    if (!name) {
+      return res.status(400).json({ message: "Name is required" });
+    }
+
+    const { error } = await supabaseAdmin
+      .from("profiles")
+      .update({ name })
+      .eq("id", userAuth.id);
+
+    if (error) {
+      return res.status(500).json({ message: "Failed to update name" });
+    }
+
+    res.status(200).json({ success: true, message: "Profile updated" });
+
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 export default avatarsRoutes;

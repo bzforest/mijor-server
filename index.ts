@@ -12,7 +12,8 @@ import couponsRoutes from './routes/coupons';
 import userCouponsRoutes from './routes/userCoupons';
 import cinemaRoutes from "./routes/cinemaRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
-import avatarsRoutes from "./routes/avatars";import chatbotRouter from "./routes/chatbot";
+import avatarsRoutes from "./routes/avatars";
+import chatbotRouter from "./routes/chatbot";
 
 // Booking Routes and socket.io
 import bookingRouter from "./routes/booking";
@@ -49,6 +50,13 @@ app.use('/api/user/coupons', userCouponsRoutes);
 app.use('/chatbot', chatbotRouter)
 app.use('/api/auth/reset-password', routerApiAuth);
 app.use("/api/avatars", avatarsRoutes);
+
+// ตรวจสอบ Request ที่หลุดไป 404
+app.use((req, res, next) => {
+  console.log(`[404 DEBUG] Not Found: ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 // Test Route
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running on Clean Architecture! 🚀");
@@ -80,8 +88,19 @@ app.get("/ex", (req: Request, res: Response) => {
 });
 
 if (process.env.NODE_ENV !== "production") {
+  // เริ่มต้น Server
   server.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
+  });
+
+  // ตรวจสอบ Error กรณี Port ซ้ำ
+  server.on("error", (err: any) => {
+    if (err.code === "EADDRINUSE") {
+      console.error(`❌ Port ${port} is already in use! Please kill the process or use another port.`);
+      process.exit(1);
+    } else {
+      console.error(`❌ Server Error:`, err);
+    }
   });
 }
 

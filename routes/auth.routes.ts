@@ -118,22 +118,20 @@ routerApiAuth.post("/login", validateLoginInput , async (req: Request, res: Resp
         });
       }
   
-      console.log("email:", email);
-      console.log("currentPassword:", currentPassword);
-      // ตรวจสอบ password เดิม
+      // 1. ตรวจสอบ password เดิมก่อน
       const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
         email,
         password: currentPassword
       });
   
       if (loginError || !loginData?.user) {
-        return res.status(401).json({
+        return res.status(200).json({
           success: false,
           message: "Current password is incorrect"
         });
       }
   
-      // เปลี่ยน password
+      // 2. สั่งเปลี่ยน password (ทางฝั่ง Admin)
       const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(
         loginData.user.id,
         { password: newPassword }
@@ -145,10 +143,26 @@ routerApiAuth.post("/login", validateLoginInput , async (req: Request, res: Resp
           message: updateError.message
         });
       }
+
+      // 3. หลังจากเปลี่ยนรหัสผ่านแล้ว ให้สั่ง Login ใหม่ด้วยรหัสผ่านใหม่ทันที
+      // เพื่อรับ Session/Token ชุดใหม่ที่ถูกต้องกลับไปให้ Client
+      const { data: newSessionData, error: newSessionError } = await supabase.auth.signInWithPassword({
+        email,
+        password: newPassword
+      });
+
+      if (newSessionError) {
+        return res.status(500).json({
+          success: false,
+          message: "Password updated, but failed to refresh session. Please login again."
+        });
+      }
   
       return res.status(200).json({
         success: true,
-        message: "Password updated"
+        message: "Password updated",
+        session: newSessionData.session,
+        user: newSessionData.user
       });
   
     } catch (err: any) {
