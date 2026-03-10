@@ -399,6 +399,18 @@ bookingRouter.post(
         );
       }
 
+      // 🎁 Award Wheel Spin Credits: 1 Spin per 500 THB spent
+      const earnedCredits = Math.floor(Number(total) / 500);
+      if (earnedCredits > 0) {
+        await client.query(
+          `
+          INSERT INTO wheel_spin_credits (profile_id, booking_id, credits, used)
+          VALUES ($1, $2, $3, false)
+          `,
+          [userId, booking.id, earnedCredits]
+        );
+      }
+
       await client.query("COMMIT");
 
       io.to(`showtime:${showtimeId}`).emit("seatBooked", {
