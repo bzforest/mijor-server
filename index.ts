@@ -66,14 +66,6 @@ app.use((req, res, next) => {
 // Payment Routes
 app.use('/api/payments', paymentRouter);
 
-
-// Payment Routes
-app.use('/api/payments', paymentRouter);
-
-
-// Payment Routes
-app.use('/api/payments', paymentRouter);
-
 // Test Route
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running on Clean Architecture! 🚀");
