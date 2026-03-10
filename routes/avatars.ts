@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import multer from "multer";
-import { supabase } from "../utils/supabase";
-import { supabaseAdmin } from "../utils/supabaseAdmin";
+import { supabase, supabaseAdmin } from '../utils/supabase';
 import { requireAuth } from "../middlewares/auth.middleware";
 
 const avatarsRoutes = express.Router();

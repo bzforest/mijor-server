@@ -1,6 +1,5 @@
 import { Request, Response , Router} from "express";
-import { supabase } from '../utils/supabase';
-import { supabaseAdmin } from "../utils/supabaseAdmin";
+import { supabase, supabaseAdmin } from '../utils/supabase';
 import { validateRegisterInput , validateLoginInput } from "../middlewares/auth.middleware";
 
 const routerApiAuth = Router();
@@ -191,7 +190,7 @@ routerApiAuth.post("/forgot-password" , async (req: Request, res: Response): Pro
 
     // ส่งให้ supabase ส่งอีเมล reset password
     const { data , error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password`,
+      redirectTo: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/update-password`,
     });
 
     if (error) {
@@ -208,6 +207,48 @@ routerApiAuth.post("/forgot-password" , async (req: Request, res: Response): Pro
   } catch (err: any) {
     console.error("Forgot Password Error:", err);
     return res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
+// ==========================================
+// เส้น API สำหรับ Update Password (รับรหัสผ่านใหม่จากลิงก์)
+// ==========================================
+routerApiAuth.post("/update-password" , async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { password , access_token } = req.body;
+    
+    if (!password || !access_token ) {
+      return res.status(400).json ({ success: false, message:  "ข้อมูลไม่ครบถ้วน (ต้องการรหัสผ่านใหม่และ Token)" });
+    }
+
+    // เอา access token ให้ supabase ล็อคอินชั่วคราว ให้สามารถเข้าไปเปลี่ยนได้
+    const { data: { user }, error: userError} = await supabase.auth.getUser(access_token);
+
+    if (userError || !user) {
+      console.error("Supabase Get User Error:", userError);
+      return res.status(401).json({ success: false, message: "Token ไม่ถูกต้อง หรือ ลิงก์หมดอายุแล้ว" });
+    }
+
+    // ใช้สิทธิ์แอดมิน (Admin API) สั่งเปลี่ยนรหัสผ่านให้ User คนนั้นเลย
+    // หมายเหตุ: ต้องใช้ supabase ที่เป็น Service Role Key
+    const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(
+      user.id,
+      { password: password }
+    );
+
+    if (updateError) {
+      console.error("Supabase Update Password Error:", updateError);
+      return res.status(400).json ({ success: false, message: updateError.message });
+    }
+
+    return res.status(200).json ({
+      success: true,
+      message: "เปลี่ยนรหัสผ่านสำเร็จ"
+    });
+
+  } catch (err: any) {
+    console.error("Update Password Error", err);
+    return res.status(500).json ({ success: false, message: "Internal server error" });
   }
 });
 
