@@ -1,7 +1,7 @@
 import { connectionPool } from "../utils/db";
-import { io } from "../index"
+import { Server } from "socket.io";
 
-export const startExpireSeatJob = () => {
+export const startExpireSeatJob = (io: Server) => {
   setInterval(async () => {
     try {
       const result = await connectionPool.query(`
@@ -15,9 +15,12 @@ export const startExpireSeatJob = () => {
       `);
 
       if (result.rowCount && result.rowCount > 0) {
+        console.log(
+          `[Job] Found ${result.rowCount} expired seats. Update UI realtime.`,
+        );
         const grouped: Record<string, string[]> = {};
 
-        result.rows.forEach( row => {
+        result.rows.forEach((row) => {
           if (!grouped[row.showtime_id]) {
             grouped[row.showtime_id] = [];
           }
@@ -30,9 +33,8 @@ export const startExpireSeatJob = () => {
           });
         }
       }
-
     } catch (error) {
       console.error("Expire job error:", error);
     }
-  }, 2000);
+  }, 3000);
 };

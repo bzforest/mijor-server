@@ -66,7 +66,7 @@ io.on("connection", (socket) => {
   });
 });
 
-startExpireSeatJob();
+startExpireSeatJob(io);
 
 // Global Error Handler
 app.use(errorHandler);
@@ -74,7 +74,6 @@ app.use(errorHandler);
 app.get("/ex", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running! 🚀");
 });
-
 
 if (process.env.NODE_ENV !== "production") {
   server.listen(port, () => {
