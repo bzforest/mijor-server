@@ -150,7 +150,6 @@ paymentRouter.post(
   paymentRateLimit(10, 60000), // 10 requests per minute for QR
   validateAmount,
   validateCoupon,
-  validateBookingForPayment,
   async (req, res) => {
     const { amount, bookingId, totalPrice, selectedCouponId } = req.body;
 
