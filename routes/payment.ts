@@ -401,4 +401,41 @@ paymentRouter.get(
   },
 );
 
+// ========================================
+// POST /payments/test-simulate-success
+// DEV ONLY — Simulate QR payment success
+// ========================================
+if (process.env.NODE_ENV !== 'production') {
+  paymentRouter.post('/test-simulate-success', async (req, res) => {
+    const { paymentIntentId } = req.body;
+    try {
+      // Stripe test mode: ใช้ confirm พร้อม expand next_action
+      const paymentIntent = await stripe.paymentIntents.confirm(paymentIntentId, {
+        payment_method_data: {
+          type: 'promptpay',
+        },
+        return_url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/payment-success`,
+        expand: ['next_action'],
+      } as any);
+
+      console.log('🧪 After confirm status:', paymentIntent.status);
+
+      // ถ้ายัง requires_action อยู่ ให้ใช้ test helper
+      if (paymentIntent.status === 'requires_action') {
+        // Force succeed ผ่าน Stripe test API
+        const succeeded = await stripe.paymentIntents.applyCustomerBalance(
+          paymentIntentId
+        ).catch(() => null);
+
+        console.log('🧪 After applyCustomerBalance:', succeeded?.status);
+      }
+
+      res.json({ success: true, status: paymentIntent.status });
+    } catch (error: any) {
+      console.error('🧪 Simulate error:', error.message);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+}
+
 export default paymentRouter;

@@ -51,6 +51,8 @@ app.use('/cities', cities);
 app.use('/movieGenres', movieGenres);
 app.use("/search", searchRouter);
 app.use("/api/auth", routerApiAuth);
+app.use('/api/payments', paymentRouter);
+app.use("/api/booking", bookingRouter);
 app.use('/coupons', couponsRoutes);
 app.use('/api/user/coupons', userCouponsRoutes);
 app.use('/chatbot', chatbotRouter)
