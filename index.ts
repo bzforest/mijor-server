@@ -14,12 +14,14 @@ import cinemaRoutes from "./routes/cinemaRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
 import avatarsRoutes from "./routes/avatars";
 import chatbotRouter from "./routes/chatbot";
-
-// Booking Routes and socket.io
 import bookingRouter from "./routes/booking";
 import { startExpireSeatJob } from "./jobs/expireSeats";
 import { Server } from "socket.io";
 import http from "http";
+
+// Webhook Routes
+import webhookRouter from "./routes/webhook";
+import paymentRouter from "./routes/payment";
 
 dotenv.config();
 
@@ -34,6 +36,9 @@ export const io = new Server(server, {
     origin: "*",
   },
 });
+
+// Webhook Routes
+app.use("/webhook", webhookRouter);
 
 // Middleware
 app.use(cors()); // อนุญาตทุกโดเมนไปก่อน
@@ -56,6 +61,10 @@ app.use((req, res, next) => {
   console.log(`[404 DEBUG] Not Found: ${req.method} ${req.originalUrl}`);
   next();
 });
+
+
+// Payment Routes
+app.use('/api/payments', paymentRouter);
 
 // Test Route
 app.get("/", (req: Request, res: Response) => {
