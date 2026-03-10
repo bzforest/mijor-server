@@ -16,10 +16,15 @@ const getMovieShowtimesDeclaration: FunctionDeclaration = {
             // สำหรับลูกค้า ที่เจาะจงชื่อหนัง
             movieName: {
                 type: SchemaType.STRING,
-                description: "ชื่อภาพยนต์ที่ลูกค้าต้องการรอบฉาย (ถ้าไม่ได้ระบุ จะถูกส่งเป็นค่าว่าง)"
+                description: "ชื่อภาพยนตร์ที่ลูกค้าต้องการรอบฉาย (สำคัญมาก: หากลูกค้าพิมพ์เป็นภาษาไทย ให้พยายามแปลหรือเขียนทับศัพท์เป็นภาษาอังกฤษก่อนส่งค่ามาเสมอ เช่น 'สัปเหร่อ' -> 'Sup Pa Ro', 'สรรพลี้หวน' -> 'Sap Pa Lee Huan') ถ้าไม่ได้ระบุ จะถูกส่งเป็นค่าว่าง"
             },
+
+            cinemaName: {
+                type: SchemaType.STRING,
+                description: "ชื่อสาขาของโรงภาพยนตร์ที่ลูกค้าต้องการค้นหา (เช่น 'เชียงใหม่', 'Rama 3', 'ลาดพร้าว') ถ้าไม่ได้ระบุ ให้ส่งเป็นค่าว่าง"
+            }
         },
-        required: ["movieName"]
+        required: ["movieName" , "cinemaName"]
     },
 };
 
@@ -42,10 +47,15 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
         });
 
         const prompt = `
-        คุณคือ " Minor AI Assistant " พนักงานบริการลูกค้าสุดอัจฉริยะของโรงภาพยนต์ Minor Cineplex
-        กฏการตอบ:
+        คุณคือ "Minor AI Assistant" พนักงานบริการลูกค้าสุดอัจฉริยะของโรงภาพยนตร์ Minor Cineplex
+        
+        กฏการตอบ (ต้องปฏิบัติตามอย่างเคร่งครัด):
         1. ตอบเป็นภาษาไทย สุภาพ เป็นกันเอง และลงท้ายด้วย "ครับ" เสมอ
         2. ตอบให้สั้น กระชับ ไม่เยิ่นเย้อ
+        3. [สำคัญมาก] หน้าที่ของคุณคือตอบคำถามที่เกี่ยวกับ "ภาพยนตร์, โรงภาพยนตร์, ตารางรอบฉาย, และบริการของ Minor Cineplex" เท่านั้น!
+        4. [Guardrails] หากลูกค้าถามเรื่องอื่นที่ "ไม่เกี่ยวข้องกันเลย" ให้ตอบปฏิเสธอย่างสุภาพ แล้วดึงกลับมาเรื่องหนัง เช่น "ขออภัยครับ ผมเป็นผู้ช่วยด้านภาพยนตร์ ตอบได้เฉพาะเรื่องที่เกี่ยวกับ Minor Cineplex เท่านั้นครับ วันนี้มีหนังเรื่องไหนที่คุณลูกค้าสนใจเป็นพิเศษไหมครับ?" 
+        5. ห้ามให้ข้อมูล นอกเหนือจากบริบทของโรงภาพยนตร์เด็ดขาด!
+        6. [การจัดรูปแบบ] 💡 หากมีการแจ้ง "รอบฉายภาพยนตร์" ให้จัดเรียงเป็นข้อๆ (Bullet points) หรือขึ้นบรรทัดใหม่แยกแต่ละรอบ/แต่ละสาขา ให้สวยงามและอ่านง่ายที่สุด ห้ามพิมพ์ติดกันเป็นพรืดเด็ดขาด!
 
         คำถามจากลูกค้า: "${message}"
         `;
@@ -61,8 +71,9 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
 
             //  ถ้า AI เรียกหาฟังก์ชัน "หารอบหนัง"
             if (call.name === "get_movie_showtimes") {
-                const args = call.args as {movieName?: string};
+                const args = call.args as {movieName?: string, cinemaName?: string};
                 const movieName = args.movieName || "";
+                const cinemaName = args.cinemaName || "";
 
                 console.log(`[Function Call] AI กำลังขอข้อมูลรอบฉายของ: ${movieName || 'ทั้งหมด'}`);
 
@@ -84,8 +95,14 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
                         values.push(`%${movieName}%`);
                     }
 
+                    // ถ้าหากลูกค้าระบุชื่อโรงหนังมา
+                    if (cinemaName) {
+                        values.push(`%${cinemaName}%`);
+                        sql += ` AND c.name ILIKE $${values.length}`;
+                    }
+
                     // เรียงตามเวลาฉาย และจำกัดแค่ 10 รอบ เพื่อไม่ให้ AI อ่านข้อมูลเยอะจนเกินไป
-                    sql += ` ORDER BY s.start_time ASC LIMIT 10 `;
+                    sql += ` ORDER BY s.start_time ASC LIMIT 15 `;
 
                     const dbResult = await connectionPool.query(sql , values);
                     const showtimesData = dbResult.rows;
