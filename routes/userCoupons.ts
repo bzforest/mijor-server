@@ -14,6 +14,20 @@ userCouponsRoutes.post("/", async (req: Request, res: Response) => {
     const { couponId } = req.body;
     const user = (req as any).user;
 
+    // ===== Security Check: Is it a minigame coupon? =====
+    const { data: couponMeta } = await supabase
+      .from("coupons")
+      .select("discount_type, discount_value")
+      .eq("id", couponId)
+      .single();
+
+    if (
+      couponMeta?.discount_type === 'discount_percentage' &&
+      [5, 10, 15, 20, 25, 50].includes(Number(couponMeta.discount_value))
+    ) {
+      return res.status(403).json({ message: "This coupon is exclusive to Minigames!" });
+    }
+
     // ===== Existence Check =====
     const { data: existing } = await supabase
       .from("profile_coupons")
@@ -29,10 +43,10 @@ userCouponsRoutes.post("/", async (req: Request, res: Response) => {
     // ===== Database Insertion =====
     const { error: insertError } = await supabase
       .from("profile_coupons")
-      .insert([{ 
-        profile_id: user.id, 
-        coupon_id: couponId, 
-        collected_at: new Date().toISOString() 
+      .insert([{
+        profile_id: user.id,
+        coupon_id: couponId,
+        collected_at: new Date().toISOString()
       }]);
 
     if (insertError) {
@@ -73,13 +87,14 @@ userCouponsRoutes.get("/", async (req: Request, res: Response) => {
         )
       `)
       .eq('profile_id', user.id)
-      .eq('is_used', false);
+      .eq('is_used', false)
+      .or(`expires_at.is.null,expires_at.gte.${new Date().toISOString()}`);
 
     if (fetchError) {
       return res.status(500).json({ message: "Failed to fetch coupons" });
     }
 
-    res.status(200).json({ 
+    res.status(200).json({
       success: true,
       data: coupons,
       count: coupons.length

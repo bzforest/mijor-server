@@ -5,7 +5,12 @@ const couponsRoutes = express.Router();
 
 couponsRoutes.get("/", async (req: Request, res: Response) => {
   try {
-    const results = await connectionPool.query('SELECT * FROM coupons');
+    // Hide minigame coupons from public view
+    const results = await connectionPool.query(`
+      SELECT * FROM coupons 
+      WHERE NOT (discount_type = 'discount_percentage' AND discount_value IN (5, 10, 15, 20, 25, 50))
+      AND is_active = true
+    `);
 
     return res.status(200).json({
       data: results.rows
@@ -41,4 +46,4 @@ couponsRoutes.get("/:id", async (req: Request, res: Response) => {
 });
 
 export default couponsRoutes;
-  
+

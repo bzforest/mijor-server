@@ -384,7 +384,7 @@ bookingRouter.post(
       // อัปเดตสถานะคูปองว่าถูกใช้แล้ว
       if (couponIdToInsert && couponIdToInsert.trim() !== '') {
         await client.query(
-          "UPDATE user_coupons SET is_used = true, used_at = now() WHERE coupon_id = $1 AND profile_id = $2",
+          "UPDATE profile_coupons SET is_used = true, used_at = now() WHERE coupon_id = $1 AND profile_id = $2",
           [couponIdToInsert, userId]
         );
       }
@@ -396,6 +396,18 @@ bookingRouter.post(
           VALUES ($1, $2, $3)
         `,
           [booking.id, seatId, basePrice],
+        );
+      }
+
+      // 🎁 Award Wheel Spin Credits: 1 Spin per 500 THB spent
+      const earnedCredits = Math.floor(Number(total) / 500);
+      if (earnedCredits > 0) {
+        await client.query(
+          `
+          INSERT INTO wheel_spin_credits (profile_id, booking_id, credits, used)
+          VALUES ($1, $2, $3, false)
+          `,
+          [userId, booking.id, earnedCredits]
         );
       }
 

@@ -11,6 +11,7 @@ import routerApiAuth from "./routes/auth.routes";
 import couponsRoutes from './routes/coupons';
 import userCouponsRoutes from './routes/userCoupons';
 import cinemaRoutes from "./routes/cinemaRoutes";
+import minigameRoutes from "./routes/minigames";
 import { errorHandler } from "./middlewares/errorHandler";
 import avatarsRoutes from "./routes/avatars";
 import chatbotRouter from "./routes/chatbot";
@@ -66,6 +67,7 @@ app.use((req, res, next) => {
 // Payment Routes
 app.use('/api/payments', paymentRouter);
 
+app.use('/minigames', minigameRoutes);
 // Test Route
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running on Clean Architecture! 🚀");
