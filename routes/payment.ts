@@ -57,9 +57,9 @@ paymentRouter.post(
           selectedCouponId,
           coupon: coupon
             ? {
-                discountType: coupon.discount_type,
-                discountValue: coupon.discount_value,
-              }
+              discountType: coupon.discount_type,
+              discountValue: coupon.discount_value,
+            }
             : null,
           clientCalculatedPrice: amount,
           serverCalculatedPrice,
@@ -205,23 +205,13 @@ paymentRouter.post(
       if (selectedCouponId) {
         const coupon = await getCouponFromDB(selectedCouponId);
         if (coupon && coupon.is_active) {
-          let discount = 0;
-          if (coupon.discount_type === "percentage") {
-            discount = (serverCalculatedPrice * coupon.discount_value) / 100;
-          } else {
-            discount = coupon.discount_value;
-          }
-          finalPrice = Math.max(0, serverCalculatedPrice - discount);
+          finalPrice = calculateDiscount(serverCalculatedPrice, coupon);
 
           console.log("🔍 QR Payment Price Calculation:", {
             serverCalculatedPrice,
             selectedCouponId,
-            coupon: {
-              discount_type: coupon.discount_type,
-              discount_value: coupon.discount_value,
-              is_active: coupon.is_active,
-            },
-            discount,
+            discount_type: coupon.discount_type,
+            discount_value: coupon.discount_value,
             finalPrice,
             clientAmount: amount,
             difference: Math.abs(amount - finalPrice),

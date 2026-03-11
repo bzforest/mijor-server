@@ -3,7 +3,7 @@ import crypto from "crypto";
 import { connectionPool } from "../utils/db";
 import { io } from "../index";
 import { requireAuth } from "../middlewares/auth.middleware";
-import { getCouponFromDB } from "../utils/booking";
+import { getCouponFromDB, calculateDiscount } from "../utils/booking";
 import Stripe from "stripe";
 
 const bookingRouter = Router();
@@ -358,9 +358,8 @@ bookingRouter.post(
       if (selectedCouponId && selectedCouponId.trim() !== '') {
         const coupon = await getCouponFromDB(selectedCouponId);
         if (coupon && coupon.is_active) {
-          discount = coupon.discount_type === 'percentage'
-            ? (subtotal * coupon.discount_value) / 100
-            : coupon.discount_value;
+          const discountedTotal = calculateDiscount(subtotal, coupon);
+          discount = subtotal - discountedTotal;
         } else {
           // ถ้าไม่พบ coupon ให้ไม่ใช้คูปองและไม่ส่ง coupon_id ไป
           console.log('⚠️ [Booking Confirm] Coupon not found, proceeding without discount');
@@ -520,9 +519,8 @@ bookingRouter.post(
       if (selectedCouponId && selectedCouponId.trim() !== '') {
         const coupon = await getCouponFromDB(selectedCouponId);
         if (coupon && coupon.is_active) {
-          discount = coupon.discount_type === 'percentage'
-            ? (subtotal * coupon.discount_value) / 100
-            : coupon.discount_value;
+          const discountedTotal = calculateDiscount(subtotal, coupon);
+          discount = subtotal - discountedTotal;
         } else {
           couponIdToInsert = '';
         }
