@@ -151,7 +151,7 @@ paymentRouter.post(
   validateAmount,
   validateCoupon,
   async (req, res) => {
-    const { amount, bookingId, totalPrice, selectedCouponId } = req.body;
+    const { amount, bookingId, totalPrice, selectedCouponId, seatExpiresAt } = req.body;
 
     try {
       // Validate amount
@@ -238,6 +238,10 @@ paymentRouter.post(
           },
         });
       }
+      // คำนวณ expiresIn จาก seatExpiresAt
+      const expiresIn = seatExpiresAt
+        ? Math.max(0, Math.floor((new Date(seatExpiresAt).getTime() - Date.now()) / 1000))
+        : 900;
 
       // Create Stripe payment intent for QR code
       const paymentIntent = await stripe.paymentIntents.create({
@@ -296,7 +300,7 @@ paymentRouter.post(
             }
           },
           amount: finalPrice,
-          expiresIn: 900,
+          expiresIn: expiresIn,
         });
         return;
       }
@@ -315,7 +319,7 @@ paymentRouter.post(
           },
         },
         amount: finalPrice,
-        expiresIn: 900,
+        expiresIn: expiresIn,
       });
     } catch (error: any) {
       console.error("QR Payment Error:", error);
