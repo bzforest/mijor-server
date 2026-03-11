@@ -384,7 +384,7 @@ bookingRouter.post(
       // อัปเดตสถานะคูปองว่าถูกใช้แล้ว
       if (couponIdToInsert && couponIdToInsert.trim() !== '') {
         await client.query(
-          "UPDATE user_coupons SET is_used = true, used_at = now() WHERE coupon_id = $1 AND profile_id = $2",
+          "UPDATE profile_coupons SET is_used = true, used_at = now() WHERE coupon_id = $1 AND profile_id = $2",
           [couponIdToInsert, userId]
         );
       }
