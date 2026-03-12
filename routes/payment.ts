@@ -33,6 +33,7 @@ paymentRouter.post(
   validateCoupon,
   validateBookingForPayment,
   async (req, res) => {
+     console.log("🔵 [create-payment-intent] Request received:", req.body);
     const { amount, bookingId, paymentIntentId, totalPrice, selectedCouponId } =
       req.body;
 
@@ -94,6 +95,15 @@ paymentRouter.post(
         });
       }
 
+      if (serverCalculatedPrice === 0) {
+        return res.json({
+          success: true,
+          clientSecret: "free",
+          paymentIntentId: "free-" + Date.now(),
+          isFree: true,
+        });
+      }
+
       console.log(" Creating payment intent:", {
         amount: serverCalculatedPrice,
         bookingId,
@@ -151,6 +161,7 @@ paymentRouter.post(
   validateAmount,
   validateCoupon,
   async (req, res) => {
+    console.log("🔵 [create-qr-payment] Request received:", req.body); 
     const { amount, bookingId, totalPrice, selectedCouponId, seatExpiresAt } = req.body;
 
     try {
@@ -206,6 +217,16 @@ paymentRouter.post(
         const coupon = await getCouponFromDB(selectedCouponId);
         if (coupon && coupon.is_active) {
           finalPrice = calculateDiscount(serverCalculatedPrice, coupon);
+
+        if (finalPrice === 0) {
+          return res.json({
+            success: true,
+            paymentIntentId: "free-" + Date.now(), // dummy ID
+            qrData: null, // ไม่ต้องแสดง QR
+            amount: 0,
+            isFree: true,
+          });
+        }
 
           console.log("🔍 QR Payment Price Calculation:", {
             serverCalculatedPrice,

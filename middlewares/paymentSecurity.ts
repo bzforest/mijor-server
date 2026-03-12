@@ -136,7 +136,12 @@ export const validateAmount = (
   try {
     const { amount } = req.body;
 
-    if (!amount || typeof amount !== "number") {
+    if (
+      amount === undefined ||
+      amount === null ||
+      typeof amount !== "number" ||
+      isNaN(amount)
+    ) {
       return res.status(400).json({
         success: false,
         message: "Valid amount is required",
@@ -144,7 +149,7 @@ export const validateAmount = (
     }
 
     // ตรวจสอบช่วงราคาที่ปลอดภัย (1 - 50,000 บาท)
-    if (amount <= 0 || amount > 50000) {
+    if (amount < 0 || amount > 50000) {
       console.warn("🚨 [validateAmount] Invalid amount:", {
         amount,
         ip: req.ip,
@@ -153,7 +158,7 @@ export const validateAmount = (
 
       return res.status(400).json({
         success: false,
-        message: "Amount must be between 1 and 50,000 THB",
+        message: "Amount must be between 0 and 50,000 THB",
       });
     }
 

@@ -14,27 +14,30 @@ userCouponsRoutes.post("/", async (req: Request, res: Response) => {
     const { couponId } = req.body;
     const user = (req as any).user;
 
-    // ===== Security Check: Is it a minigame coupon? =====
-    const { data: couponMeta } = await supabase
+    const { data: coupon } = await supabase
       .from("coupons")
-      .select("discount_type, discount_value")
+      .select("id")
       .eq("id", couponId)
-      .single();
+      .maybeSingle();
 
-    if (
-      couponMeta?.discount_type === 'discount_percentage' &&
-      [5, 10, 15, 20, 25, 50].includes(Number(couponMeta.discount_value))
-    ) {
-      return res.status(403).json({ message: "This coupon is exclusive to Minigames!" });
+    if (!coupon) {
+      return res.status(404).json({
+        message: "Coupon not found"
+      });
     }
 
     // ===== Existence Check =====
-    const { data: existing } = await supabase
+    const { data: existing, error: existingError } = await supabase
       .from("profile_coupons")
-      .select("*")
+      .select("id")
       .eq("profile_id", user.id)
       .eq("coupon_id", couponId)
-      .single();
+      .maybeSingle();
+
+    if (existingError) {
+      console.error("Check existing coupon error:", existingError);
+      return res.status(500).json({ message: "Failed to check coupon" });
+    }
 
     if (existing) {
       return res.status(400).json({ message: "Coupon already saved" });
@@ -87,7 +90,6 @@ userCouponsRoutes.get("/", async (req: Request, res: Response) => {
         )
       `)
       .eq('profile_id', user.id)
-      .eq('is_used', false)
       .or(`expires_at.is.null,expires_at.gte.${new Date().toISOString()}`);
 
     if (fetchError) {
