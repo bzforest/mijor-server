@@ -10,6 +10,7 @@ import movieGenres from "./routes/moviegenres";
 import routerApiAuth from "./routes/auth.routes";
 import couponsRoutes from './routes/coupons';
 import userCouponsRoutes from './routes/userCoupons';
+import historyRouter from "./routes/history";
 import cinemaRoutes from "./routes/cinemaRoutes";
 import minigameRoutes from "./routes/minigames";
 import { errorHandler } from "./middlewares/errorHandler";
@@ -58,6 +59,7 @@ app.use('/api/user/coupons', userCouponsRoutes);
 app.use('/chatbot', chatbotRouter)
 app.use('/api/auth/reset-password', routerApiAuth);
 app.use("/api/avatars", avatarsRoutes);
+app.use('/history', historyRouter);
 
 // ตรวจสอบ Request ที่หลุดไป 404
 app.use((req, res, next) => {
