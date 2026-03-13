@@ -3,7 +3,8 @@ import crypto from "crypto";
 import { connectionPool } from "../utils/db";
 import { io } from "../index";
 import { requireAuth } from "../middlewares/auth.middleware";
-import { getCouponFromDB } from "../utils/booking";
+import { getCouponFromDB, calculateDiscount } from "../utils/booking";
+import Stripe from "stripe";
 
 const bookingRouter = Router();
 
@@ -237,7 +238,7 @@ bookingRouter.post(
         UPDATE showtime_seats
         SET status = 'selected',
             selected_by = $1,
-            expires_at = now() + interval '2 minute'
+            expires_at = now() + interval '1 minute'
         WHERE id = ANY($2)
         AND status = 'available'
         AND showtime_id = $3
@@ -357,9 +358,8 @@ bookingRouter.post(
       if (selectedCouponId && selectedCouponId.trim() !== '') {
         const coupon = await getCouponFromDB(selectedCouponId);
         if (coupon && coupon.is_active) {
-          discount = coupon.discount_type === 'percentage'
-            ? (subtotal * coupon.discount_value) / 100
-            : coupon.discount_value;
+          const discountedTotal = calculateDiscount(subtotal, coupon);
+          discount = subtotal - discountedTotal;
         } else {
           // ถ้าไม่พบ coupon ให้ไม่ใช้คูปองและไม่ส่ง coupon_id ไป
           console.log('⚠️ [Booking Confirm] Coupon not found, proceeding without discount');
@@ -441,6 +441,139 @@ bookingRouter.post(
       client.release();
     }
   },
+);
+
+// =========================================
+// POST /booking/confirm-qr — Confirm QR Payment
+// =========================================
+
+// POST /booking/showtimeSeat/confirm-qr
+bookingRouter.post(
+  "/showtimeSeat/confirm-qr",
+  async (req: Request, res: Response) => {
+    const client = await connectionPool.connect();
+
+    try {
+      const { showtimeId, seatIds, selectedCouponId, paymentIntentId, forceSuccess } = req.body;
+
+      if (!showtimeId || !Array.isArray(seatIds) || seatIds.length === 0 || !paymentIntentId) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid payload"
+        });
+      }
+
+      // ✅ Verify Stripe — ข้ามถ้าเป็น dev + forceSuccess
+      if (!forceSuccess || process.env.NODE_ENV === 'production') {
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+        const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+        if (paymentIntent.status !== "succeeded") {
+          return res.status(400).json({
+            success: false,
+            message: `Payment not succeeded: ${paymentIntent.status}`,
+          });
+        }
+      }
+
+      // ดึง userId จาก seat
+      const seatOwnerResult = await client.query(
+        `SELECT selected_by FROM showtime_seats 
+         WHERE id = ANY($1) AND status = 'selected' AND showtime_id = $2
+         LIMIT 1`,
+        [seatIds, showtimeId]
+      );
+
+      if (seatOwnerResult.rowCount === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Seats not found or already expired",
+        });
+      }
+
+      const userId = seatOwnerResult.rows[0].selected_by;
+
+      await client.query("BEGIN");
+
+      const updateSeat = await client.query(
+        `UPDATE showtime_seats
+         SET status = 'booked', booked_at = now(), expires_at = NULL
+         WHERE id = ANY($1) AND selected_by = $2 AND status = 'selected' AND showtime_id = $3
+         RETURNING id`,
+        [seatIds, userId, showtimeId]
+      );
+
+      if (updateSeat.rowCount !== seatIds.length) {
+        throw new Error("One or more seats are invalid or expired");
+      }
+
+      const showtimeResult = await client.query(
+        `SELECT base_price FROM showtimes WHERE id = $1`,
+        [showtimeId]
+      );
+
+      const basePrice = Number(showtimeResult.rows[0].base_price);
+      const subtotal = basePrice * seatIds.length;
+      let discount = 0;
+      let couponIdToInsert = selectedCouponId;
+
+      if (selectedCouponId && selectedCouponId.trim() !== '') {
+        const coupon = await getCouponFromDB(selectedCouponId);
+        if (coupon && coupon.is_active) {
+          const discountedTotal = calculateDiscount(subtotal, coupon);
+          discount = subtotal - discountedTotal;
+        } else {
+          couponIdToInsert = '';
+        }
+      }
+
+      const total = subtotal - discount;
+
+      const bookingResult = await client.query(
+        `INSERT INTO bookings 
+         (profile_id, showtime_id, subtotal, discount_amount, total_price, coupon_id, status)
+         VALUES ($1, $2, $3, $4, $5, $6, 'confirmed')
+         RETURNING *`,
+        [userId, showtimeId, subtotal, discount, total, couponIdToInsert || null]
+      );
+
+      const booking = bookingResult.rows[0];
+
+      if (couponIdToInsert && couponIdToInsert.trim() !== '') {
+        await client.query(
+          "UPDATE profile_coupons SET is_used = true, used_at = now() WHERE coupon_id = $1 AND profile_id = $2",
+          [couponIdToInsert, userId]
+        );
+      }
+
+      for (const seatId of seatIds) {
+        await client.query(
+          `INSERT INTO booking_seats (booking_id, showtime_seat_id, price_at_booking)
+           VALUES ($1, $2, $3)`,
+          [booking.id, seatId, basePrice]
+        );
+      }
+
+      await client.query("COMMIT");
+      io.to(`showtime:${showtimeId}`).emit("seatBooked", { seatIds });
+
+      return res.status(200).json({
+        success: true,
+        message: "Booking confirmed successfully",
+        bookingId: booking.id,
+        finalPrice: total,
+      });
+
+    } catch (error: any) {
+      await client.query("ROLLBACK");
+      console.error("❌ [QR Confirm] Error:", error.message);
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    } finally {
+      client.release();
+    }
+  }
 );
 
 // =========================================

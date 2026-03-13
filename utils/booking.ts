@@ -120,21 +120,33 @@ export async function getCouponFromDB(couponId: string): Promise<any | null> {
 export function calculateDiscount(originalPrice: number, coupon: any): number {
   if (!coupon) return originalPrice;
 
-  const discount = coupon.discount_type === 'percentage'
-    ? (originalPrice * coupon.discount_value) / 100
-    : coupon.discount_value;
+  let discount = 0;
 
-  const finalPrice = Math.max(0, originalPrice - discount);
-  
-  console.log('💰 [calculateDiscount] Discount calculation:', {
-    originalPrice,
-    discountType: coupon.discount_type,
-    discountValue: coupon.discount_value,
-    discountAmount: discount,
-    finalPrice
-  });
+  switch (coupon.discount_type) {
+    case 'discount_percentage':
+      discount = (originalPrice * coupon.discount_value) / 100;
+      break;
+    case 'discount_amount':
+      discount = coupon.discount_value;
+      break;
+    case 'fixed_price':
+      // จ่ายราคา fixed_price เลย
+      return Math.max(0, coupon.discount_value);
+    case 'free_ticket':
+    case 'free_item':
+      return 0;
+    case 'buy_one_get_one':
+      discount = originalPrice / 2;
+      break;
+    case 'cashback':
+    case 'upgrade':
+      discount = 0; // handle แยกนอก payment flow
+      break;
+    default:
+      discount = 0;
+  }
 
-  return finalPrice;
+  return Math.max(0, originalPrice - discount);
 }
 
 /**

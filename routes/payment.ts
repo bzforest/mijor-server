@@ -33,6 +33,7 @@ paymentRouter.post(
   validateCoupon,
   validateBookingForPayment,
   async (req, res) => {
+     console.log("🔵 [create-payment-intent] Request received:", req.body);
     const { amount, bookingId, paymentIntentId, totalPrice, selectedCouponId } =
       req.body;
 
@@ -57,9 +58,9 @@ paymentRouter.post(
           selectedCouponId,
           coupon: coupon
             ? {
-                discountType: coupon.discount_type,
-                discountValue: coupon.discount_value,
-              }
+              discountType: coupon.discount_type,
+              discountValue: coupon.discount_value,
+            }
             : null,
           clientCalculatedPrice: amount,
           serverCalculatedPrice,
@@ -91,6 +92,15 @@ paymentRouter.post(
         return res.status(400).json({
           success: false,
           message: "Price validation failed",
+        });
+      }
+
+      if (serverCalculatedPrice === 0) {
+        return res.json({
+          success: true,
+          clientSecret: "free",
+          paymentIntentId: "free-" + Date.now(),
+          isFree: true,
         });
       }
 
@@ -150,9 +160,9 @@ paymentRouter.post(
   paymentRateLimit(10, 60000), // 10 requests per minute for QR
   validateAmount,
   validateCoupon,
-  validateBookingForPayment,
   async (req, res) => {
-    const { amount, bookingId, totalPrice, selectedCouponId } = req.body;
+    console.log("🔵 [create-qr-payment] Request received:", req.body); 
+    const { amount, bookingId, totalPrice, selectedCouponId, seatExpiresAt } = req.body;
 
     try {
       // Validate amount
@@ -206,23 +216,23 @@ paymentRouter.post(
       if (selectedCouponId) {
         const coupon = await getCouponFromDB(selectedCouponId);
         if (coupon && coupon.is_active) {
-          let discount = 0;
-          if (coupon.discount_type === "percentage") {
-            discount = (serverCalculatedPrice * coupon.discount_value) / 100;
-          } else {
-            discount = coupon.discount_value;
-          }
-          finalPrice = Math.max(0, serverCalculatedPrice - discount);
+          finalPrice = calculateDiscount(serverCalculatedPrice, coupon);
+
+        if (finalPrice === 0) {
+          return res.json({
+            success: true,
+            paymentIntentId: "free-" + Date.now(), // dummy ID
+            qrData: null, // ไม่ต้องแสดง QR
+            amount: 0,
+            isFree: true,
+          });
+        }
 
           console.log("🔍 QR Payment Price Calculation:", {
             serverCalculatedPrice,
             selectedCouponId,
-            coupon: {
-              discount_type: coupon.discount_type,
-              discount_value: coupon.discount_value,
-              is_active: coupon.is_active,
-            },
-            discount,
+            discount_type: coupon.discount_type,
+            discount_value: coupon.discount_value,
             finalPrice,
             clientAmount: amount,
             difference: Math.abs(amount - finalPrice),
@@ -249,6 +259,10 @@ paymentRouter.post(
           },
         });
       }
+      // คำนวณ expiresIn จาก seatExpiresAt
+      const expiresIn = seatExpiresAt
+        ? Math.max(0, Math.floor((new Date(seatExpiresAt).getTime() - Date.now()) / 1000))
+        : 900;
 
       // Create Stripe payment intent for QR code
       const paymentIntent = await stripe.paymentIntents.create({
@@ -307,7 +321,7 @@ paymentRouter.post(
             }
           },
           amount: finalPrice,
-          expiresIn: 900,
+          expiresIn: expiresIn,
         });
         return;
       }
@@ -326,7 +340,7 @@ paymentRouter.post(
           },
         },
         amount: finalPrice,
-        expiresIn: 900,
+        expiresIn: expiresIn,
       });
     } catch (error: any) {
       console.error("QR Payment Error:", error);
@@ -400,5 +414,42 @@ paymentRouter.get(
     }
   },
 );
+
+// ========================================
+// POST /payments/test-simulate-success
+// DEV ONLY — Simulate QR payment success
+// ========================================
+if (process.env.NODE_ENV !== 'production') {
+  paymentRouter.post('/test-simulate-success', async (req, res) => {
+    const { paymentIntentId } = req.body;
+    try {
+      // Stripe test mode: ใช้ confirm พร้อม expand next_action
+      const paymentIntent = await stripe.paymentIntents.confirm(paymentIntentId, {
+        payment_method_data: {
+          type: 'promptpay',
+        },
+        return_url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/payment-success`,
+        expand: ['next_action'],
+      } as any);
+
+      console.log('🧪 After confirm status:', paymentIntent.status);
+
+      // ถ้ายัง requires_action อยู่ ให้ใช้ test helper
+      if (paymentIntent.status === 'requires_action') {
+        // Force succeed ผ่าน Stripe test API
+        const succeeded = await stripe.paymentIntents.applyCustomerBalance(
+          paymentIntentId
+        ).catch(() => null);
+
+        console.log('🧪 After applyCustomerBalance:', succeeded?.status);
+      }
+
+      res.json({ success: true, status: paymentIntent.status });
+    } catch (error: any) {
+      console.error('🧪 Simulate error:', error.message);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+}
 
 export default paymentRouter;
