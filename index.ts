@@ -18,6 +18,7 @@ import avatarsRoutes from "./routes/avatars";
 import chatbotRouter from "./routes/chatbot";
 import bookingRouter from "./routes/booking";
 import { startExpireSeatJob } from "./jobs/expireSeats";
+import { startMonthlyLeaderboardJob } from "./jobs/rewardLeaderboard";
 import { Server } from "socket.io";
 import http from "http";
 
@@ -94,6 +95,7 @@ io.on("connection", (socket) => {
 });
 
 startExpireSeatJob(io);
+startMonthlyLeaderboardJob();
 
 // Global Error Handler
 app.use(errorHandler);
