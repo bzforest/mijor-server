@@ -19,7 +19,7 @@ import chatbotRouter from "./routes/chatbot";
 import bookingRouter from "./routes/booking";
 import { startExpireSeatJob } from "./jobs/expireSeats";
 import { startMonthlyLeaderboardJob } from "./jobs/rewardLeaderboard";
-import { Server } from "socket.io";
+import { initSocket } from "./utils/socket";
 import http from "http";
 
 // Webhook Routes
@@ -34,11 +34,7 @@ const port = process.env.PORT || 4000;
 const server = http.createServer(app);
 
 // Socket.io
-export const io = new Server(server, {
-  cors: {
-    origin: "*",
-  },
-});
+export const io = initSocket(server);
 
 // Webhook Routes
 app.use("/webhook", webhookRouter);
@@ -54,25 +50,17 @@ app.use('/movieGenres', movieGenres);
 app.use("/search", searchRouter);
 app.use("/api/auth", routerApiAuth);
 app.use('/api/payments', paymentRouter);
-app.use("/api/booking", bookingRouter);
 app.use('/coupons', couponsRoutes);
 app.use('/api/user/coupons', userCouponsRoutes);
 app.use('/chatbot', chatbotRouter)
 app.use('/api/auth/reset-password', routerApiAuth);
 app.use("/api/avatars", avatarsRoutes);
 app.use('/history', historyRouter);
-
-// ตรวจสอบ Request ที่หลุดไป 404
-app.use((req, res, next) => {
-  console.log(`[404 DEBUG] Not Found: ${req.method} ${req.originalUrl}`);
-  next();
-});
-
-
-// Payment Routes
-app.use('/api/payments', paymentRouter);
-
 app.use('/minigames', minigameRoutes);
+
+// Booking Routes
+app.use("/api/booking", bookingRouter);
+app.use("/booking", bookingRouter);
 // Test Route
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running on Clean Architecture! 🚀");
@@ -81,12 +69,16 @@ app.get("/", (req: Request, res: Response) => {
 // API Routes
 app.use("/api/cinemas", cinemaRoutes);
 
-// Booking Routes
-app.use("/booking", bookingRouter);
+// ตรวจสอบ Request ที่หลุดไป 404
+app.use((req, res, next) => {
+  console.log(`[404 DEBUG] Not Found: ${req.method} ${req.originalUrl}`);
+  next();
+});
 
 io.on("connection", (socket) => {
   socket.on("joinShowtime", (showtimeId: string) => {
     socket.join(`showtime:${showtimeId}`);
+    console.log(`✅ Socket ${socket.id} joined showtime:${showtimeId}`);
   });
 
   socket.on("disconnect", () => {
