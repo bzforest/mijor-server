@@ -102,21 +102,19 @@ app.get("/ex", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server is running! 🚀");
 });
 
-if (process.env.NODE_ENV !== "production") {
-  // เริ่มต้น Server
-  server.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
-  });
+// เริ่มต้น Server
+server.listen(port, () => {
+  console.log(`[server]: Server is running at http://localhost:${port}`);
+});
 
-  // ตรวจสอบ Error กรณี Port ซ้ำ
-  server.on("error", (err: any) => {
-    if (err.code === "EADDRINUSE") {
-      console.error(`❌ Port ${port} is already in use! Please kill the process or use another port.`);
-      process.exit(1);
-    } else {
-      console.error(`❌ Server Error:`, err);
-    }
-  });
-}
+// ตรวจสอบ Error กรณี Port ซ้ำ
+server.on("error", (err: any) => {
+  if (err.code === "EADDRINUSE") {
+    console.error(`❌ Port ${port} is already in use! Please kill the process or use another port.`);
+    process.exit(1);
+  } else {
+    console.error(`❌ Server Error:`, err);
+  }
+});
 
 export default app; // สำคัญมาก! ต้อง export เพื่อให้ Vercel เอาไปใช้ต่อได้
