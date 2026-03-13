@@ -14,13 +14,30 @@ userCouponsRoutes.post("/", async (req: Request, res: Response) => {
     const { couponId } = req.body;
     const user = (req as any).user;
 
+    const { data: coupon } = await supabase
+      .from("coupons")
+      .select("id")
+      .eq("id", couponId)
+      .maybeSingle();
+
+    if (!coupon) {
+      return res.status(404).json({
+        message: "Coupon not found"
+      });
+    }
+
     // ===== Existence Check =====
-    const { data: existing } = await supabase
+    const { data: existing, error: existingError } = await supabase
       .from("profile_coupons")
-      .select("*")
+      .select("id")
       .eq("profile_id", user.id)
       .eq("coupon_id", couponId)
-      .single();
+      .maybeSingle();
+
+    if (existingError) {
+      console.error("Check existing coupon error:", existingError);
+      return res.status(500).json({ message: "Failed to check coupon" });
+    }
 
     if (existing) {
       return res.status(400).json({ message: "Coupon already saved" });
@@ -29,10 +46,10 @@ userCouponsRoutes.post("/", async (req: Request, res: Response) => {
     // ===== Database Insertion =====
     const { error: insertError } = await supabase
       .from("profile_coupons")
-      .insert([{ 
-        profile_id: user.id, 
-        coupon_id: couponId, 
-        collected_at: new Date().toISOString() 
+      .insert([{
+        profile_id: user.id,
+        coupon_id: couponId,
+        collected_at: new Date().toISOString()
       }]);
 
     if (insertError) {
@@ -73,13 +90,13 @@ userCouponsRoutes.get("/", async (req: Request, res: Response) => {
         )
       `)
       .eq('profile_id', user.id)
-      .eq('is_used', false);
+      .or(`expires_at.is.null,expires_at.gte.${new Date().toISOString()}`);
 
     if (fetchError) {
       return res.status(500).json({ message: "Failed to fetch coupons" });
     }
 
-    res.status(200).json({ 
+    res.status(200).json({
       success: true,
       data: coupons,
       count: coupons.length

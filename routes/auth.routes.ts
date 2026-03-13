@@ -1,5 +1,5 @@
 import { Request, Response , Router} from "express";
-import { supabase } from '../utils/supabase';
+import { supabase, supabaseAdmin } from '../utils/supabase';
 import { validateRegisterInput , validateLoginInput } from "../middlewares/auth.middleware";
 
 const routerApiAuth = Router();
@@ -69,9 +69,9 @@ routerApiAuth.post("/register", validateRegisterInput , async (req: Request, res
     }
   });
   
-  // ==========================================
-  // เส้น API สำหรับ Login
-  // ==========================================
+// ==========================================
+// เส้น API สำหรับ Login
+// ==========================================
 routerApiAuth.post("/login", validateLoginInput , async (req: Request, res: Response): Promise<any> => {
     try {
       const { email, password } = req.body;
@@ -100,5 +100,156 @@ routerApiAuth.post("/login", validateLoginInput , async (req: Request, res: Resp
       return res.status(500).json({ success: false, message: "Internal server error" });
     }
   });
+
+  // ==========================================
+  // Reset Password
+  // ==========================================
+  routerApiAuth.post("/reset-password", async (req: Request, res: Response): Promise<any> => {
+
+    try {
+  
+      const { email, currentPassword, newPassword } = req.body;
+  
+      if (!email || !currentPassword || !newPassword) {
+        return res.status(400).json({
+          success: false,
+          message: "Missing required fields"
+        });
+      }
+  
+      // 1. ตรวจสอบ password เดิมก่อน
+      const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+        email,
+        password: currentPassword
+      });
+  
+      if (loginError || !loginData?.user) {
+        return res.status(200).json({
+          success: false,
+          message: "Current password is incorrect"
+        });
+      }
+  
+      // 2. สั่งเปลี่ยน password (ทางฝั่ง Admin)
+      const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(
+        loginData.user.id,
+        { password: newPassword }
+      );
+  
+      if (updateError) {
+        return res.status(400).json({
+          success: false,
+          message: updateError.message
+        });
+      }
+
+      // 3. หลังจากเปลี่ยนรหัสผ่านแล้ว ให้สั่ง Login ใหม่ด้วยรหัสผ่านใหม่ทันที
+      // เพื่อรับ Session/Token ชุดใหม่ที่ถูกต้องกลับไปให้ Client
+      const { data: newSessionData, error: newSessionError } = await supabase.auth.signInWithPassword({
+        email,
+        password: newPassword
+      });
+
+      if (newSessionError) {
+        return res.status(500).json({
+          success: false,
+          message: "Password updated, but failed to refresh session. Please login again."
+        });
+      }
+  
+      return res.status(200).json({
+        success: true,
+        message: "Password updated",
+        session: newSessionData.session,
+        user: newSessionData.user
+      });
+  
+    } catch (err: any) {
+  
+      console.error("Reset Password Error:", err);
+  
+      return res.status(500).json({
+        success: false,
+        message: err.message
+      });
+  
+    }
+  
+  });
+
+// ==========================================
+// เส้น API สำหรับ Forgot Password (ส่งลิงก์รีเซ็ต)
+// ==========================================
+routerApiAuth.post("/forgot-password" , async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: "กรุณาระบุอีเมล" });
+    }
+
+    // ส่งให้ supabase ส่งอีเมล reset password
+    const { data , error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/update-password`,
+    });
+
+    if (error) {
+      console.error("Supabase Reset Password Error:", error);
+      return res.status(400).json({ success: false, message: "ไม่สามารถส่งอีเมลได้ โปรดตรวจสอบว่าอีเมลนี้มีในระบบ"});
+    }
+
+    return res.status(200).json ({
+      success: true,
+      message: "ส่งลิงก์สำหรับตั้งรหัสผ่านใหม่ไปยังอีเมลของคุณแล้ว",
+      data: data
+    });
+
+  } catch (err: any) {
+    console.error("Forgot Password Error:", err);
+    return res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
+// ==========================================
+// เส้น API สำหรับ Update Password (รับรหัสผ่านใหม่จากลิงก์)
+// ==========================================
+routerApiAuth.post("/update-password" , async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { password , access_token } = req.body;
+    
+    if (!password || !access_token ) {
+      return res.status(400).json ({ success: false, message:  "ข้อมูลไม่ครบถ้วน (ต้องการรหัสผ่านใหม่และ Token)" });
+    }
+
+    // เอา access token ให้ supabase ล็อคอินชั่วคราว ให้สามารถเข้าไปเปลี่ยนได้
+    const { data: { user }, error: userError} = await supabase.auth.getUser(access_token);
+
+    if (userError || !user) {
+      console.error("Supabase Get User Error:", userError);
+      return res.status(401).json({ success: false, message: "Token ไม่ถูกต้อง หรือ ลิงก์หมดอายุแล้ว" });
+    }
+
+    // ใช้สิทธิ์แอดมิน (Admin API) สั่งเปลี่ยนรหัสผ่านให้ User คนนั้นเลย
+    // หมายเหตุ: ต้องใช้ supabase ที่เป็น Service Role Key
+    const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(
+      user.id,
+      { password: password }
+    );
+
+    if (updateError) {
+      console.error("Supabase Update Password Error:", updateError);
+      return res.status(400).json ({ success: false, message: updateError.message });
+    }
+
+    return res.status(200).json ({
+      success: true,
+      message: "เปลี่ยนรหัสผ่านสำเร็จ"
+    });
+
+  } catch (err: any) {
+    console.error("Update Password Error", err);
+    return res.status(500).json ({ success: false, message: "Internal server error" });
+  }
+});
 
 export default routerApiAuth

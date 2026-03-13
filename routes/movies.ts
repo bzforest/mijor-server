@@ -14,6 +14,7 @@ interface Movie {
   language: string;
   rating: number;
   status: "now" | "soon" | "out"; // ✅ เพิ่ม out
+  trailer_youtube: string | null;
 }
 
 // ==============================
@@ -61,6 +62,7 @@ movie.get("/", async (req: Request, res: Response) => {
         language: row.language || "",
         rating: row.rating ? Number(row.rating) : 0,
         status: formattedStatus,
+        trailer_youtube: row.trailer_youtube || null,
       };
     });
 
@@ -122,6 +124,7 @@ movie.get("/:id", async (req: Request, res: Response) => {
       language: row.language || "",
       rating: row.rating ? Number(row.rating) : 0,
       status: formattedStatus,
+      trailer_youtube: row.trailer_youtube || null,
     };
 
     return res.status(200).json({

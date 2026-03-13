@@ -4,13 +4,15 @@ import { connectionPool } from "../utils/db";
 // ===== Types =====
 
 /* --- Database Rows --- */
-interface MovieCinemaPair {
+interface MovieCinemaDatePair {
   title: string;
   cinema_name: string;
+  show_date: string | null;
 }
 
 interface MovieRow {
   id: number;
+  show_date?: string | null;
   title: string;
   synopsis: string;
   poster_url: string;
@@ -18,6 +20,7 @@ interface MovieRow {
   language: string;
   rating: string;
   status: string;
+  showtime_id?: string;
   hall_name?: string;
   time_start?: Date;
   end_time?: Date;
@@ -63,6 +66,7 @@ interface AggregatedMovie {
   city?: string;
   hearingAssistance: boolean;
   wheelchairAccess: boolean;
+  date?: string;
   hallsMap: Record<string, Schedule[]>;
 }
 
@@ -115,23 +119,36 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
     }
 
     // --- Filter: Showtime Start Time ---
-    // Rule: Supports both exact datetime match and date-only match (YYYY-MM-DD)
+    // Rule: Apply date filter only to 'Now Showing' movies.
+    // 'Coming Soon' and 'Out of Theater' bypass the date filter (they may have no showtimes).
     const showtimeStartTimeQuery = req.query["showtime.start_time"];
-    const showtimeStartTime = Array.isArray(showtimeStartTimeQuery)
+    const showtimeStartTimeRaw = Array.isArray(showtimeStartTimeQuery)
       ? showtimeStartTimeQuery[0]
       : showtimeStartTimeQuery;
 
-    if (typeof showtimeStartTime === "string" && showtimeStartTime.trim() !== "") {
-      const trimmedShowtimeStartTime = showtimeStartTime.trim();
-      const isDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(trimmedShowtimeStartTime);
+    // Compute today's date in Asia/Bangkok timezone as YYYY-MM-DD
+    const todayBangkok = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Bangkok" });
 
+    const isDateProvided = typeof showtimeStartTimeRaw === "string" && showtimeStartTimeRaw.trim() !== "";
+    let effectiveDate: string | null = null;
+
+    const hasAnyFilter = title || language || genre || city || hearingAssistance === 'true' || wheelchairAccess === 'true';
+
+    if (isDateProvided) {
+      effectiveDate = showtimeStartTimeRaw.trim();
+    }
+
+    if (effectiveDate) {
+      const isDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(effectiveDate);
+
+      // Date condition: strictly filter by the showtime start time
       if (isDateOnly) {
         conditions.push(`showtimes.start_time::date = $${paramIndex}`);
       } else {
         conditions.push(`showtimes.start_time = $${paramIndex}`);
       }
 
-      values.push(trimmedShowtimeStartTime);
+      values.push(effectiveDate);
       paramIndex++;
     }
 
@@ -193,7 +210,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
     const countQuery = `
       SELECT COUNT(*) 
       FROM (
-        SELECT DISTINCT movies.title, COALESCE(cinemas.name, '') AS cinema_name
+        SELECT DISTINCT movies.title, COALESCE(cinemas.name, '') AS cinema_name, showtimes.start_time::date
         ${fromClause} 
         ${whereClause}
       ) AS pairs
@@ -204,15 +221,17 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
     const totalPages = Math.ceil(totalCount / LIMIT);
 
     // --- Step 3.2: Fetch Paginated Pairs ---
+    const todayIndex = paramIndex;
     const pairsQuery = `
       SELECT
         movies.title,
         COALESCE(cinemas.name, '') AS cinema_name,
+        showtimes.start_time::date AS show_date,
         MIN(showtimes.start_time) AS first_showtime,
         MAX(movies.status) AS status
       ${fromClause}
       ${whereClause}
-      GROUP BY movies.title, COALESCE(cinemas.name, '')
+      GROUP BY movies.title, COALESCE(cinemas.name, ''), showtimes.start_time::date
       ORDER BY
         CASE MAX(movies.status)
           WHEN 'Now Showing'    THEN 1
@@ -220,19 +239,37 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
           WHEN 'Out of Theater' THEN 3
           ELSE 4
         END ASC,
+        CASE 
+          WHEN showtimes.start_time::date = $${todayIndex} THEN 1
+          WHEN showtimes.start_time::date > $${todayIndex} THEN 2
+          WHEN showtimes.start_time::date < $${todayIndex} THEN 3
+          ELSE 4
+        END ASC,
+        CASE 
+          WHEN showtimes.start_time::date < $${todayIndex} THEN showtimes.start_time::date
+        END DESC,
+        showtimes.start_time::date ASC,
         MIN(showtimes.start_time) ASC,
         COALESCE(cinemas.name, '') ASC
-      LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
+      LIMIT $${todayIndex + 1} OFFSET $${todayIndex + 2}
     `;
 
-    const pairsValues = [...values, LIMIT, offset];
+    const pairsValues = [...values, todayBangkok, LIMIT, offset];
     const pairsResult = await connectionPool.query(pairsQuery, pairsValues);
 
-    const identifiers: MovieCinemaPair[] = pairsResult.rows.map(
-      (row: MovieCinemaPair) => ({
-        title: row.title,
-        cinema_name: row.cinema_name,
-      })
+    const identifiers: MovieCinemaDatePair[] = pairsResult.rows.map(
+      (row: any) => {
+        let sd = null;
+        if (row.show_date) {
+            const d = new Date(row.show_date);
+            sd = d.toLocaleDateString("en-CA");
+        }
+        return {
+            title: row.title,
+            cinema_name: row.cinema_name,
+            show_date: sd,
+        };
+      }
     );
 
     if (identifiers.length === 0) {
@@ -248,11 +285,21 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
     // Calculate offset so placeholders ($N) start after the existing `values` array length
     const offsetIndex = values.length;
 
-    // Generate pair placeholders like ($3, $4), ($5, $6) etc. instead of ($1, $2)
-    const pairPlaceholders = identifiers
-      .map((_, i) => `($${offsetIndex + (i * 2) + 1}, $${offsetIndex + (i * 2) + 2})`)
-      .join(", ");
-    const pairValues = identifiers.flatMap((p) => [p.title, p.cinema_name]);
+    const pairConditionStrings: string[] = [];
+    const pairValues: unknown[] = [];
+    let currentParamIdx = offsetIndex + 1;
+
+    for (const pair of identifiers) {
+      if (pair.show_date === null) {
+        pairConditionStrings.push(`(movies.title = $${currentParamIdx} AND COALESCE(cinemas.name, '') = $${currentParamIdx + 1} AND showtimes.start_time IS NULL)`);
+        pairValues.push(pair.title, pair.cinema_name);
+        currentParamIdx += 2;
+      } else {
+        pairConditionStrings.push(`(movies.title = $${currentParamIdx} AND COALESCE(cinemas.name, '') = $${currentParamIdx + 1} AND showtimes.start_time::date = $${currentParamIdx + 2})`);
+        pairValues.push(pair.title, pair.cinema_name, pair.show_date);
+        currentParamIdx += 3;
+      }
+    }
 
     let dataQuery = `
       SELECT
@@ -260,10 +307,10 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
         movies.title,
         movies.synopsis,
         movies.poster_url,
-        movies.release_date,
         movies.language,
-        movies.rating,
         movies.status,
+        showtimes.id AS showtime_id,
+        showtimes.start_time::date::varchar AS show_date,
         halls.name AS hall_name,
         showtimes.start_time AS time_start,
         showtimes.end_time,
@@ -289,7 +336,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
 
     const wherePrefix = whereClause.length > 0 ? whereClause + ' AND' : 'WHERE';
     dataQuery += `
-      ${wherePrefix} (movies.title, COALESCE(cinemas.name, '')) IN (${pairPlaceholders}) 
+      ${wherePrefix} (${pairConditionStrings.join(" OR ")}) 
       ORDER BY showtimes.start_time ASC
     `;
 
@@ -326,8 +373,14 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
     moviesResult.rows.forEach((row: MovieRow) => {
       const cinemaName = row.cinema_name || "Unknown Cinema";
 
-      // Use composite key (title + cinema) to strictly match the pagination grouping limit applied in Step 3
-      const compositeKey = `${row.title}-${cinemaName}`;
+      let showDateStr = null;
+      if (row.show_date) {
+         const d = new Date(row.show_date);
+         showDateStr = d.toLocaleDateString("en-CA");
+      }
+
+      // Use composite key (title + cinema + date) to strictly match the pagination grouping limit applied in Step 3
+      const compositeKey = `${row.title}-${cinemaName}-${showDateStr ?? 'null'}`;
 
       // --- 5.1 Initialize Movie Entity ---
       if (!moviesMap[compositeKey]) {
@@ -345,6 +398,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
           city: row.city,
           hearingAssistance: row.hearing_assistance ?? false,
           wheelchairAccess: row.wheelchair_access ?? false,
+          date: showDateStr ?? undefined,
           hallsMap: {},
         };
       }
@@ -356,7 +410,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
       }
 
       // --- 5.3 Process Schedules ---
-      if (row.time_start) {
+      if (row.time_start && row.showtime_id) {
         const dateObj = new Date(row.time_start);
         const hours = String(dateObj.getUTCHours()).padStart(2, "0");
         const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
@@ -364,12 +418,12 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
 
         const currentHallSchedules = moviesMap[compositeKey].hallsMap[hallName];
         const isDuplicate = currentHallSchedules.some(
-          (s: Schedule) => s.time === timeStr
+          (s: Schedule) => s.id === row.showtime_id
         );
 
         if (!isDuplicate) {
           currentHallSchedules.push({
-            id: `${compositeKey}-${hallName}-${timeStr}`,
+            id: row.showtime_id,
             time: timeStr,
             endTime: row.end_time,
           });
@@ -408,6 +462,7 @@ searchRouter.get("/movies", async (req: Request, res: Response) => {
     /* ================= 6. Response ================= */
     return res.status(200).json({
       data: aggregatedData,
+      date: effectiveDate,
       pagination: {
         totalCount,
         totalPages,
