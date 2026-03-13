@@ -12,6 +12,16 @@ historyRouter.get("/", requireAuth, async (req, res) => {
   try {
     const user = (req as any).user;
 
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 5;
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
+
+    const { count } = await supabase
+      .from("bookings")
+      .select("*", { count: "exact", head: true })
+      .eq("profile_id", user.id);
+
     const { data, error } = await supabase
       .from("bookings")
       .select(`
@@ -36,7 +46,8 @@ historyRouter.get("/", requireAuth, async (req, res) => {
         )
         `)
       .eq("profile_id", user.id)
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: false })
+      .range(from, to);
 
     if (error) {
       console.error("History error:", error);
@@ -76,6 +87,12 @@ historyRouter.get("/", requireAuth, async (req, res) => {
     return res.json({
       success: true,
       data: formatted,
+      pagination: {
+        page,
+        limit,
+        total: count || 0,
+        totalPages: Math.ceil((count || 0) / limit),
+      },
     });
   } catch (err) {
     console.error("History server error:", err);
