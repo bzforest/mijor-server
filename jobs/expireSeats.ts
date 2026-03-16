@@ -28,6 +28,7 @@ export const startExpireSeatJob = (io: Server) => {
         });
 
         for (const showtimeId in grouped) {
+          console.log(`📡 Emitting seatExpired to showtime:${showtimeId}`, grouped[showtimeId]); // เพิ่ม
           io.to(`showtime:${showtimeId}`).emit("seatExpired", {
             seatIds: grouped[showtimeId],
           });
@@ -36,5 +37,6 @@ export const startExpireSeatJob = (io: Server) => {
     } catch (error) {
       console.error("Expire job error:", error);
     }
-  }, 3000);
+  }, 1000);
 };
+
