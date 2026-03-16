@@ -37,6 +37,6 @@ export const startExpireSeatJob = (io: Server) => {
     } catch (error) {
       console.error("Expire job error:", error);
     }
-  }, 3000);
+  }, 1000);
 };
 
