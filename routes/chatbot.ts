@@ -5,6 +5,7 @@ import { connectionPool } from "../utils/db";
 const chatbotRouter = express.Router();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const today = new Date().toISOString().split('T')[0];
 
 // function หารอบหนัง
 const getMovieShowtimesDeclaration: FunctionDeclaration = {
@@ -22,16 +23,22 @@ const getMovieShowtimesDeclaration: FunctionDeclaration = {
             cinemaName: {
                 type: SchemaType.STRING,
                 description: "ชื่อสาขาของโรงภาพยนตร์ที่ต้องการค้นหา **[สำคัญมาก] หากลูกค้าพิมพ์ภาษาไทย ให้แปลหรือทับศัพท์เป็นอังกฤษก่อนเสมอ เช่น 'เชียงใหม่' -> 'Chiangmai', 'ลาดพร้าว' -> 'Ladprao', 'พระราม' -> 'Rama'** ถ้าไม่ได้ระบุ ให้ส่งเป็น string ว่าง ('')"
+            },
+
+            targetDate: {
+                type: SchemaType.STRING,
+                description: `วันที่ลูกค้าต้องการค้นหารอบฉาย (รูปแบบ YYYY-MM-DD) เช่น ถ้าลูกค้าถามหา 'พรุ่งนี้' ให้บวกวันเพิ่มจาก ${today} เป็นต้นไป ถ้าลูกค้าไม่ได้ระบุวัน ให้ส่งเป็น string ว่าง ('')`
             }
+
         },
-        required: ["movieName" , "cinemaName"]
+        required: ["movieName" , "cinemaName" , "targetDate"]
     },
 };
 
 chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
     try {
     
-        const {message } = req.body;
+        const { message, history = [] } = req.body;
 
         if (!message) {
             return res.status(400).json ({ error: "กรุณาส่งข้อความมาด้วยครับ" });
@@ -46,8 +53,14 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
             ],
         });
 
+        const historyText = history
+            .map((msg: any) => `${msg.role === 'user' ? 'ลูกค้า' : 'AI'}: ${msg.text}`)
+            .join('\n');
+        
+
         const prompt = `
         คุณคือ "Minor AI Assistant" พนักงานบริการลูกค้าสุดอัจฉริยะของโรงภาพยนตร์ Minor Cineplex
+        วันนี้คือวันที่: ${today}
         
         กฏการตอบ (ต้องปฏิบัติตามอย่างเคร่งครัด):
         1. ตอบเป็นภาษาไทย สุภาพ เป็นกันเอง และลงท้ายด้วย "ครับ" เสมอ
@@ -55,8 +68,18 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
         3. [สำคัญมาก] หน้าที่ของคุณคือตอบคำถามที่เกี่ยวกับ "ภาพยนตร์, โรงภาพยนตร์, ตารางรอบฉาย, และบริการของ Minor Cineplex" เท่านั้น!
         4. [Guardrails] หากลูกค้าถามเรื่องอื่นที่ "ไม่เกี่ยวข้องกันเลย" ให้ตอบปฏิเสธอย่างสุภาพ แล้วดึงกลับมาเรื่องหนัง เช่น "ขออภัยครับ ผมเป็นผู้ช่วยด้านภาพยนตร์ ตอบได้เฉพาะเรื่องที่เกี่ยวกับ Minor Cineplex เท่านั้นครับ วันนี้มีหนังเรื่องไหนที่คุณลูกค้าสนใจเป็นพิเศษไหมครับ?" 
         5. ห้ามให้ข้อมูล นอกเหนือจากบริบทของโรงภาพยนตร์เด็ดขาด!
-        6. [การจัดรูปแบบ] 💡 หากมีการแจ้ง "รอบฉายภาพยนตร์" ให้จัดเรียงเป็นข้อๆ (Bullet points) หรือขึ้นบรรทัดใหม่แยกแต่ละรอบ/แต่ละสาขา ให้สวยงามและอ่านง่ายที่สุด ห้ามพิมพ์ติดกันเป็นพรืดเด็ดขาด!
+        6. [การจัดรูปแบบ] 💡 สำคัญมาก: หากมีการแจ้ง "รอบฉายภาพยนตร์" ห้ามพิมพ์ติดกันเป็นพรืด บังคับให้จัดรูปแบบตามโครงสร้างนี้เท่านั้น:
+        
+        **[ชื่อภาพยนตร์]**
+        - เวลา: [รอบฉายทั้งหมด]
+        <เว้น 1 บรรทัดเสมอ>
+        **[ชื่อภาพยนตร์เรื่องถัดไป]**
 
+        ---
+        ประวัติการสนทนาที่ผ่านมา (ใช้อ้างอิงบริบทเท่านั้น):
+        ${historyText}
+        ---
+        
         คำถามจากลูกค้า: "${message}"
         `;
 
@@ -71,9 +94,10 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
 
             //  ถ้า AI เรียกหาฟังก์ชัน "หารอบหนัง"
             if (call.name === "get_movie_showtimes") {
-                const args = call.args as {movieName?: string, cinemaName?: string};
+                const args = call.args as {movieName?: string, cinemaName?: string, targetDate?: string};
                 const movieName = args.movieName || "";
                 const cinemaName = args.cinemaName || "";
+                const targetDate = args.targetDate || "";
 
                 console.log(`[Function Call] AI กำลังขอข้อมูลรอบฉายของ: ${movieName || 'ทั้งหมด'}`);
 
@@ -85,7 +109,7 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
                         JOIN movies m ON s.movie_id = m.id 
                         JOIN halls h ON s.hall_id = h.id
                         JOIN cinemas c ON h.cinema_id = c.id 
-                        WHERE s.start_time >= NOW()
+                        WHERE 1=1
                     `;
                     const values: any[] = [];
 
@@ -99,6 +123,14 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
                     if (cinemaName) {
                         values.push(`%${cinemaName}%`);
                         sql += ` AND c.name ILIKE $${values.length}`;
+                    }
+
+                    if (targetDate) {
+                        // ถ้ามี targetDate เราต้องเช็กค่าของมัน ไม่ใช่แค่ push อย่างเดียว
+                        values.push(targetDate);
+                        sql += ` AND DATE(s.start_time) = $${values.length}`;
+                    } else {
+                        sql += ` AND s.start_time >= NOW()`;
                     }
 
                     // เรียงตามเวลาฉาย และจำกัดแค่ 10 รอบ เพื่อไม่ให้ AI อ่านข้อมูลเยอะจนเกินไป
