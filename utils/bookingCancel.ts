@@ -83,13 +83,6 @@ export const cancelBooking = async (
 
     seatIds = seatResult.rows.map((row) => row.showtime_seat_id);
 
-    // ✅ FIX 2: ลบ booking_seats ใน transaction เดียวกันเสมอ
-    // ไม่ว่าจะมี Stripe refund หรือไม่ก็ตาม
-    // เดิม: ลบเฉพาะตอน Stripe refund สำเร็จ → ทำให้ rebooking conflict
-    await client.query("DELETE FROM booking_seats WHERE booking_id = $1", [
-      bookingId,
-    ]);
-
     if (seatIds.length > 0) {
       await client.query(
         `UPDATE showtime_seats
