@@ -22,32 +22,11 @@ historyRouter.get("/", requireAuth, async (req, res) => {
       .select("*", { count: "exact", head: true })
       .eq("profile_id", user.id);
 
-    const { data, error } = await supabase
-      .from("bookings")
-      .select(`
-        id,
-        total_price,
-        status,
-        created_at,
-        booking_seats(
-            showtime_seats(
-            seats(
-                row_letter,
-                seat_number
-            ),
-            showtimes(
-                start_time,
-                movies(
-                title,
-                poster_url
-                )
-            )
-            )
-        )
-        `)
-      .eq("profile_id", user.id)
-      .order("created_at", { ascending: false })
-      .range(from, to);
+    const { data, error } = await supabase.rpc("get_booking_history", {
+      user_id_input: user.id,
+      limit_input: limit,
+      offset_input: from
+    });
 
     if (error) {
       console.error("History error:", error);
@@ -58,31 +37,18 @@ historyRouter.get("/", requireAuth, async (req, res) => {
     }
 
     const formatted = (data || []).map((b: any) => ({
-      booking_id: b.id,
-      total_price: b.total_price,
-      status: b.status,
-      created_at: b.created_at,
-
-      title:
-        b.booking_seats?.[0]?.showtime_seats?.showtimes?.movies?.title || "",
-
-      poster_url:
-        b.booking_seats?.[0]?.showtime_seats?.showtimes?.movies?.poster_url ||
-        "",
-
-      start_time:
-        b.booking_seats?.[0]?.showtime_seats?.showtimes?.start_time || "",
-
-      seats: (b.booking_seats || [])
-        .map((s: any) => {
-          const seat = s.showtime_seats?.seats;
-
-          if (!seat) return null;
-
-          return `${seat.row_letter}${seat.seat_number}`;
-        })
-        .filter(Boolean),
-    }));
+  booking_id: b.booking_id,
+  title: b.title,
+  poster_url: b.poster_url,
+  start_time: b.start_time,
+  subtotal: b.subtotal,
+  discount: b.discount,
+  total_price: b.total_price,
+  status: b.status,
+  created_at: b.created_at,
+  seats: b.seats || [],
+  ticket_count: b.seats?.length || 0,
+}));
 
     return res.json({
       success: true,

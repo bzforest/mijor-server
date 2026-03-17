@@ -4,6 +4,7 @@ import { connectionPool } from "../utils/db";
 import { getIO } from "../utils/socket";
 import { requireAuth } from "../middlewares/auth.middleware";
 import { getCouponFromDB, calculateDiscount } from "../utils/booking";
+import { cancelBooking } from "../utils/bookingCancel";
 import Stripe from "stripe";
 
 const bookingRouter = Router();
@@ -338,7 +339,7 @@ bookingRouter.post(
     const client = await connectionPool.connect();
 
     try {
-      const { showtimeId, seatIds, selectedCouponId } = req.body;
+      const { showtimeId, seatIds, selectedCouponId, paymentIntentId } = req.body;
 
       const userId = (req as any).user.id;
 
@@ -364,8 +365,8 @@ bookingRouter.post(
             booked_at = now(),
             expires_at = NULL
         WHERE id = ANY($1)
-        AND selected_by = $2
         AND status = 'selected'
+        AND selected_by = $2
         AND showtime_id = $3
         RETURNING id;
       `,
@@ -429,18 +430,11 @@ bookingRouter.post(
       const bookingResult = await client.query(
         `
           INSERT INTO bookings 
-          (profile_id, showtime_id, subtotal, discount_amount, total_price, coupon_id, status)
-          VALUES ($1, $2, $3, $4, $5, $6, 'confirmed')
+          (profile_id, showtime_id, subtotal, discount_amount, total_price, coupon_id, status, payment_method, stripe_payment_intent_id)
+          VALUES ($1, $2, $3, $4, $5, $6, 'confirmed', $7, $8)
           RETURNING *;
         `,
-        [
-          userId,
-          showtimeId,
-          subtotal,
-          discount,
-          total,
-          couponIdToInsert || null,
-        ],
+        [userId, showtimeId, subtotal, discount, total, couponIdToInsert || null, 'credit_card', paymentIntentId || null],
       );
 
       const booking = bookingResult.rows[0];
@@ -458,6 +452,8 @@ bookingRouter.post(
           `
           INSERT INTO booking_seats (booking_id, showtime_seat_id, price_at_booking)
           VALUES ($1, $2, $3)
+          ON CONFLICT (booking_id, showtime_seat_id)
+          DO NOTHING
         `,
           [booking.id, seatId, basePrice],
         );
@@ -513,8 +509,9 @@ bookingRouter.post(
 
 // POST /booking/showtimeSeat/confirm-qr
 bookingRouter.post(
-  "/showtimeSeat/confirm-qr",
+  "/showtimeSeat/confirm-qr", requireAuth,
   async (req: Request, res: Response) => {
+    console.log("QR confirm payload:", req.body)
     const client = await connectionPool.connect();
 
     try {
@@ -529,8 +526,7 @@ bookingRouter.post(
       if (
         !showtimeId ||
         !Array.isArray(seatIds) ||
-        seatIds.length === 0 ||
-        !paymentIntentId
+        seatIds.length === 0
       ) {
         return res.status(400).json({
           success: false,
@@ -539,7 +535,7 @@ bookingRouter.post(
       }
 
       // ✅ Verify Stripe — ข้ามถ้าเป็น dev + forceSuccess
-      if (!forceSuccess || process.env.NODE_ENV === "production") {
+      if (paymentIntentId && (!forceSuccess && process.env.NODE_ENV === "production")) {
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
         const paymentIntent =
           await stripe.paymentIntents.retrieve(paymentIntentId);
@@ -551,22 +547,7 @@ bookingRouter.post(
         }
       }
 
-      // ดึง userId จาก seat
-      const seatOwnerResult = await client.query(
-        `SELECT selected_by FROM showtime_seats 
-         WHERE id = ANY($1) AND status = 'selected' AND showtime_id = $2
-         LIMIT 1`,
-        [seatIds, showtimeId],
-      );
-
-      if (seatOwnerResult.rowCount === 0) {
-        return res.status(400).json({
-          success: false,
-          message: "Seats not found or already expired",
-        });
-      }
-
-      const userId = seatOwnerResult.rows[0].selected_by;
+      const userId = (req as any).user.id;
 
       await client.query("BEGIN");
 
@@ -606,17 +587,10 @@ bookingRouter.post(
 
       const bookingResult = await client.query(
         `INSERT INTO bookings 
-         (profile_id, showtime_id, subtotal, discount_amount, total_price, coupon_id, status)
-         VALUES ($1, $2, $3, $4, $5, $6, 'confirmed')
+         (profile_id, showtime_id, subtotal, discount_amount, total_price, coupon_id, status, payment_method, stripe_payment_intent_id)
+         VALUES ($1, $2, $3, $4, $5, $6, 'confirmed', $7, $8)
          RETURNING *`,
-        [
-          userId,
-          showtimeId,
-          subtotal,
-          discount,
-          total,
-          couponIdToInsert || null,
-        ],
+        [userId, showtimeId, subtotal, discount, total, couponIdToInsert || null, 'promptpay', paymentIntentId || null]
       );
 
       const booking = bookingResult.rows[0];
@@ -631,8 +605,9 @@ bookingRouter.post(
       for (const seatId of seatIds) {
         await client.query(
           `INSERT INTO booking_seats (booking_id, showtime_seat_id, price_at_booking)
-           VALUES ($1, $2, $3)`,
-          [booking.id, seatId, basePrice],
+          VALUES ($1, $2, $3)
+          ON CONFLICT (booking_id, showtime_seat_id) DO NOTHING`,
+          [booking.id, seatId, basePrice]
         );
       }
 
@@ -655,7 +630,144 @@ bookingRouter.post(
     } finally {
       client.release();
     }
-  },
+  }
+);
+
+// =========================================
+// POST /booking/cancel — Cancel Booking
+// =========================================
+bookingRouter.post(
+  "/:bookingId/cancel",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const { bookingId } = req.params;
+      const userId = (req as any).user.id;
+      const { reason } = req.body;
+
+      if (!bookingId || Array.isArray(bookingId)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid bookingId",
+        });
+      }
+
+      const result = await cancelBooking(bookingId, userId, reason);
+
+      // 🔥 realtime seat release
+      if (result.releasedSeatIds.length > 0) {
+        getIO().to(`showtime:${result.showtimeId}`).emit("seatReleased", {
+          seatIds: result.releasedSeatIds,
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        status: result.status,
+        message:
+          result.status === "refunded"
+            ? "Booking cancelled and refunded"
+            : "Booking cancelled",
+      });
+    } catch (err: any) {
+      console.error("Cancel booking error:", err.message);
+
+      if (err.message === "BOOKING_NOT_FOUND") {
+        return res.status(404).json({
+          success: false,
+          message: "Booking not found",
+        });
+      }
+
+      if (err.message === "FORBIDDEN") {
+        return res.status(403).json({
+          success: false,
+          message: "You cannot cancel this booking",
+        });
+      }
+
+      if (err.message === "BOOKING_COMPLETED") {
+        return res.status(400).json({
+          success: false,
+          message: "This booking is already completed",
+        });
+      }
+
+      if (err.message === "CANNOT_CANCEL_TIME") {
+        return res.status(400).json({
+          success: false,
+          message: "Cannot cancel less than 30 minutes before showtime",
+        });
+      }
+
+      return res.status(500).json({
+        success: false,
+        message: "Failed to cancel booking",
+      });
+    }
+  }
+);
+
+// =========================================
+// GET /booking/:bookingId — Booking Detail
+// =========================================
+bookingRouter.get(
+  "/:bookingId",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const client = await connectionPool.connect();
+
+    try {
+      const { bookingId } = req.params;
+      const userId = (req as any).user.id;
+
+      const result = await client.query(
+        `
+        SELECT
+          b.id,
+          b.status,
+          b.subtotal,
+          b.discount_amount,
+          b.total_price,
+          b.payment_method,
+          b.created_at,
+          s.start_time,
+          m.title,
+          m.poster_url,
+          COALESCE(
+            ARRAY_AGG(se.row_letter || se.seat_number)
+            FILTER (WHERE se.id IS NOT NULL),
+            '{}'
+          ) AS seats
+        FROM bookings b
+        JOIN showtimes s ON s.id = b.showtime_id
+        JOIN movies m ON m.id = s.movie_id
+        LEFT JOIN booking_seats bs ON bs.booking_id = b.id
+        LEFT JOIN showtime_seats ss ON ss.id = bs.showtime_seat_id
+        LEFT JOIN seats se ON se.id = ss.seat_id
+        WHERE b.id = $1
+        AND b.profile_id = $2
+        GROUP BY b.id, s.start_time, m.title, m.poster_url
+        `,
+        [bookingId, userId]
+      );
+
+      if (result.rowCount === 0) {
+        return res.status(404).json({
+          message: "Booking not found",
+        });
+      }
+
+      return res.json(result.rows[0]);
+
+    } catch (err: any) {
+      return res.status(500).json({
+        message: "Failed to load booking",
+      });
+    } finally {
+      client.release();
+    }
+  }
 );
 
 // =========================================
