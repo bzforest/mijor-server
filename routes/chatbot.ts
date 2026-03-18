@@ -78,6 +78,7 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
         **[ชื่อภาพยนตร์]**
         - สาขา: [ชื่อสาขา]
         - เวลา: [รอบฉาย] (ราคาเริ่มต้น [ราคา] บาท | ว่าง [จำนวน] ที่นั่ง)
+        👉 [คลิกเพื่อจองตั๋วรอบนี้](/booking/[showtime_id])
         <เว้น 1 บรรทัดเสมอ>
         **[ชื่อภาพยนตร์เรื่องถัดไป]**
         
@@ -113,7 +114,8 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
                 try {
                     // SQL ดึงข้อมูลจากทั้ง 4 ตารางเชื่อมกัน
                     let sql = `
-                    SELECT 
+                    SELECT
+                        s.id AS showtime_id, 
                         c.name AS cinema, 
                         m.title AS movie, 
                         s.start_time,
