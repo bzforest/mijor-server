@@ -45,6 +45,7 @@ historyRouter.get("/", requireAuth, async (req, res) => {
   discount: b.discount,
   total_price: b.total_price,
   status: b.status,
+  is_cancellable: b.is_cancellable ?? false,
   created_at: b.created_at,
   seats: b.seats || [],
   ticket_count: b.seats?.length || 0,
