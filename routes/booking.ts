@@ -274,6 +274,61 @@ bookingRouter.post(
 );
 
 // =====================================================
+// POST /booking/showtimeSeat/release — Release Seats
+// =====================================================
+bookingRouter.post(
+  "/showtimeSeat/release",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const client = await connectionPool.connect();
+
+    try {
+      const { seatIds, showtimeId } = req.body;
+      const userId = (req as any).user.id;
+
+      if (!showtimeId || !Array.isArray(seatIds) || seatIds.length === 0) {
+        return res.status(400).json({
+          message: "Invalid payload",
+        });
+      }
+
+      const result = await client.query(
+        `
+        UPDATE showtime_seats
+        SET status = 'available',
+            selected_by = NULL,
+            expires_at = NULL
+        WHERE id = ANY($1)
+        AND selected_by = $2
+        AND status = 'selected'
+        AND showtime_id = $3
+        RETURNING id;
+      `,
+        [seatIds, userId, showtimeId],
+      );
+
+      if (result.rowCount && result.rowCount > 0) {
+        getIO().to(`showtime:${showtimeId}`).emit("seatExpired", {
+          seatIds: result.rows.map((r) => r.id),
+        });
+      }
+
+      return res.status(200).json({
+        message: "Seats released successfully",
+        releasedCount: result.rowCount,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        message: "Failed to release seats",
+        error: error.message,
+      });
+    } finally {
+      client.release();
+    }
+  },
+);
+
+// =====================================================
 // POST /booking/showtimeSeat/confirm — Confirm Booking
 // =====================================================
 bookingRouter.post(

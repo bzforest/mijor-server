@@ -76,9 +76,58 @@ app.use((req, res, next) => {
 });
 
 io.on("connection", (socket) => {
-  socket.on("joinShowtime", (showtimeId: string) => {
+  socket.on("joinShowtime", async (showtimeId: string) => {
     socket.join(`showtime:${showtimeId}`);
     console.log(`✅ Socket ${socket.id} joined showtime:${showtimeId}`);
+
+    // Send fresh seat state to the connecting client
+    try {
+      const result = await connectionPool.query(
+        `
+        SELECT 
+          showtime_seats.id,
+          seats.row_letter,
+          seats.seat_number,
+          showtime_seats.status,
+          showtime_seats.selected_by,
+          profiles.name AS booked_by_name,
+          profiles.avatar_url AS booked_by_avatar
+        FROM showtime_seats
+        JOIN seats ON seats.id = showtime_seats.seat_id
+        LEFT JOIN profiles ON profiles.id = showtime_seats.selected_by
+        WHERE showtime_seats.showtime_id = $1
+        ORDER BY seats.row_letter DESC, seats.seat_number ASC;
+        `,
+        [showtimeId],
+      );
+
+      const grouped: Record<string, any[]> = {};
+      result.rows.forEach((seat) => {
+        if (!grouped[seat.row_letter]) {
+          grouped[seat.row_letter] = [];
+        }
+        grouped[seat.row_letter].push({
+          id: seat.id,
+          seat_number: seat.seat_number,
+          status: seat.status,
+          selected_by: seat.selected_by,
+          booked_by_name: seat.booked_by_name || null,
+          booked_by_avatar: seat.booked_by_avatar || null,
+        });
+      });
+
+      const formatted = Object.keys(grouped)
+        .sort()
+        .reverse()
+        .map((row) => ({
+          row_letter: row,
+          seats: grouped[row],
+        }));
+
+      socket.emit("seatSync", { seats: formatted });
+    } catch (error) {
+      console.error("❌ Failed to sync seats on join:", error);
+    }
   });
 
   socket.on("disconnect", () => {
