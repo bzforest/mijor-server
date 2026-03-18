@@ -28,10 +28,15 @@ const getMovieShowtimesDeclaration: FunctionDeclaration = {
             targetDate: {
                 type: SchemaType.STRING,
                 description: `วันที่ลูกค้าต้องการค้นหารอบฉาย (รูปแบบ YYYY-MM-DD) เช่น ถ้าลูกค้าถามหา 'พรุ่งนี้' ให้บวกวันเพิ่มจาก ${today} เป็นต้นไป ถ้าลูกค้าไม่ได้ระบุวัน ให้ส่งเป็น string ว่าง ('')`
+            },
+
+            genre: {
+                type: SchemaType.STRING,
+                description: "หมวดหมู่หรือประเภทของภาพยนตร์ที่ลูกค้าต้องการดู เช่น 'Action', 'Horror', 'Comedy', 'Drama', 'Sci-Fi', 'Animation' **[สำคัญ] หากลูกค้าพิมพ์ภาษาไทย ให้แปลเป็นหมวดหมู่ภาษาอังกฤษที่สอดคล้องกัน เช่น 'ผี/น่ากลัว' -> 'Horror', 'ตลก' -> 'Comedy', 'บู๊' -> 'Action'** ถ้าไม่ได้ระบุ ให้ส่งเป็น string ว่าง ('')"
             }
 
         },
-        required: ["movieName" , "cinemaName" , "targetDate"]
+        required: ["movieName" , "cinemaName" , "targetDate" , "genre"]
     },
 };
 
@@ -94,10 +99,11 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
 
             //  ถ้า AI เรียกหาฟังก์ชัน "หารอบหนัง"
             if (call.name === "get_movie_showtimes") {
-                const args = call.args as {movieName?: string, cinemaName?: string, targetDate?: string};
+                const args = call.args as {movieName?: string, cinemaName?: string, targetDate?: string, genre?: string};
                 const movieName = args.movieName || "";
                 const cinemaName = args.cinemaName || "";
                 const targetDate = args.targetDate || "";
+                const genre = args.genre || "";
 
                 console.log(`[Function Call] AI กำลังขอข้อมูลรอบฉายของ: ${movieName || 'ทั้งหมด'}`);
 
@@ -123,6 +129,17 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
                     if (cinemaName) {
                         values.push(`%${cinemaName}%`);
                         sql += ` AND c.name ILIKE $${values.length}`;
+                    }
+
+                    if (genre) {
+                        values.push(`%${genre}%`);
+                        // ใช้ Sub-query วิ่งไปเช็กในตาราง genres ว่าหนังเรื่องนี้ตรงกับหมวดหมู่ที่หาไหม
+                        sql += ` AND m.id IN (
+                            SELECT mg.movie_id 
+                            FROM movie_genres mg 
+                            JOIN genres g ON mg.genre_id = g.id 
+                            WHERE g.name ILIKE $${values.length}
+                        )`;
                     }
 
                     if (targetDate) {
