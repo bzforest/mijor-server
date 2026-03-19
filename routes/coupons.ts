@@ -5,10 +5,10 @@ const couponsRoutes = express.Router();
 
 couponsRoutes.get("/", async (req: Request, res: Response) => {
   try {
-    // Hide minigame coupons from public view
+    // Hide minigame coupons from public view using the 'brand' column
     const results = await connectionPool.query(`
       SELECT * FROM coupons 
-      WHERE NOT (discount_type = 'discount_percentage' AND discount_value IN (5, 10, 15, 20, 25, 50))
+      WHERE brand != 'Minigame'
       AND is_active = true
     `);
 
