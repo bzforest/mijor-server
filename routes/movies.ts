@@ -12,6 +12,7 @@ interface Movie {
   release_date: string;
   created_at: string;
   language: string;
+  genre: string[];
   rating: number;
   status: "now" | "soon" | "out"; // ✅ เพิ่ม out
   trailer_youtube: string | null;
@@ -24,13 +25,23 @@ movie.get("/", async (req: Request, res: Response) => {
   try {
     const { status } = req.query;
 
-    let query = "SELECT * FROM movies";
+    let query = `
+      SELECT m.*, (
+        SELECT COALESCE(json_agg(g.name), '[]'::json)
+        FROM movie_genres mg
+        JOIN genres g ON mg.genre_id = g.id
+        WHERE mg.movie_id = m.id
+      ) AS genres
+      FROM movies m
+    `;
     let values: any[] = [];
 
     if (status) {
-      query += " WHERE LOWER(status) LIKE $1";
+      query += " WHERE LOWER(m.status) LIKE $1 ";
       values.push(`%${String(status).toLowerCase()}%`);
     }
+
+    query += " ORDER BY m.release_date DESC";
 
     const results = await connectionPool.query(query, values);
 
@@ -60,6 +71,7 @@ movie.get("/", async (req: Request, res: Response) => {
           ? new Date(row.created_at).toISOString()
           : "",
         language: row.language || "",
+        genre: row.genres || [],
         rating: row.rating ? Number(row.rating) : 0,
         status: formattedStatus,
         trailer_youtube: row.trailer_youtube || null,
@@ -87,7 +99,16 @@ movie.get("/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const results = await connectionPool.query(
-      "SELECT * FROM movies WHERE id = $1",
+      `
+      SELECT m.*, (
+        SELECT COALESCE(json_agg(g.name), '[]'::json)
+        FROM movie_genres mg
+        JOIN genres g ON mg.genre_id = g.id
+        WHERE mg.movie_id = m.id
+      ) AS genres
+      FROM movies m
+      WHERE m.id = $1
+      `,
       [id]
     );
 
@@ -122,6 +143,7 @@ movie.get("/:id", async (req: Request, res: Response) => {
         ? new Date(row.created_at).toISOString()
         : "",
       language: row.language || "",
+      genre: row.genres || [],
       rating: row.rating ? Number(row.rating) : 0,
       status: formattedStatus,
       trailer_youtube: row.trailer_youtube || null,
