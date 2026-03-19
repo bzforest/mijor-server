@@ -25,6 +25,7 @@ import http from "http";
 // Webhook Routes
 import webhookRouter from "./routes/webhook";
 import paymentRouter from "./routes/payment";
+import notificationRouter from "./routes/notification";
 
 dotenv.config();
 
@@ -54,8 +55,9 @@ app.use('/coupons', couponsRoutes);
 app.use('/api/user/coupons', userCouponsRoutes);
 app.use('/chatbot', chatbotRouter)
 app.use('/api/auth/reset-password', routerApiAuth);
-app.use("/api/avatars", avatarsRoutes);
+app.use('/api/avatars', avatarsRoutes);
 app.use('/history', historyRouter);
+app.use('/api/notifications', notificationRouter);
 app.use('/minigames', minigameRoutes);
 
 // Booking Routes
