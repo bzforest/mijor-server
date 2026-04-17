@@ -165,13 +165,20 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
                         sql += ` AND s.start_time >= NOW()`;
                     }
 
-                    // เรียงตามเวลาฉาย และจำกัดแค่ 10 รอบ เพื่อไม่ให้ AI อ่านข้อมูลเยอะจนเกินไป
-                    sql += ` ORDER BY s.start_time ASC LIMIT 15 `;
+                    // เรียงตามเวลาฉาย และจำกัดแค่ 6 รอบ เพื่อไม่ให้ AI อ่านข้อมูลเยอะจนเกินไป
+                    sql += ` ORDER BY s.start_time ASC LIMIT 6 `;
 
                     const dbResult = await connectionPool.query(sql , values);
-                    const showtimesData = dbResult.rows;
+                    // 💡 แปลง Format เวลาให้เป็น "10:00 น." ก่อนส่งให้ AI
+                    const formattedShowtimes = dbResult.rows.map(st => ({
+                        ...st,
+                        start_time: new Date(st.start_time).toLocaleTimeString('th-TH', { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                        }) + ' น.'
+                    }));
 
-                    console.log("ได้ข้อมูลจาก Database แล้วจำนวน:", showtimesData.length, "รอบ");
+                    console.log("ได้ข้อมูลจาก Database แล้วจำนวน:", formattedShowtimes.length, "รอบ");
 
                     // ส่งกลับไปให้ AI สุรปคำพูด
                     const finalResult = await model.generateContent ({
@@ -185,7 +192,7 @@ chatbotRouter.post("/" , async (req: Request , res: Response): Promise<any> => {
                                         name: "get_movie_showtimes",
                                         response: {
                                              // ถ้าไม่มีรอบฉาย ส่งข้อมูลว่างไปบอก AI เดี๋ยว AI จะบอกลูกค้าเองว่า "ไม่มีรอบฉาย"
-                                            showtimes: showtimesData.length > 0 ? showtimesData : "ไม่พบรอบฉายในขณะนี้"
+                                            showtimes: formattedShowtimes.length > 0 ? formattedShowtimes : "ไม่พบรอบฉายในขณะนี้"
                                         }
                                     }
                                 }]
